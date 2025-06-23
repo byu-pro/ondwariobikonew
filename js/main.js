@@ -1,83 +1,91 @@
-// main.js - Logic for the homepage
-
+// main.js - Premium Portfolio Script
 document.addEventListener('DOMContentLoaded', () => {
-
-    // --- Data for Projects ---
+    // --- Project Data ---
     const projects = [
         {
             slug: "project-alpha.html",
             title: "Project Alpha",
             category: "Branding & Identity",
-            imageUrl: "https://placehold.co/1200x900/003333/ffffff?text=Project+Alpha"
+            imageUrl: "https://source.unsplash.com/random/1200x900/?design,branding"
         },
         {
             slug: "project-beta.html",
             title: "Project Beta",
             category: "Web Design & UX",
-            imageUrl: "https://placehold.co/1200x900/33001a/ffffff?text=Project+Beta"
+            imageUrl: "https://source.unsplash.com/random/1200x900/?design,web"
         },
         {
             slug: "project-gamma.html",
             title: "Project Gamma",
             category: "Mobile Application",
-            imageUrl: "https://placehold.co/1200x900/4a4a4a/ffffff?text=Project+Gamma"
+            imageUrl: "https://source.unsplash.com/random/1200x900/?design,mobile"
         },
         {
             slug: "project-delta.html",
             title: "Project Delta",
             category: "Packaging Design",
-            imageUrl: "https://placehold.co/1200x900/1a1a1a/ffffff?text=Project+Delta"
+            imageUrl: "https://source.unsplash.com/random/1200x900/?design,packaging"
         }
     ];
-    
-    // --- Global Elements ---
+
+    // --- DOM Elements ---
     const preloader = document.getElementById('preloader');
     const cursorDot = document.getElementById('cursor-dot');
     const cursorOutline = document.getElementById('cursor-outline');
+    let scrollDirection = 0;
+    let lastScrollTime = 0;
 
-    // --- Functions ---
+    // --- Core Functions ---
 
-    /**
-     * Populates the horizontal scroll track with project cards.
-     */
     function populateProjects() {
         const track = document.querySelector('.horizontal-scroll-track');
         if (!track) return;
 
-        let projectHTML = '';
-        projects.forEach(p => {
-            projectHTML += `
-                <a href="${p.slug}" class="project-card page-link">
+        track.innerHTML = projects.map(p => `
+            <a href="${p.slug}" class="project-card page-link">
+                <div class="project-image-container">
                     <img src="${p.imageUrl}" alt="${p.title}" class="project-image">
-                    <div class="absolute bottom-0 left-0 p-8 text-white bg-gradient-to-t from-black/50 to-transparent w-full">
-                        <h3 class="text-3xl font-bold">${p.title}</h3>
-                        <p class="text-zinc-300">${p.category}</p>
-                    </div>
-                </a>
-            `;
-        });
-        track.innerHTML = projectHTML;
+                    <div class="project-overlay"></div>
+                </div>
+                <div class="project-info">
+                    <h3 class="project-title">${p.title}</h3>
+                    <p class="project-category">${p.category}</p>
+                </div>
+            </a>
+        `).join('');
+
+        // Initialize hover effects for desktop
+        if (window.innerWidth >= 1024) {
+            document.querySelectorAll('.project-card').forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.querySelector('.project-image').style.transform = 'scale(1.05)';
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.querySelector('.project-image').style.transform = 'scale(1)';
+                });
+            });
+        }
     }
-    
-    /**
-     * Handles the preloader and page load transitions.
-     */
+
     function initPageTransitions() {
         window.addEventListener('load', () => {
             document.body.classList.add('loaded');
-            preloader.classList.add('loaded');
-            // Trigger initial reveal animations after preloader finishes
-            setTimeout(initRevealAnimations, 1000); 
+            if (preloader) {
+                preloader.classList.add('loaded');
+            }
+            setTimeout(initRevealAnimations, 500);
         });
 
         document.querySelectorAll('.page-link').forEach(link => {
-            if (link.dataset.listenerAttached) return;
-            link.dataset.listenerAttached = 'true';
             link.addEventListener('click', function(e) {
+                if (this.hasAttribute('data-no-transition')) return;
+                
                 e.preventDefault();
                 const destination = this.href;
-                preloader.classList.remove('loaded'); // Show preloader
-                document.body.classList.remove('loaded'); // Hide content
+                
+                document.body.classList.remove('loaded');
+                if (preloader) preloader.classList.remove('loaded');
+                
                 setTimeout(() => {
                     window.location.href = destination;
                 }, 900);
@@ -85,9 +93,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /**
-     * Initializes the Intersection Observer for reveal-on-scroll animations.
-     */
     function initRevealAnimations() {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -96,50 +101,46 @@ document.addEventListener('DOMContentLoaded', () => {
                     observer.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.1 });
-        
-        document.querySelectorAll('.reveal-line, .reveal-text, .reveal-image').forEach(el => observer.observe(el));
+        }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll(
+            '.reveal-line, .reveal-text, .reveal-image, .reveal-up, .project-card'
+        ).forEach(el => observer.observe(el));
     }
 
-    /**
-     * Sets up the custom cursor movement and interaction states.
-     */
     function initCustomCursor() {
         if (!cursorDot || !cursorOutline) return;
 
-        window.addEventListener('mousemove', (e) => {
+        const moveCursor = (e) => {
             const { clientX, clientY } = e;
-            cursorDot.style.left = `${clientX}px`;
-            cursorDot.style.top = `${clientY}px`;
-            cursorOutline.animate({ left: `${clientX}px`, top: `${clientY}px` }, { duration: 600, fill: 'forwards' });
-        });
-        
-        document.body.addEventListener('mouseleave', () => {
-            cursorDot.classList.add('cursor-hidden');
-            cursorOutline.classList.add('cursor-hidden');
-        });
+            cursorDot.style.transform = `translate(${clientX}px, ${clientY}px)`;
+            cursorOutline.animate({
+                left: `${clientX}px`,
+                top: `${clientY}px`
+            }, { duration: 800, fill: 'forwards', easing: 'cubic-bezier(0.22, 1, 0.36, 1)' });
+        };
 
-        document.body.addEventListener('mouseenter', () => {
-            cursorDot.classList.remove('cursor-hidden');
-            cursorOutline.classList.remove('cursor-hidden');
-        });
+        window.addEventListener('mousemove', moveCursor);
 
-        const interactiveElements = document.querySelectorAll('a, button');
-        interactiveElements.forEach(el => {
-            el.addEventListener('mouseenter', () => cursorOutline.classList.add('hover'));
-            el.addEventListener('mouseleave', () => cursorOutline.classList.remove('hover'));
-        });
-        
-        const textElements = document.querySelectorAll('p, h1, h2, h3');
-        textElements.forEach(el => {
-            el.addEventListener('mouseenter', () => cursorOutline.classList.add('text-hover'));
-            el.addEventListener('mouseleave', () => cursorOutline.classList.remove('text-hover'));
-        });
+        const handleCursorState = (state) => {
+            cursorDot.classList.toggle('cursor-hidden', !state);
+            cursorOutline.classList.toggle('cursor-hidden', !state);
+        };
+
+        document.body.addEventListener('mouseleave', () => handleCursorState(false));
+        document.body.addEventListener('mouseenter', () => handleCursorState(true));
+
+        const initCursorInteraction = (elements, className) => {
+            elements.forEach(el => {
+                el.addEventListener('mouseenter', () => cursorOutline.classList.add(className));
+                el.addEventListener('mouseleave', () => cursorOutline.classList.remove(className));
+            });
+        };
+
+        initCursorInteraction(document.querySelectorAll('a, button'), 'hover');
+        initCursorInteraction(document.querySelectorAll('p, h1, h2, h3, .project-card'), 'text-hover');
     }
-    
-    /**
-     * Sets up the mobile navigation menu toggle.
-     */
+
     function initMobileMenu() {
         const menuToggle = document.getElementById('menu-toggle');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -155,72 +156,170 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.querySelectorAll('.menu-link').forEach(link => {
             link.addEventListener('click', (e) => {
+                if (link.classList.contains('page-link')) return;
+                
                 e.preventDefault();
                 mobileMenu.classList.remove('open');
                 document.body.style.overflow = '';
                 menuSpans.forEach(span => span.style.transform = '');
                 
                 const targetId = link.getAttribute('href');
-                document.querySelector(targetId)?.scrollIntoView({ behavior: 'smooth' });
+                document.querySelector(targetId)?.scrollIntoView({
+                    behavior: 'smooth'
+                });
             });
         });
     }
 
-    /**
-     * Translates vertical scroll into horizontal movement for the work section.
-     */
     function initHorizontalScroll() {
-        if (window.innerWidth < 1024) return; // Only for desktop
-
         const section = document.querySelector('.horizontal-scroll-section');
         const track = document.querySelector('.horizontal-scroll-track');
         if (!section || !track) return;
-        
-        const scrollableWidth = track.scrollWidth - window.innerWidth;
-        section.style.height = `${track.scrollWidth}px`;
 
-        window.addEventListener('scroll', () => {
-            const stickyWrapper = document.querySelector('.sticky-wrapper');
-            if (!stickyWrapper) return;
+        if (window.innerWidth < 1024) {
+            // Mobile Premium Implementation
+            section.style.height = 'auto';
+            track.style.display = 'flex';
+            track.style.overflowX = 'auto';
+            track.style.scrollSnapType = 'x mandatory';
+            track.style.scrollBehavior = 'smooth';
+            track.style.padding = '0 5vw';
+            track.style.gap = '4vw';
+            track.style.transform = 'none';
 
-            const stickyTop = stickyWrapper.parentElement.offsetTop;
-            const scrollFromTop = window.scrollY;
-            
-            if (scrollFromTop > stickyTop && scrollFromTop <= stickyTop + scrollableWidth) {
-                let progress = (scrollFromTop - stickyTop) / scrollableWidth;
-                track.style.transform = `translateX(-${scrollableWidth * Math.min(progress, 1)}px)`;
-            } else if (scrollFromTop <= stickyTop) {
-                track.style.transform = `translateX(0px)`;
+            document.querySelectorAll('.project-card').forEach(card => {
+                card.style.width = '80vw';
+                card.style.minWidth = '80vw';
+                card.style.height = '70vh';
+                card.style.scrollSnapAlign = 'center';
+                card.style.margin = '0';
+            });
+
+            // Enhanced touch scrolling with momentum
+            let startX, scrollLeft, isDown;
+            const momentumThreshold = 0.5;
+            const momentumMultiplier = 0.3;
+
+            track.addEventListener('touchstart', (e) => {
+                isDown = true;
+                startX = e.touches[0].pageX;
+                scrollLeft = track.scrollLeft;
+            }, { passive: true });
+
+            track.addEventListener('touchmove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                
+                const x = e.touches[0].pageX;
+                const walk = (x - startX) * 1.5;
+                track.scrollLeft = scrollLeft - walk;
+                
+                // Update scroll direction for parallax
+                const now = Date.now();
+                if (now - lastScrollTime > 16) { // ~60fps
+                    const newDirection = Math.sign(track.scrollLeft - scrollLeft);
+                    if (newDirection !== scrollDirection) {
+                        scrollDirection = newDirection;
+                        updateParallaxEffects();
+                    }
+                    lastScrollTime = now;
+                }
+            }, { passive: false });
+
+            track.addEventListener('touchend', () => {
+                isDown = false;
+                
+                // Apply momentum
+                const velocity = scrollDirection * momentumMultiplier;
+                if (Math.abs(velocity) > momentumThreshold) {
+                    const targetScroll = track.scrollLeft + (velocity * 100);
+                    track.scrollTo({
+                        left: targetScroll,
+                        behavior: 'smooth'
+                    });
+                }
+            }, { passive: true });
+
+            // Dynamic parallax effect
+            function updateParallaxEffects() {
+                document.querySelectorAll('.project-image').forEach(img => {
+                    const card = img.closest('.project-card');
+                    const cardRect = card.getBoundingClientRect();
+                    const viewportCenter = window.innerWidth / 2;
+                    const cardCenter = cardRect.left + (cardRect.width / 2);
+                    const distanceFromCenter = (cardCenter - viewportCenter) / viewportCenter;
+                    
+                    img.style.transform = `scale(${1 + (0.05 * -distanceFromCenter * scrollDirection)})`;
+                });
             }
-        });
+
+            // Auto-snap to nearest card
+            track.addEventListener('scroll', () => {
+                clearTimeout(track.scrollEndTimer);
+                track.scrollEndTimer = setTimeout(() => {
+                    const cards = Array.from(document.querySelectorAll('.project-card'));
+                    const trackCenter = track.scrollLeft + (track.clientWidth / 2);
+                    
+                    const closestCard = cards.reduce((closest, card) => {
+                        const cardCenter = card.offsetLeft + (card.clientWidth / 2);
+                        const distance = Math.abs(trackCenter - cardCenter);
+                        return distance < closest.distance ? 
+                            { card, distance } : closest;
+                    }, { card: cards[0], distance: Infinity }).card;
+                    
+                    track.scrollTo({
+                        left: closestCard.offsetLeft - ((track.clientWidth - closestCard.clientWidth) / 2),
+                        behavior: 'smooth'
+                    });
+                }, 100);
+            }, { passive: true });
+
+        } else {
+            // Desktop Implementation
+            const scrollableWidth = track.scrollWidth - window.innerWidth;
+            section.style.height = `${track.scrollWidth}px`;
+
+            window.addEventListener('scroll', () => {
+                const stickyWrapper = document.querySelector('.sticky-wrapper');
+                if (!stickyWrapper) return;
+
+                const stickyTop = stickyWrapper.parentElement.offsetTop;
+                const scrollFromTop = window.scrollY;
+                
+                if (scrollFromTop > stickyTop && scrollFromTop <= stickyTop + scrollableWidth) {
+                    const progress = (scrollFromTop - stickyTop) / scrollableWidth;
+                    track.style.transform = `translateX(-${scrollableWidth * Math.min(progress, 1)}px)`;
+                } else if (scrollFromTop <= stickyTop) {
+                    track.style.transform = 'translateX(0)';
+                }
+            });
+        }
     }
 
-    /**
-     * Updates the clock in the footer.
-     */
     function initClock() {
         const timeEl = document.getElementById('current-time');
         if (!timeEl) return;
 
         function updateTime() {
             const now = new Date();
-            const options = { timeZone: 'Africa/Nairobi', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+            const options = { 
+                timeZone: 'Africa/Nairobi',
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: true
+            };
             timeEl.textContent = now.toLocaleTimeString('en-US', options);
         }
-        setInterval(updateTime, 1000);
         updateTime();
+        setInterval(updateTime, 30000); // Update every 30 seconds
     }
-    
-    /**
-     * Adds a magnetic effect to specified links.
-     */
+
     function initMagneticLinks() {
         document.querySelectorAll('.magnetic-link').forEach(link => {
             link.addEventListener('mousemove', (e) => {
-                const { clientX, clientY } = e;
-                const { left, top, width, height } = link.getBoundingClientRect();
-                const x = (clientX - (left + width / 2)) * 0.2;
-                const y = (clientY - (top + height / 2)) * 0.2;
+                const rect = link.getBoundingClientRect();
+                const x = (e.clientX - (rect.left + rect.width / 2)) * 0.2;
+                const y = (e.clientY - (rect.top + rect.height / 2)) * 0.2;
                 link.style.transform = `translate(${x}px, ${y}px)`;
             });
             link.addEventListener('mouseleave', () => {
@@ -229,20 +328,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /**
-     * Reloads the page on resize to recalculate dimensions.
-     */
-    function initResizeListener() {
-        let resizeTimeout;
+    function initResizeHandler() {
+        let resizeTimer;
         window.addEventListener('resize', () => {
             document.body.classList.remove('loaded');
-            clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(() => window.location.reload(), 250);
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                window.requestAnimationFrame(() => {
+                    initHorizontalScroll();
+                    document.body.classList.add('loaded');
+                });
+            }, 250);
         });
     }
 
-
-    // --- Initialization ---
+    // --- Initialize Everything ---
     populateProjects();
     initPageTransitions();
     initCustomCursor();
@@ -250,5 +350,5 @@ document.addEventListener('DOMContentLoaded', () => {
     initHorizontalScroll();
     initClock();
     initMagneticLinks();
-    initResizeListener();
+    initResizeHandler();
 });
