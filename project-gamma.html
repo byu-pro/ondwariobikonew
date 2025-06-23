@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Gamma | Alex Vance</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body class="bg-[#111111] text-white">
+    <div id="preloader" class="bg-[#111111]"><h2 class="preloader-text"><div class="preloader-text-inner">Gamma</div></h2></div>
+    <div id="cursor-dot" class="cursor"></div>
+    <div id="cursor-outline" class="cursor"></div>
+
+    <div class="content-wrapper">
+        <header class="fixed top-0 left-0 w-full p-6 md:p-8 z-50 flex justify-between items-center mix-blend-difference">
+            <a href="index.html" class="page-link text-2xl font-bold uppercase text-white">AV</a>
+            <button id="menu-toggle" class="w-12 h-12 rounded-full border border-white/50 flex flex-col items-center justify-center space-y-1.5 z-50">
+                <span class="w-6 h-0.5 bg-white block transition-transform duration-300"></span>
+                <span class="w-6 h-0.5 bg-white block transition-transform duration-300"></span>
+            </button>
+        </header>
+
+        <div id="mobile-menu" class="fixed inset-0 bg-black z-40 flex items-center justify-center">
+            <nav class="flex flex-col items-center text-center space-y-8">
+                <a href="index.html#work" class="menu-link text-5xl md:text-7xl font-bold uppercase hover:text-accent-color transition-colors">Work</a>
+                <a href="index.html#about" class="menu-link text-5xl md:text-7xl font-bold uppercase hover:text-accent-color transition-colors">About</a>
+                <a href="index.html#contact" class="menu-link text-5xl md:text-7xl font-bold uppercase hover:text-accent-color transition-colors">Contact</a>
+            </nav>
+        </div>
+
+        <main>
+             <section class="container mx-auto px-6 py-32 md:py-40 text-center">
+                <h1 class="text-5xl md:text-8xl uppercase reveal-line"><span class="reveal-line-inner">Project Gamma</span></h1>
+                <p class="text-xl md:text-2xl text-zinc-400 mt-4 max-w-2xl mx-auto reveal-up">A mobile-first social networking app designed to connect local communities.</p>
+            </section>
+
+            <section class="container mx-auto px-6 pb-16 md:pb-24">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                    <div class="col-span-2 rounded-2xl overflow-hidden reveal-image"><img src="https://placehold.co/800x1000/4a4a4a/fff?text=App+Screen+1" alt="App Screen" class="w-full h-full object-cover"></div>
+                     <div class="col-span-2 md:col-span-1 rounded-2xl overflow-hidden reveal-image" style="transition-delay: 0.1s;"><img src="https://placehold.co/400x500/3c3c3c/fff?text=App+Icon" alt="App Icon" class="w-full h-full object-cover"></div>
+                     <div class="col-span-2 md:col-span-1 rounded-2xl overflow-hidden reveal-image" style="transition-delay: 0.2s;"><img src="https://placehold.co/400x500/2e2e2e/fff?text=Feature" alt="Feature" class="w-full h-full object-cover"></div>
+                    <div class="col-span-2 md:col-span-1 rounded-2xl overflow-hidden reveal-image" style="transition-delay: 0.2s;"><img src="https://placehold.co/400x500/585858/fff?text=Screen+2" alt="App Screen" class="w-full h-full object-cover"></div>
+                    <div class="col-span-2 md:col-span-2 rounded-2xl overflow-hidden reveal-image" style="transition-delay: 0.3s;"><img src="https://placehold.co/800x1000/202020/fff?text=App+Screen+3" alt="App Screen" class="w-full h-full object-cover"></div>
+                    <div class="col-span-2 md:col-span-1 flex items-center justify-center p-8 bg-black rounded-2xl reveal-up"><p class="text-lg text-text-color text-center">Built with React Native for a seamless cross-platform experience.</p></div>
+                </div>
+            </section>
+            
+            <section class="py-20 md:py-32 bg-black">
+                <div class="text-center container mx-auto px-6"><p class="text-text-color text-lg mb-4">Next Project</p><a href="project-delta.html" class="page-link text-5xl md:text-8xl uppercase hover:text-accent-color transition-colors">Project Delta</a></div>
+            </section>
+        </main>
+        
+        <footer id="contact" class="py-20 md:py-40 bg-black">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-4xl md:text-6xl lg:text-8xl uppercase mb-4"><span class="reveal-line"><span class="reveal-line-inner">Have a project?</span></span></h2>
+                <a href="mailto:hello@alexvance.design" class="text-4xl md:text-6xl lg:text-8xl text-accent-color hover:text-white transition-colors duration-500 uppercase inline-block magnetic-link"><span class="reveal-line"><span class="reveal-line-inner">Let's talk</span></span></a>
+                <div class="mt-20 md:mt-32 text-text-color flex justify-between items-center"><div class="text-left"><p>Nairobi, Kenya</p><p>EAT <span id="current-time"></span></p></div><div class="flex space-x-6"><a href="#" class="hover:text-white transition-colors">Twitter</a><a href="#" class="hover:text-white transition-colors">LinkedIn</a><a href="#" class="hover:text-white transition-colors">Instagram</a></div></div>
+            </div>
+        </footer>
+    </div>
+    <script src="js/project.js" defer></script>
+</body>
+</html>

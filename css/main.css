@@ -1,0 +1,193 @@
+/*
+  main.css
+  Custom stylesheet for the Alex Vance portfolio.
+*/
+
+:root {
+    --bg-color: #0D0D0D;
+    --primary-color: #FFFFFF;
+    --accent-color: #00FFFF;
+    --text-color: #a0a0a0;
+}
+
+/* --- Basic Setup & Typography --- */
+body {
+    background-color: var(--bg-color);
+    color: var(--primary-color);
+    font-family: 'Satoshi', sans-serif;
+    overscroll-behavior: none; /* Prevents bounce on scroll */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Clash Display', sans-serif;
+    font-weight: 700;
+}
+
+/* --- Custom Cursor --- */
+.cursor {
+    position: fixed;
+    z-index: 9999;
+    pointer-events: none;
+    border-radius: 50%;
+    transition: transform 0.2s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.3s, width 0.3s, height 0.3s;
+    transform: translate(-50%, -50%);
+}
+#cursor-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent-color);
+}
+#cursor-outline {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--accent-color);
+}
+.cursor-hidden {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+}
+#cursor-outline.hover {
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 0.5;
+}
+#cursor-outline.text-hover {
+    transform: translate(-50%, -50%) scale(1.5);
+    width: 60px;
+    height: 20px;
+    border-radius: 20px;
+}
+
+/* --- Page Transition / Preloader --- */
+#preloader {
+    position: fixed;
+    inset: 0;
+    background-color: var(--bg-color);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.8s ease-in-out, visibility 0.8s;
+}
+#preloader.loaded {
+    opacity: 0;
+    visibility: hidden;
+}
+.preloader-text {
+    font-family: 'Clash Display', sans-serif;
+    font-size: 2rem;
+    overflow: hidden;
+}
+.preloader-text-inner {
+    transform: translateY(100%);
+    transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1) 0.5s;
+}
+#preloader.loaded .preloader-text-inner {
+     transform: translateY(-100%);
+}
+
+.content-wrapper {
+    opacity: 0;
+    transition: opacity 1s ease 1s;
+}
+body.loaded .content-wrapper {
+    opacity: 1;
+}
+
+/* --- Text & Image Reveal Animations --- */
+.reveal-line {
+    display: block;
+    overflow: hidden;
+}
+.reveal-line-inner {
+    display: block;
+    transform: translateY(110%);
+    transition: transform 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.is-visible .reveal-line-inner {
+    transform: translateY(0);
+}
+.reveal-image {
+    opacity: 0;
+    transform: scale(1.1);
+    transition: opacity 1s ease, transform 1s ease;
+}
+.is-visible.reveal-image {
+    opacity: 1;
+    transform: scale(1);
+}
+.reveal-text, .reveal-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+.is-visible.reveal-text, .is-visible.reveal-up {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* --- Horizontal Scroll Section (Homepage) --- */
+.horizontal-scroll-section {
+    position: relative;
+    height: 300vh; /* This height determines scroll duration */
+}
+.sticky-wrapper {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+.horizontal-scroll-track {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.project-card {
+    flex-shrink: 0;
+    display: block;
+    width: 60vw;
+    height: 70vh;
+    margin: 0 5vw;
+    position: relative;
+    overflow: hidden;
+    border-radius: 1.5rem;
+    transition: transform 0.5s ease;
+}
+.project-card:hover {
+    transform: scale(0.98);
+}
+.project-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.project-card:hover .project-image {
+    transform: scale(1.1);
+}
+
+/* --- Marquee --- */
+.marquee {
+    overflow: hidden;
+    white-space: nowrap;
+}
+.marquee-inner {
+    display: inline-block;
+    animation: marquee 20s linear infinite;
+}
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* --- Mobile Menu --- */
+#mobile-menu {
+    transition: clip-path 0.8s cubic-bezier(0.76, 0, 0.24, 1);
+    clip-path: circle(0% at 95% 5%);
+}
+#mobile-menu.open {
+    clip-path: circle(150% at 95% 5%);
+}
