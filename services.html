@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services | Alex Vance</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body class="text-white">
+    <div id="preloader"><h2 class="preloader-text"><div class="preloader-text-inner">Services</div></h2></div>
+    <div id="cursor-dot" class="cursor"></div>
+    <div id="cursor-outline" class="cursor"></div>
+    
+    <div class="content-wrapper">
+        <header class="fixed top-0 left-0 w-full p-6 md:p-8 z-50 flex justify-between items-center mix-blend-difference">
+            <a href="index.html" class="page-link text-2xl font-bold uppercase text-white">AV</a>
+            <button id="menu-toggle" class="w-12 h-12 rounded-full border border-white/50 flex flex-col items-center justify-center space-y-1.5 z-50">
+                <span class="w-6 h-0.5 bg-white block transition-transform duration-300"></span>
+                <span class="w-6 h-0.5 bg-white block transition-transform duration-300"></span>
+            </button>
+        </header>
+
+        <!-- FIXED Mobile Menu Overlay -->
+        <div id="mobile-menu" class="fixed inset-0 bg-black z-40 flex items-center justify-center">
+            <nav class="flex flex-col items-center text-center space-y-8">
+                <a href="index.html#work" class="menu-link text-5xl md:text-7xl font-bold uppercase hover:text-accent-color transition-colors">Work</a>
+                <a href="services.html" class="page-link text-5xl md:text-7xl font-bold uppercase hover:text-accent-color transition-colors">Services</a>
+                <a href="index.html#about" class="menu-link text-5xl md:text-7xl font-bold uppercase hover:text-accent-color transition-colors">About</a>
+                <a href="index.html#contact" class="menu-link text-5xl md:text-7xl font-bold uppercase hover:text-accent-color transition-colors">Contact</a>
+            </nav>
+        </div>
+
+        <main>
+            <section class="container mx-auto px-6 py-32 md:py-40 text-center">
+                <p class="text-lg text-text-color mb-4 reveal-up">What I Do</p>
+                <h1 class="text-6xl md:text-8xl lg:text-9xl uppercase reveal-line"><span class="reveal-line-inner">Capabilities</span></h1>
+            </section>
+            
+            <section class="services-grid container mx-auto px-6 pb-20 md:pb-40">
+                <!-- Service 1: Branding -->
+                <div class="service-item reveal-up">
+                    <div class="service-header">
+                        <span class="service-number">01</span>
+                        <h2 class="service-title">Branding & Identity</h2>
+                    </div>
+                    <p class="service-description">I craft memorable brand identities that tell a compelling story. From logo design and color theory to typography and voice, I build a cohesive visual system that resonates with your target audience and sets you apart from the competition.</p>
+                </div>
+                <!-- Service 2: Web Design -->
+                <div class="service-item reveal-up">
+                    <div class="service-header">
+                        <span class="service-number">02</span>
+                        <h2 class="service-title">Web Design & UX</h2>
+                    </div>
+                    <p class="service-description">I design and build beautiful, intuitive, and high-performing websites. My user-centric approach ensures a seamless experience across all devices, focusing on clear navigation, engaging interactions, and achieving your business goals.</p>
+                </div>
+                <!-- Service 3: Art Direction -->
+                <div class="service-item reveal-up">
+                    <div class="service-header">
+                        <span class="service-number">03</span>
+                        <h2 class="service-title">Art Direction</h2>
+                    </div>
+                    <p class="service-description">I provide creative oversight for digital campaigns, photoshoots, and video production. I establish and maintain a consistent visual style and quality, ensuring every creative asset aligns perfectly with the brand's vision and strategy.</p>
+                </div>
+                 <!-- Service 4: Packaging -->
+                <div class="service-item reveal-up">
+                    <div class="service-header">
+                        <span class="service-number">04</span>
+                        <h2 class="service-title">Packaging Design</h2>
+                    </div>
+                    <p class="service-description">I create tangible brand experiences through thoughtful packaging design. From concept to production, I focus on sustainable materials and innovative structural design to create a memorable unboxing moment that delights customers.</p>
+                </div>
+            </section>
+        </main>
+        
+        <footer id="contact" class="py-20 md:py-40 bg-black">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-4xl md:text-6xl lg:text-8xl uppercase mb-4"><span class="reveal-line"><span class="reveal-line-inner">Have a project?</span></span></h2>
+                <a href="mailto:hello@alexvance.design" class="text-4xl md:text-6xl lg:text-8xl text-accent-color hover:text-white transition-colors duration-500 uppercase inline-block magnetic-link"><span class="reveal-line"><span class="reveal-line-inner">Let's talk</span></span></a>
+                <div class="mt-20 md:mt-32 text-text-color flex justify-between items-center">
+                    <div class="text-left"><p>Nairobi, Kenya</p><p>EAT <span id="current-time"></span></p></div>
+                    <div class="flex space-x-6"><a href="#" class="hover:text-white transition-colors">Twitter</a><a href="#" class="hover:text-white transition-colors">LinkedIn</a><a href="#" class="hover:text-white transition-colors">Instagram</a></div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="js/project.js" defer></script>
+</body>
+</html>

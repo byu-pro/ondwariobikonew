@@ -115,12 +115,12 @@ body.loaded .content-wrapper {
     opacity: 1;
     transform: scale(1);
 }
-.reveal-text {
+.reveal-text, .reveal-up {
     opacity: 0;
     transform: translateY(30px);
     transition: opacity 1s ease, transform 1s ease;
 }
-.is-visible.reveal-text {
+.is-visible.reveal-text, .is-visible.reveal-up {
     opacity: 1;
     transform: translateY(0);
 }
@@ -128,7 +128,7 @@ body.loaded .content-wrapper {
 /* --- Horizontal Scroll Section --- */
 .horizontal-scroll-section {
     position: relative;
-    height: 300vh; /* This height determines how long you scroll to go through the horizontal content */
+    height: 300vh; 
 }
 .sticky-wrapper {
     position: sticky;
@@ -191,20 +191,184 @@ body.loaded .content-wrapper {
     clip-path: circle(150% at 95% 5%);
 }
 
-/* Fallback for Tailwind's aspect-ratio plugin if it fails */
-.aspect-w-3 {
+/* --- CLIENT LOGO STYLES --- */
+.clients-section {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.logos-container {
+    overflow: hidden;
+    white-space: nowrap;
     position: relative;
-    padding-bottom: 75%; /* 4:3 ratio */
 }
-.aspect-h-4 {
-    /* No styles needed here with this method */
-}
-.aspect-w-3 > * {
+.logos-container:before,
+.logos-container:after {
+    content: '';
     position: absolute;
-    height: 100%;
-    width: 100%;
     top: 0;
-    right: 0;
-    bottom: 0;
+    width: 200px;
+    height: 100%;
+    z-index: 2;
+}
+.logos-container:before {
     left: 0;
+    background: linear-gradient(to left, rgba(13, 13, 13, 0), var(--bg-color));
+}
+.logos-container:after {
+    right: 0;
+    background: linear-gradient(to right, rgba(13, 13, 13, 0), var(--bg-color));
+}
+@keyframes infinite-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+.logos-slide {
+    display: inline-block;
+    animation: infinite-scroll 40s linear infinite;
+}
+.logo-item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+    width: 200px;
+    margin: 0 40px;
+    filter: grayscale(100%);
+    opacity: 0.6;
+    transition: all 0.4s ease;
+}
+.logo-item:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+    transform: scale(1.05);
+}
+.logo-item img {
+    max-height: 40px;
+    width: auto;
+}
+
+/* --- SERVICES PAGE STYLES --- */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+}
+
+@media (min-width: 1024px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.service-item {
+    padding: 2.5rem;
+    background-color: var(--bg-color);
+    transition: background-color 0.3s ease;
+}
+
+.service-item:hover {
+    background-color: #1a1a1a;
+}
+
+.service-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.service-number {
+    font-family: 'Satoshi', sans-serif;
+    color: var(--accent-color);
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.service-title {
+    font-size: 2.25rem; /* text-4xl */
+    line-height: 2.5rem;
+}
+
+.service-description {
+    font-size: 1.125rem; /* text-lg */
+    color: var(--text-color);
+    line-height: 1.75;
+    max-width: 42rem; /* prose */
+}
+
+/* --- PROJECT PAGE TEMPLATE STYLES --- */
+
+@media (min-width: 1024px) {
+    .sticky-sidebar {
+        position: sticky;
+        top: 120px; 
+        align-self: flex-start;
+    }
+}
+
+.gallery-item {
+    opacity: 0;
+    transform: translateY(60px) scale(0.95);
+    transition: transform 1s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.gallery-item.is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.masonry-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+.masonry-item:nth-child(3n+1) {
+    grid-column: span 1;
+    grid-row: span 2;
+}
+.masonry-item:nth-child(3n+2) {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+.masonry-item:nth-child(3n) {
+    grid-column: span 1;
+    grid-row: span 2;
+}
+@media (max-width: 768px) {
+    .masonry-grid {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.next-project-link {
+    position: relative;
+    display: block;
+    overflow: hidden;
+}
+.next-project-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.1);
+    transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+    opacity: 0;
+}
+.next-project-link:hover .next-project-bg {
+    transform: scale(1);
+    opacity: 1;
+}
+.next-project-text {
+    position: relative;
+    z-index: 2;
+    transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.next-project-link:hover .next-project-text {
+    transform: scale(0.95);
 }
