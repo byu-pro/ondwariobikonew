@@ -54,18 +54,27 @@
                             </div>
                         </div>
                     </div>
-                    <div class="w-full lg:w-2/3"><div class="masonry-grid">
-                            <div class="masonry-item gallery-item"><img src="https://images.pexels.com/photos/3775602/pexels-photo-3775602.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Product Page Showcase" class="w-full h-full object-cover rounded-2xl"></div>
-                            <div class="masonry-item gallery-item" style="transition-delay: 0.1s;"><img src="https://images.pexels.com/photos/7679883/pexels-photo-7679883.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Homepage Mockup" class="w-full h-full object-cover rounded-2xl"></div>
-                            <div class="masonry-item gallery-item" style="transition-delay: 0.2s;"><img src="https://images.pexels.com/photos/258244/pexels-photo-258244.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Fashion Editorial Shot" class="w-full h-full object-cover rounded-2xl"></div>
-                            <div class="masonry-item gallery-item" style="transition-delay: 0.1s;"><img src="https://images.pexels.com/photos/102129/pexels-photo-102129.jpeg?auto=compress&cs=tinysrgb&w=800" alt="UI Detail" class="w-full h-full object-cover rounded-2xl"></div>
-                    </div></div>
+                    <div class="w-full lg:w-2/3">
+                        <div class="masonry-grid gap-6"> <!-- Added gap-6 for spacing -->
+                            <div class="masonry-item gallery-item">
+                                <img src="https://images.pexels.com/photos/3775602/pexels-photo-3775602.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Product Page Showcase" class="w-full h-full object-cover rounded-2xl">
+                            </div>
+                            <div class="masonry-item gallery-item" style="transition-delay: 0.1s;">
+                                <img src="https://images.pexels.com/photos/7679883/pexels-photo-7679883.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Homepage Mockup" class="w-full h-full object-cover rounded-2xl">
+                            </div>
+                            <div class="masonry-item gallery-item" style="transition-delay: 0.2s;">
+                                <img src="https://images.pexels.com/photos/258244/pexels-photo-258244.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Fashion Editorial Shot" class="w-full h-full object-cover rounded-2xl">
+                            </div>
+                            <div class="masonry-item gallery-item" style="transition-delay: 0.1s;">
+                                <img src="https://images.pexels.com/photos/102129/pexels-photo-102129.jpeg?auto=compress&cs=tinysrgb&w=800" alt="UI Detail" class="w-full h-full object-cover rounded-2xl">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
             
             <section class="py-20 md:py-32 bg-black">
-                <a href="project-gamma.html" class="page-link next-project-link">
-                    <img src="https://images.pexels.com/photos/1229861/pexels-photo-1229861.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Next Project" class="next-project-bg">
+                <a href="project-gamma.html" class="page-link next-project-link block w-full"> <!-- Removed image and added block w-full -->
                     <div class="text-center container mx-auto px-6 relative z-10">
                         <p class="text-text-color text-lg mb-4 next-project-text" style="transition-delay: 0.1s;">Next Project</p>
                         <h3 class="text-5xl md:text-8xl uppercase next-project-text">Project Gamma</h3>
@@ -78,7 +87,17 @@
             <div class="container mx-auto px-6 text-center">
                 <h2 class="text-4xl md:text-6xl lg:text-8xl uppercase mb-4"><span class="reveal-line"><span class="reveal-line-inner">Have a project?</span></span></h2>
                 <a href="mailto:hello@alexvance.design" class="text-4xl md:text-6xl lg:text-8xl text-accent-color hover:text-white transition-colors duration-500 uppercase inline-block magnetic-link"><span class="reveal-line"><span class="reveal-line-inner">Let's talk</span></span></a>
-                <div class="mt-20 md:mt-32 text-text-color flex justify-between items-center"><div class="text-left"><p>Nairobi, Kenya</p><p>EAT <span id="current-time"></span></p></div><div class="flex space-x-6"><a href="#" class="hover:text-white transition-colors">Twitter</a><a href="#" class="hover:text-white transition-colors">LinkedIn</a><a href="#" class="hover:text-white transition-colors">Instagram</a></div></div>
+                <div class="mt-20 md:mt-32 text-text-color flex justify-between items-center">
+                    <div class="text-left">
+                        <p>Nairobi, Kenya</p>
+                        <p>EAT <span id="current-time"></span></p>
+                    </div>
+                    <div class="flex space-x-6">
+                        <a href="#" class="hover:text-white transition-colors">Twitter</a>
+                        <a href="#" class="hover:text-white transition-colors">LinkedIn</a>
+                        <a href="#" class="hover:text-white transition-colors">Instagram</a>
+                    </div>
+                </div>
             </div>
         </footer>
     </div>

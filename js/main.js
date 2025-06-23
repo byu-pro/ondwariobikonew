@@ -352,3 +352,24 @@ document.addEventListener('DOMContentLoaded', () => {
     initMagneticLinks();
     initResizeHandler();
 });
+// Add this to your initPageTransitions() function
+function initPageTransitions() {
+    window.addEventListener('load', () => {
+        // ... existing load handler code ...
+        
+        // Add this image loader
+        document.querySelectorAll('.project-image').forEach(img => {
+            if (img.complete) {
+                img.closest('.project-card').classList.add('loaded');
+            } else {
+                img.addEventListener('load', () => {
+                    img.closest('.project-card').classList.add('loaded');
+                });
+                img.addEventListener('error', () => {
+                    console.error('Image failed to load:', img.src);
+                });
+            }
+        });
+    });
+    // ... rest of your existing code ...
+}
