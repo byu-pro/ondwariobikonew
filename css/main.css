@@ -1161,9 +1161,30 @@ a, button {
     .modal-info { padding: 2rem; }
 }
 
+/* In css/main.css */
+
 /* ==========================================================================
-   NEW: Mute Button Icon Styling
+   ENHANCED WORK GRID STYLES
    ========================================================================== */
-#mute-btn .hidden {
-    display: none;
+
+/* This prepares the grid items for the GSAP entrance animation */
+.work-item.reveal-grid-item {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+/* The .hide class is no longer needed for filtering because GSAP now handles it, 
+  but it can be kept as a fallback or for other uses. 
+  The GSAP implementation is superior.
+*/
+.work-item.hide {
+    transform: scale(0.95);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease, transform 0.5s ease, width 0s 0.5s, height 0s 0.5s, margin 0s 0.5s, padding 0s 0.5s;
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
 }

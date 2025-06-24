@@ -7,17 +7,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://api.fontshare.com/v2/css?f[]=clash-display@700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
-    <link rel="icon" type="image/png" href="images/ondwariobiko logotype and symbol-02.png">
+    <link rel="icon" type="image/png" href="images/logo%20favicon-02.png">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
-    <script type="importmap">
-    {
-        "imports": {
-            "three": "https://unpkg.com/three@0.158.0/build/three.module.js"
-        }
-    }
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Flip.min.js" defer></script>
 </head>
 <body class="overflow-x-hidden">
     <div id="preloader">
@@ -37,10 +30,6 @@
                 <img src="images/logo favicon-02.png" alt="Ondwari Obiko Logo" class="navbar-logo">
             </a>
             <div class="flex items-center space-x-4">
-                <button id="mute-btn" class="w-12 h-12 rounded-full border border-white/50 flex items-center justify-center z-50" aria-label="Toggle Sound">
-                    <svg id="icon-sound-on" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-                    <svg id="icon-sound-off" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white hidden"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
-                </button>
                 <button id="menu-toggle" aria-label="Open main menu" class="w-12 h-12 rounded-full border border-white/50 flex flex-col items-center justify-center space-y-1.5 z-50">
                     <span class="w-6 h-0.5 bg-white block transition-transform duration-300"></span>
                     <span class="w-6 h-0.5 bg-white block transition-transform duration-300"></span>
@@ -77,8 +66,7 @@
 
             <section class="container mx-auto px-6 pb-20 md:pb-40">
                 <div id="work-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
-
-                    <a href="#" class="work-item page-link" data-category="branding">
+                    <a href="#" class="work-item page-link reveal-grid-item" data-category="branding">
                         <div class="work-item-image-wrapper">
                             <img src="https://images.unsplash.com/photo-1639762681057-408e52192e55?auto=format&fit=crop&w=800&q=80" alt="Nairobi Coffee Co." class="work-item-image">
                         </div>
@@ -87,8 +75,7 @@
                             <p class="work-item-category">Branding & Identity</p>
                         </div>
                     </a>
-
-                    <a href="#" class="work-item page-link" data-category="web">
+                    <a href="#" class="work-item page-link reveal-grid-item" data-category="web">
                         <div class="work-item-image-wrapper">
                             <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&w=800&q=80" alt="Safari Explorer" class="work-item-image">
                         </div>
@@ -97,8 +84,7 @@
                             <p class="work-item-category">Web Design & UX</p>
                         </div>
                     </a>
-                    
-                    <a href="#" class="work-item page-link" data-category="packaging">
+                    <a href="#" class="work-item page-link reveal-grid-item" data-category="packaging">
                         <div class="work-item-image-wrapper">
                             <img src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?auto=format&fit=crop&w=800&q=80" alt="Maisha Tea" class="work-item-image">
                         </div>
@@ -107,8 +93,7 @@
                             <p class="work-item-category">Packaging Design</p>
                         </div>
                     </a>
-
-                    <a href="#" class="work-item page-link" data-category="mobile">
+                    <a href="#" class="work-item page-link reveal-grid-item" data-category="mobile">
                         <div class="work-item-image-wrapper">
                              <img src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?auto=format&fit=crop&w=800&q=80" alt="PesaTrack" class="work-item-image">
                         </div>
@@ -117,8 +102,7 @@
                             <p class="work-item-category">Mobile & App Design</p>
                         </div>
                     </a>
-                    
-                    <a href="#" class="work-item page-link" data-category="web">
+                    <a href="#" class="work-item page-link reveal-grid-item" data-category="web">
                         <div class="work-item-image-wrapper">
                             <img src="https://images.unsplash.com/photo-1516116216624-53e697300947?auto=format&fit=crop&w=800&q=80" alt="KaziConnect Platform" class="work-item-image">
                         </div>
@@ -127,8 +111,7 @@
                             <p class="work-item-category">Web Design & UX</p>
                         </div>
                     </a>
-
-                    <a href="#" class="work-item page-link" data-category="branding">
+                    <a href="#" class="work-item page-link reveal-grid-item" data-category="branding">
                         <div class="work-item-image-wrapper">
                             <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?auto=format&fit=crop&w=800&q=80" alt="Artisan Collective" class="work-item-image">
                         </div>
@@ -137,13 +120,12 @@
                             <p class="work-item-category">Branding & Identity</p>
                         </div>
                     </a>
-
                 </div>
             </section>
         </main>
         
         <footer id="contact" class="bg-[#111111] text-white pt-24 pb-8 md:pt-40 md:pb-28">
-                <div class="container mx-auto px-6">
+            <div class="container mx-auto px-6">
                     <div class="text-center tilt-container mb-24 md:mb-32">
                         <p class="text-lg text-text-color mb-4 reveal-up">Got an idea?</p>
                         <h2 class="contact-heading uppercase mb-6 interactive-tilt">
@@ -182,16 +164,13 @@
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.584-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.85s.012-3.584.07-4.85c.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.85-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.058-1.281.072-1.689.072-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.441-.645 1.441-1.44s-.646-1.44-1.441-1.44z"></path></svg>
                         </a>
                     </div>
-                    </div>
                 </div>
-            </footer>
+            </div>
+        </footer>
     </div>
-
-    <script src="js/main.js" type="module" defer></script>
-    <script src="js/work.js" defer></script>
     
-    <audio id="audio-hover" src="sounds/hover.mp3" preload="auto"></audio>
-    <audio id="audio-click" src="sounds/click.mp3" preload="auto"></audio>
+    <script src="js/app.js" type="module" defer></script>
+    <script src="js/work.js" type="module" defer></script>
 
     <div id="hire-me-fab" class="hire-me-container">
         <button id="fab-main-btn" class="fab-main" aria-label="Contact Me">

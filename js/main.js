@@ -14,11 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const cursorOutline = document.getElementById('cursor-outline');
     const cursorText = document.getElementById('cursor-text');
 
-    // ADDED: Global state and elements for sound effects
-    let isMuted = true; // Sound is muted by default
-    const audioHover = document.getElementById('audio-hover');
-    const audioClick = document.getElementById('audio-click');
-
     /**
      * Handles the preloader and smooth page load transitions.
      */
@@ -49,7 +44,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 
                 e.preventDefault();
-                playSound(audioClick); // MODIFIED: Play sound on click
 
                 const mobileMenu = document.getElementById('mobile-menu');
                 if (mobileMenu && mobileMenu.classList.contains('open')) {
@@ -142,7 +136,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll(interactiveElements).forEach(el => {
             el.addEventListener('mouseenter', () => {
                 cursorOutline.classList.add('hover');
-                playSound(audioHover);
                 const customText = el.getAttribute('data-cursor-text');
                 if (cursorText) {
                     cursorText.textContent = customText || 'Click';
@@ -171,7 +164,6 @@ document.addEventListener('DOMContentLoaded', () => {
         
         menuToggle.addEventListener('click', (e) => {
             e.stopPropagation();
-            playSound(audioClick); // Play sound
             const isOpen = mobileMenu.classList.toggle('open');
             document.body.style.overflow = isOpen ? 'hidden' : '';
             menuSpans[0].style.transform = isOpen ? 'translateY(5px) rotate(45deg)' : '';
@@ -282,7 +274,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!fabContainer || !mainFab) return;
         mainFab.addEventListener('click', (e) => {
             e.stopPropagation();
-            playSound(audioClick);
             fabContainer.classList.toggle('active');
         });
         document.addEventListener('click', (e) => {
@@ -379,7 +370,6 @@ document.addEventListener('DOMContentLoaded', () => {
         projectCards.forEach(card => {
             card.addEventListener('click', (e) => {
                 e.preventDefault();
-                playSound(audioClick);
                 
                 modalTitle.textContent = card.dataset.title;
                 modalImg.src = card.dataset.img;
@@ -401,33 +391,6 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
     }
 
-    /**
-     * NEW: Initializes sound controls and provides a helper function.
-     */
-    function initSound() {
-        const muteBtn = document.getElementById('mute-btn');
-        const iconOn = document.getElementById('icon-sound-on');
-        const iconOff = document.getElementById('icon-sound-off');
-        if (!muteBtn || !iconOn || !iconOff) return;
-
-        muteBtn.addEventListener('click', () => {
-            isMuted = !isMuted;
-            iconOn.classList.toggle('hidden', isMuted);
-            iconOff.classList.toggle('hidden', !isMuted);
-            if (audioClick) {
-                audioClick.muted = false;
-                audioClick.play().catch(e => {});
-            }
-        });
-    }
-
-    function playSound(sound) {
-        if (!isMuted && sound) {
-            sound.currentTime = 0;
-            sound.play().catch(e => {});
-        }
-    }
-
 
     // --- FINAL INITIALIZATION ---
     // This block calls all the functions to set up the page.
@@ -444,7 +407,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // NEW functions are called here
     initHeroWebGL();
     initProjectModal();
-    initSound();
     
     // Kept from original file structure, checks if this element exists on the page before running
     if (document.querySelector('.next-project-link')) {
