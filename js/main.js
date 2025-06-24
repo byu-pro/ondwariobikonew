@@ -206,6 +206,65 @@ document.addEventListener('DOMContentLoaded', () => {
         handleScroll();
     }
 
+    /**
+     * Initializes the new testimonial slider functionality.
+     */
+    function initTestimonialSlider() {
+        const slider = document.getElementById('testimonial-slider');
+        if (!slider) return;
+
+        const track = slider.querySelector('.testimonial-track');
+        const slides = Array.from(track.children);
+        const nextButton = document.getElementById('testimonial-next');
+        const prevButton = document.getElementById('testimonial-prev');
+        const paginationNav = document.getElementById('testimonial-pagination');
+        let currentIndex = 0;
+
+        // Create pagination dots
+        slides.forEach((_, index) => {
+            const dot = document.createElement('button');
+            dot.classList.add('pagination-dot');
+            dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
+            if (index === 0) dot.classList.add('active');
+            paginationNav.appendChild(dot);
+            dot.addEventListener('click', () => goToSlide(index));
+        });
+        
+        const dots = Array.from(paginationNav.children);
+
+        const goToSlide = (index) => {
+            track.style.transform = `translateX(-${index * 100}%)`;
+            updateNav(currentIndex, index);
+            currentIndex = index;
+        };
+        
+        const updateNav = (oldIndex, newIndex) => {
+            // Update dots
+            dots[oldIndex]?.classList.remove('active');
+            dots[newIndex]?.classList.add('active');
+
+            // Update buttons
+            prevButton.disabled = newIndex === 0;
+            nextButton.disabled = newIndex === slides.length - 1;
+        };
+        
+        nextButton.addEventListener('click', () => {
+            if (currentIndex < slides.length - 1) {
+                goToSlide(currentIndex + 1);
+            }
+        });
+
+        prevButton.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                goToSlide(currentIndex - 1);
+            }
+        });
+        
+        // Initialize nav state
+        updateNav(0, 0);
+    }
+
+
     function initNextProjectHover() {
         const link = document.querySelector('.next-project-link');
         const preview = document.querySelector('.next-project-preview');
@@ -289,6 +348,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initClock();
     initMagneticLinks();
     initResizeHandler();
+    initTestimonialSlider(); // Initialize the new slider
     
     if (document.querySelector('.horizontal-scroll-section')) initHorizontalScroll();
     if (document.querySelector('.next-project-link')) initNextProjectHover();
