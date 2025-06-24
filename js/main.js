@@ -357,3 +357,42 @@ document.addEventListener('DOMContentLoaded', () => {
     if (document.querySelector('.next-project-link')) initNextProjectHover();
     if (document.querySelector('.skill-item')) initSkillMeters();
 });
+// Add this code inside the DOMContentLoaded event listener in your main.js file
+
+/**
+ * Initializes the floating action button for "Hire Me".
+ */
+function initHireMeButton() {
+    const fabContainer = document.getElementById('hire-me-fab');
+    const mainFab = document.getElementById('fab-main-btn');
+
+    if (!fabContainer || !mainFab) return;
+
+    mainFab.addEventListener('click', (e) => {
+        e.stopPropagation();
+        fabContainer.classList.toggle('active');
+    });
+
+    // Close FAB if clicking anywhere else on the page
+    document.addEventListener('click', (e) => {
+        if (fabContainer.classList.contains('active') && !fabContainer.contains(e.target)) {
+            fabContainer.classList.remove('active');
+        }
+    });
+}
+
+// --- Add this to your INITIALIZE ALL FUNCTIONS section ---
+// initHireMeButton();
+// For example, add it right after initTestimonialSlider();
+// Make sure you call the function to initialize it.
+
+// Example of where to add the call in your main.js:
+/*
+    ...
+
+    initTestimonialSlider(); 
+    initHireMeButton(); // <-- ADD THIS LINE
+    
+    if (document.querySelector('.horizontal-scroll-section')) initHorizontalScroll();
+    ...
+*/

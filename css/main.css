@@ -720,3 +720,120 @@ a, button {
     transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: transform;
 }
+/* Add these styles to the end of your main.css file */
+.hire-me-container {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 1000;
+}
+
+.fab-main {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(0, 255, 255, 0.4);
+    cursor: pointer;
+    border: none;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+}
+
+.fab-main:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 25px rgba(0, 255, 255, 0.5);
+}
+
+.fab-text {
+    position: absolute;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    font-family: 'Satoshi', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.fab-icon {
+    position: absolute;
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+    transition: all 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+}
+
+.hire-me-container.active .fab-main {
+    background-color: #fff;
+    color: var(--accent-color);
+}
+
+.hire-me-container.active .fab-icon {
+    transform: rotate(45deg);
+}
+
+.fab-options {
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    pointer-events: none;
+}
+
+.fab-option {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #fff;
+    color: var(--bg-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    opacity: 0;
+    transform: translateY(20px) scale(0.8);
+    transition: all 0.3s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+}
+
+.fab-option:hover {
+    background-color: var(--accent-color);
+    color: #fff;
+    transform: translateY(15px) scale(1.1);
+}
+
+.hire-me-container.active .fab-options {
+    pointer-events: auto;
+}
+
+.hire-me-container.active .fab-option {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* Staggered animation delay */
+.hire-me-container.active .fab-option:nth-child(1) {
+    transition-delay: 0.1s;
+}
+.hire-me-container.active .fab-option:nth-child(2) {
+    transition-delay: 0.2s;
+}
+
+@media (max-width: 768px) {
+    .hire-me-container {
+        bottom: 1.5rem;
+        right: 1.5rem;
+    }
+    .fab-main {
+        width: 55px;
+        height: 55px;
+    }
+}
