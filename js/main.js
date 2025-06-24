@@ -75,38 +75,41 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     /**
-     * NEW: Adds an interactive 3D tilt effect to the hero heading.
+     * NEW & IMPROVED: Applies an interactive 3D tilt effect to designated elements sitewide.
      */
-    function initHeroTilt() {
-        const heroSection = document.querySelector('.hero-section-container');
-        const heroHeading = document.querySelector('.hero-heading');
-        if (!heroSection || !heroHeading) return;
-
+    function initGlobalTiltEffect() {
         // Don't run tilt effect on touch devices
         if (window.matchMedia("(pointer: coarse)").matches) return;
 
-        const TILT_AMOUNT = 5; // Max tilt in degrees. Adjust for more/less effect.
+        const TILT_AMOUNT = 8; // Max tilt in degrees. Adjust for more/less effect.
+        const containers = document.querySelectorAll('.tilt-container');
 
-        heroSection.addEventListener('mousemove', (e) => {
-            const { clientX, clientY } = e;
-            const { offsetWidth, offsetHeight } = heroSection;
+        containers.forEach(container => {
+            const elementToTilt = container.querySelector('.interactive-tilt');
+            if (!elementToTilt) return;
 
-            // Calculate mouse position from center of section (-0.5 to 0.5)
-            const x = (clientX / offsetWidth) - 0.5;
-            const y = (clientY / offsetHeight) - 0.5;
+            container.addEventListener('mousemove', (e) => {
+                const { clientX, clientY } = e;
+                const { top, left, width, height } = container.getBoundingClientRect();
+                
+                // Calculate mouse position from center of the container (-0.5 to 0.5)
+                const x = ((clientX - left) / width) - 0.5;
+                const y = ((clientY - top) / height) - 0.5;
 
-            // Apply transform based on mouse position
-            const rotateY = x * TILT_AMOUNT;
-            const rotateX = -y * TILT_AMOUNT;
-            
-            heroHeading.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-        });
+                // Apply transform based on mouse position
+                const rotateY = x * TILT_AMOUNT;
+                const rotateX = -y * TILT_AMOUNT;
+                
+                elementToTilt.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
 
-        // Reset transform when mouse leaves the section
-        heroSection.addEventListener('mouseleave', () => {
-            heroHeading.style.transform = 'rotateX(0deg) rotateY(0deg)';
+            // Reset transform when mouse leaves the container
+            container.addEventListener('mouseleave', () => {
+                elementToTilt.style.transform = 'rotateX(0deg) rotateY(0deg)';
+            });
         });
     }
+
 
     /**
      * Sets up the custom cursor movement and interaction states.
@@ -342,13 +345,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- INITIALIZE ALL FUNCTIONS ---
     initPageTransitions();
-    initHeroTilt();
+    initGlobalTiltEffect(); // UPDATED
     initCustomCursor();
     initMobileMenu();
     initClock();
     initMagneticLinks();
     initResizeHandler();
-    initTestimonialSlider(); // Initialize the new slider
+    initTestimonialSlider(); 
     
     if (document.querySelector('.horizontal-scroll-section')) initHorizontalScroll();
     if (document.querySelector('.next-project-link')) initNextProjectHover();

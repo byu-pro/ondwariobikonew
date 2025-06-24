@@ -36,9 +36,9 @@
         </div>
 
         <main>
-            <section class="h-screen w-full flex flex-col justify-center items-center text-center relative p-4 hero-section-container">
+            <section class="h-screen w-full flex flex-col justify-center items-center text-center relative p-4 hero-section-container tilt-container">
                 <div class="absolute inset-0 bg-gradient-to-t from-[#0D0D0D] to-transparent z-10"></div>
-                <h1 class="hero-heading uppercase leading-none z-20">
+                <h1 class="hero-heading uppercase leading-none z-20 interactive-tilt">
                     <span class="reveal-line"><span class="reveal-line-inner">Graphic</span></span>
                     <span class="reveal-line"><span class="reveal-line-inner">& Web Designer</span></span>
                 </h1>
@@ -104,26 +104,24 @@
                         </div>
                     </div>
                     <div class="lg:col-span-3">
-                        <h2 class="section-heading mb-8 uppercase"><span class="reveal-line"><span class="reveal-line-inner">About Me</span></span></h2>
+                        <div class="tilt-container mb-8">
+                            <h2 class="section-heading uppercase interactive-tilt"><span class="reveal-line"><span class="reveal-line-inner">About Me</span></span></h2>
+                        </div>
                         <p class="text-lg md:text-xl text-text-color leading-relaxed max-w-2xl reveal-text">I'm Ondwari Obiko, a graphic and web designer who combines aesthetic vision with technical skill. I specialize in creating cohesive brand identities and translating them into beautiful, responsive, and high-performing websites. My work is driven by a passion for clean design and intuitive user experiences.</p>
                         <p class="text-lg md:text-xl text-text-color leading-relaxed mt-6 max-w-2xl reveal-text" style="transition-delay: 0.2s;">Let's collaborate to build a digital presence that not only looks stunning but also achieves your strategic goals.</p>
                     </div>
                 </div>
             </section>
 
-            <!-- ==========================================================================
-               NEW TESTIMONIALS SECTION
-               ========================================================================== -->
             <section id="testimonials" class="bg-[#111111] py-20 md:py-32 overflow-hidden">
                 <div class="container mx-auto px-6">
-                    <div class="text-center mb-16 md:mb-24">
+                    <div class="text-center tilt-container mb-16 md:mb-24">
                         <p class="text-lg text-text-color mb-4 reveal-up">Testimonials</p>
-                        <h2 class="section-heading uppercase reveal-line"><span class="reveal-line-inner">What Clients Say</span></h2>
+                        <h2 class="section-heading uppercase reveal-line interactive-tilt"><span class="reveal-line-inner">What Clients Say</span></h2>
                     </div>
 
                     <div id="testimonial-slider" class="relative max-w-4xl mx-auto reveal-up">
                         <div class="testimonial-track flex">
-                            <!-- Testimonial 1 -->
                             <div class="testimonial-slide">
                                 <div class="testimonial-content">
                                     <p class="testimonial-text">"Working with Ondwari was a transformative experience. He didn't just design a website; he crafted a digital identity that perfectly captures our brand's essence. The results speak for themselves."</p>
@@ -133,7 +131,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- Testimonial 2 -->
                             <div class="testimonial-slide">
                                 <div class="testimonial-content">
                                     <p class="testimonial-text">"The level of detail and creativity brought to our web design project was outstanding. The user feedback has been overwhelmingly positive. A true professional and a pleasure to collaborate with."</p>
@@ -143,7 +140,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- Testimonial 3 -->
                             <div class="testimonial-slide">
                                  <div class="testimonial-content">
                                     <p class="testimonial-text">"From concept to final delivery, the packaging design process was seamless. Ondwari's vision for Maisha Tea was innovative and beautifully executed, elevating our product on the shelves."</p>
@@ -155,7 +151,6 @@
                             </div>
                         </div>
 
-                        <!-- Navigation Controls -->
                         <div class="testimonial-nav">
                             <button id="testimonial-prev" aria-label="Previous testimonial" class="nav-arrow">
                                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path></svg>
@@ -168,10 +163,6 @@
                     </div>
                 </div>
             </section>
-            <!-- ==========================================================================
-               END OF TESTIMONIALS SECTION
-               ========================================================================== -->
-
             <section class="clients-section">
                 <div class="container mx-auto px-6 text-center mb-12"><h2 class="text-3xl uppercase text-text-color tracking-widest reveal-up">Trusted by Industry Leaders</h2></div>
                 <div class="logos-container"><div class="logos-slide"><div class="logo-item"><img src="https://www.vectorlogo.zone/logos/microsoft/microsoft-icon.svg" alt="Microsoft Logo"></div><div class="logo-item"><img src="https://www.vectorlogo.zone/logos/google/google-icon.svg" alt="Google Logo"></div><div class="logo-item"><img src="https://www.vectorlogo.zone/logos/meta/meta-icon.svg" alt="Meta Logo"></div><div class="logo-item"><img src="https://www.vectorlogo.zone/logos/amazon/amazon-icon.svg" alt="Amazon Logo"></div><div class="logo-item"><img src="https://www.vectorlogo.zone/logos/shopify/shopify-icon.svg" alt="Shopify Logo"></div><div class="logo-item"><img src="https://www.vectorlogo.zone/logos/slack/slack-icon.svg" alt="Slack Logo"></div><div class="logo-item"><img src="https://www.vectorlogo.zone/logos/microsoft/microsoft-icon.svg" alt="Microsoft Logo"></div><div class="logo-item"><img src="https://www.vectorlogo.zone/logos/google/google-icon.svg" alt="Google Logo"></div><div class="logo-item"><img src="https://www.vectorlogo.zone/logos/meta/meta-icon.svg" alt="Meta Logo"></div><div class="logo-item"><img src="https://www.vectorlogo.zone/logos/amazon/amazon-icon.svg" alt="Amazon Logo"></div><div class="logo-item"><img src="https://www.vectorlogo.zone/logos/shopify/shopify-icon.svg" alt="Shopify Logo"></div><div class="logo-item"><img src="https://www.vectorlogo.zone/logos/slack/slack-icon.svg" alt="Slack Logo"></div></div></div>
@@ -179,9 +170,9 @@
 
            <footer id="contact" class="bg-[#111111] text-white pt-24 pb-8 md:pt-40 md:pb-12">
                 <div class="container mx-auto px-6">
-                    <div class="text-center mb-24 md:mb-32">
+                    <div class="text-center tilt-container mb-24 md:mb-32">
                         <p class="text-lg text-text-color mb-4 reveal-up">Got an idea?</p>
-                        <h2 class="contact-heading uppercase mb-6">
+                        <h2 class="contact-heading uppercase mb-6 interactive-tilt">
                             <span class="reveal-line"><span class="reveal-line-inner">Let's work together</span></span>
                         </h2>
                         <a href="mailto:ondwariobiko@gmail.com" class="magnetic-link inline-block mt-4">
