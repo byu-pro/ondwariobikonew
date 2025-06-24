@@ -303,3 +303,106 @@ footer { padding: 10rem 0; background-color: #111; }
     .clients-section { padding: 5rem 0; }
     .logo-item { height: 60px; width: 120px; margin: 0 20px; }
 }
+/* ==========================================================================
+   NON-INTRUSIVE RESPONSIVE ADDITIONS
+   - Add this to the end of main.css -
+   ========================================================================== */
+
+/* --- 1. Touch-Device Enhancements --- */
+
+/* Hide the custom mouse cursor on devices that use touch as the primary input.
+   This doesn't affect standard desktops, even if they have a touchscreen. */
+@media (pointer: coarse) {
+    #cursor-dot, #cursor-outline {
+        display: none !important;
+    }
+}
+
+/* Improve tap feedback on all interactive elements for touch devices */
+a, button {
+    -webkit-tap-highlight-color: rgba(0, 255, 255, 0.1); /* Subtle cyan flash on tap */
+}
+
+
+/* --- 2. Extra-Small Device Adjustments (e.g., iPhone SE) --- */
+@media (max-width: 479px) {
+    /* Reduce body padding slightly on the smallest screens for more content space */
+    .content-wrapper .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    /* Slightly smaller footer text on very narrow screens */
+    footer .text-text-color {
+        font-size: 0.9rem;
+    }
+}
+
+
+/* --- 3. Tablet-Specific Layout Adjustments --- */
+@media (min-width: 768px) and (max-width: 1023px) {
+    /* On tablets, make the "About Me" image and text stack for better readability
+       instead of being side-by-side where text lines can get too short. */
+    #about .lg\:grid-cols-5 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    #about .lg\:col-span-2 {
+        max-width: 400px; /* Constrain image size */
+        margin-bottom: 2rem;
+    }
+    
+    /* Make the toolkit a 2-column grid on tablets instead of 3 */
+    #toolkit .lg\:grid-cols-3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+/* --- 4. Extra-Large Desktop Screens (WQHD, 4K) --- */
+@media (min-width: 1920px) {
+    /* On very large screens, constrain the maximum width of text-heavy containers
+       to prevent lines from becoming too long and hard to read. */
+    .container {
+        max-width: 1440px; /* A common standard for large screen content width */
+    }
+
+    /* Make horizontal scroll projects slightly smaller as a percentage of the viewport
+       so more of the next item is visible, encouraging interaction. */
+    .horizontal-scroll-section .project-card {
+        width: 50vw;
+    }
+}
+
+
+/* --- 5. Mobile Landscape Orientation --- */
+@media (max-height: 500px) and (orientation: landscape) {
+    /* Reduce the size of the hero section title on short, wide screens */
+    .hero-heading {
+        font-size: clamp(2.5rem, 12vh, 4rem) !important;
+    }
+    
+    /* Hide the "Scroll to Explore" indicator as it takes up valuable vertical space */
+    .scroll-indicator {
+        display: none;
+    }
+
+    /* Adjust the mobile menu for a better landscape fit */
+    #mobile-menu .menu-link {
+        font-size: clamp(2rem, 8vh, 3rem); /* Use viewport height for sizing */
+        margin: 0;
+    }
+    #mobile-menu nav {
+        gap: 1rem; /* Reduce space between menu items */
+    }
+}
+
+/* --- 6. Final Safeguard --- */
+/* This rule helps prevent rare cases of horizontal overflow caused by rounding
+   errors or rogue elements, without interfering with intentional scroll areas. */
+body {
+    overflow-x: clip;
+}
