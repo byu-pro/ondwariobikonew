@@ -352,6 +352,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initMagneticLinks();
     initResizeHandler();
     initTestimonialSlider(); 
+    initHireMeButton(); // <-- FIX: ADD THIS LINE
     
     if (document.querySelector('.horizontal-scroll-section')) initHorizontalScroll();
     if (document.querySelector('.next-project-link')) initNextProjectHover();
@@ -380,19 +381,3 @@ function initHireMeButton() {
         }
     });
 }
-
-// --- Add this to your INITIALIZE ALL FUNCTIONS section ---
-// initHireMeButton();
-// For example, add it right after initTestimonialSlider();
-// Make sure you call the function to initialize it.
-
-// Example of where to add the call in your main.js:
-/*
-    ...
-
-    initTestimonialSlider(); 
-    initHireMeButton(); // <-- ADD THIS LINE
-    
-    if (document.querySelector('.horizontal-scroll-section')) initHorizontalScroll();
-    ...
-*/
