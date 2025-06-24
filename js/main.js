@@ -1,30 +1,37 @@
 // main.js - Premium Portfolio Script
 document.addEventListener('DOMContentLoaded', () => {
     // --- Project Data ---
+    // Updated to match the content in index.html for consistency
     const projects = [
         {
             slug: "project-alpha.html",
-            title: "Project Alpha",
+            title: "Nairobi Coffee Co.",
             category: "Branding & Identity",
-            imageUrl: "https://source.unsplash.com/random/1200x900/?design,branding"
+            imageUrl: "https://images.unsplash.com/photo-1639762681057-408e52192e55?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2232&q=80"
         },
         {
             slug: "project-beta.html",
-            title: "Project Beta",
+            title: "Safari Explorer",
             category: "Web Design & UX",
-            imageUrl: "https://source.unsplash.com/random/1200x900/?design,web"
+            imageUrl: "https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80"
         },
         {
             slug: "project-gamma.html",
-            title: "Project Gamma",
+            title: "PesaTrack",
             category: "Mobile Application",
-            imageUrl: "https://source.unsplash.com/random/1200x900/?design,mobile"
+            imageUrl: "https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80"
         },
         {
             slug: "project-delta.html",
-            title: "Project Delta",
+            title: "Maisha Tea",
             category: "Packaging Design",
-            imageUrl: "https://source.unsplash.com/random/1200x900/?design,packaging"
+            imageUrl: "https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80"
+        },
+        {
+            slug: "project-epsilon.html", // Assuming this page exists or will be created
+            title: "AfroFuturism",
+            category: "Digital Art Series",
+            imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80"
         }
     ];
 
@@ -32,8 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const preloader = document.getElementById('preloader');
     const cursorDot = document.getElementById('cursor-dot');
     const cursorOutline = document.getElementById('cursor-outline');
-    let scrollDirection = 0;
-    let lastScrollTime = 0;
+    const cursorText = document.getElementById('cursor-text');
 
     // --- Core Functions ---
 
@@ -44,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
         track.innerHTML = projects.map(p => `
             <a href="${p.slug}" class="project-card page-link">
                 <div class="project-image-container">
-                    <img src="${p.imageUrl}" alt="${p.title}" class="project-image">
+                    <img src="${p.imageUrl}" alt="${p.title}" class="project-image" loading="lazy">
                     <div class="project-overlay"></div>
                 </div>
                 <div class="project-info">
@@ -54,17 +60,21 @@ document.addEventListener('DOMContentLoaded', () => {
             </a>
         `).join('');
 
-        // Initialize hover effects for desktop
-        if (window.innerWidth >= 1024) {
-            document.querySelectorAll('.project-card').forEach(card => {
-                card.addEventListener('mouseenter', () => {
-                    card.querySelector('.project-image').style.transform = 'scale(1.05)';
+        // Re-initialize event listeners after populating
+        initPageTransitions(); 
+        initImageLoading();
+    }
+
+    function initImageLoading() {
+        document.querySelectorAll('.project-image').forEach(img => {
+            if (img.complete) {
+                img.closest('.project-card').classList.add('loaded');
+            } else {
+                img.addEventListener('load', () => {
+                    img.closest('.project-card').classList.add('loaded');
                 });
-                card.addEventListener('mouseleave', () => {
-                    card.querySelector('.project-image').style.transform = 'scale(1)';
-                });
-            });
-        }
+            }
+        });
     }
 
     function initPageTransitions() {
@@ -77,9 +87,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         document.querySelectorAll('.page-link').forEach(link => {
+            if (link.dataset.listenerAttached) return; // Prevent multiple listeners
+            link.dataset.listenerAttached = 'true';
+
             link.addEventListener('click', function(e) {
-                if (this.hasAttribute('data-no-transition')) return;
-                
                 e.preventDefault();
                 const destination = this.href;
                 
@@ -104,41 +115,53 @@ document.addEventListener('DOMContentLoaded', () => {
         }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
 
         document.querySelectorAll(
-            '.reveal-line, .reveal-text, .reveal-image, .reveal-up, .project-card'
+            '.reveal-line, .reveal-text, .reveal-image, .reveal-up'
         ).forEach(el => observer.observe(el));
     }
 
     function initCustomCursor() {
         if (!cursorDot || !cursorOutline) return;
 
-        const moveCursor = (e) => {
+        window.addEventListener('mousemove', (e) => {
             const { clientX, clientY } = e;
             cursorDot.style.transform = `translate(${clientX}px, ${clientY}px)`;
-            cursorOutline.animate({
-                left: `${clientX}px`,
-                top: `${clientY}px`
-            }, { duration: 800, fill: 'forwards', easing: 'cubic-bezier(0.22, 1, 0.36, 1)' });
-        };
+            cursorOutline.style.transform = `translate(${clientX}px, ${clientY}px)`;
+        });
 
-        window.addEventListener('mousemove', moveCursor);
+        document.body.addEventListener('mouseleave', () => {
+            cursorDot.classList.add('cursor-hidden');
+            cursorOutline.classList.add('cursor-hidden');
+        });
 
-        const handleCursorState = (state) => {
-            cursorDot.classList.toggle('cursor-hidden', !state);
-            cursorOutline.classList.toggle('cursor-hidden', !state);
-        };
+        document.body.addEventListener('mouseenter', () => {
+            cursorDot.classList.remove('cursor-hidden');
+            cursorOutline.classList.remove('cursor-hidden');
+        });
 
-        document.body.addEventListener('mouseleave', () => handleCursorState(false));
-        document.body.addEventListener('mouseenter', () => handleCursorState(true));
+        // Interactive elements with cursor text
+        const interactiveElements = [
+            { selector: 'a, button', text: 'Click' },
+            { selector: '.project-card', text: 'View' }
+        ];
 
-        const initCursorInteraction = (elements, className) => {
-            elements.forEach(el => {
-                el.addEventListener('mouseenter', () => cursorOutline.classList.add(className));
-                el.addEventListener('mouseleave', () => cursorOutline.classList.remove(className));
+        interactiveElements.forEach(item => {
+            document.querySelectorAll(item.selector).forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursorOutline.classList.add('hover');
+                    if (cursorText && item.text) cursorText.textContent = item.text;
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursorOutline.classList.remove('hover');
+                    if (cursorText) cursorText.textContent = '';
+                });
             });
-        };
-
-        initCursorInteraction(document.querySelectorAll('a, button'), 'hover');
-        initCursorInteraction(document.querySelectorAll('p, h1, h2, h3, .project-card'), 'text-hover');
+        });
+        
+        // Text hover elements
+        document.querySelectorAll('p, h1, h2, h3').forEach(el => {
+            el.addEventListener('mouseenter', () => cursorOutline.classList.add('text-hover'));
+            el.addEventListener('mouseleave', () => cursorOutline.classList.remove('text-hover'));
+        });
     }
 
     function initMobileMenu() {
@@ -153,22 +176,6 @@ document.addEventListener('DOMContentLoaded', () => {
             menuSpans[0].style.transform = isOpen ? 'translateY(5px) rotate(45deg)' : '';
             menuSpans[1].style.transform = isOpen ? 'translateY(-5px) rotate(-45deg)' : '';
         });
-
-        document.querySelectorAll('.menu-link').forEach(link => {
-            link.addEventListener('click', (e) => {
-                if (link.classList.contains('page-link')) return;
-                
-                e.preventDefault();
-                mobileMenu.classList.remove('open');
-                document.body.style.overflow = '';
-                menuSpans.forEach(span => span.style.transform = '');
-                
-                const targetId = link.getAttribute('href');
-                document.querySelector(targetId)?.scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
     }
 
     function initHorizontalScroll() {
@@ -177,105 +184,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!section || !track) return;
 
         if (window.innerWidth < 1024) {
-            // Mobile Premium Implementation
-            section.style.height = 'auto';
-            track.style.display = 'flex';
-            track.style.overflowX = 'auto';
-            track.style.scrollSnapType = 'x mandatory';
-            track.style.scrollBehavior = 'smooth';
-            track.style.padding = '0 5vw';
-            track.style.gap = '4vw';
-            track.style.transform = 'none';
-
-            document.querySelectorAll('.project-card').forEach(card => {
-                card.style.width = '80vw';
-                card.style.minWidth = '80vw';
-                card.style.height = '70vh';
-                card.style.scrollSnapAlign = 'center';
-                card.style.margin = '0';
-            });
-
-            // Enhanced touch scrolling with momentum
-            let startX, scrollLeft, isDown;
-            const momentumThreshold = 0.5;
-            const momentumMultiplier = 0.3;
-
-            track.addEventListener('touchstart', (e) => {
-                isDown = true;
-                startX = e.touches[0].pageX;
-                scrollLeft = track.scrollLeft;
-            }, { passive: true });
-
-            track.addEventListener('touchmove', (e) => {
-                if (!isDown) return;
-                e.preventDefault();
-                
-                const x = e.touches[0].pageX;
-                const walk = (x - startX) * 1.5;
-                track.scrollLeft = scrollLeft - walk;
-                
-                // Update scroll direction for parallax
-                const now = Date.now();
-                if (now - lastScrollTime > 16) { // ~60fps
-                    const newDirection = Math.sign(track.scrollLeft - scrollLeft);
-                    if (newDirection !== scrollDirection) {
-                        scrollDirection = newDirection;
-                        updateParallaxEffects();
-                    }
-                    lastScrollTime = now;
-                }
-            }, { passive: false });
-
-            track.addEventListener('touchend', () => {
-                isDown = false;
-                
-                // Apply momentum
-                const velocity = scrollDirection * momentumMultiplier;
-                if (Math.abs(velocity) > momentumThreshold) {
-                    const targetScroll = track.scrollLeft + (velocity * 100);
-                    track.scrollTo({
-                        left: targetScroll,
-                        behavior: 'smooth'
-                    });
-                }
-            }, { passive: true });
-
-            // Dynamic parallax effect
-            function updateParallaxEffects() {
-                document.querySelectorAll('.project-image').forEach(img => {
-                    const card = img.closest('.project-card');
-                    const cardRect = card.getBoundingClientRect();
-                    const viewportCenter = window.innerWidth / 2;
-                    const cardCenter = cardRect.left + (cardRect.width / 2);
-                    const distanceFromCenter = (cardCenter - viewportCenter) / viewportCenter;
-                    
-                    img.style.transform = `scale(${1 + (0.05 * -distanceFromCenter * scrollDirection)})`;
-                });
-            }
-
-            // Auto-snap to nearest card
-            track.addEventListener('scroll', () => {
-                clearTimeout(track.scrollEndTimer);
-                track.scrollEndTimer = setTimeout(() => {
-                    const cards = Array.from(document.querySelectorAll('.project-card'));
-                    const trackCenter = track.scrollLeft + (track.clientWidth / 2);
-                    
-                    const closestCard = cards.reduce((closest, card) => {
-                        const cardCenter = card.offsetLeft + (card.clientWidth / 2);
-                        const distance = Math.abs(trackCenter - cardCenter);
-                        return distance < closest.distance ? 
-                            { card, distance } : closest;
-                    }, { card: cards[0], distance: Infinity }).card;
-                    
-                    track.scrollTo({
-                        left: closestCard.offsetLeft - ((track.clientWidth - closestCard.clientWidth) / 2),
-                        behavior: 'smooth'
-                    });
-                }, 100);
-            }, { passive: true });
-
+            // Mobile uses native scrolling, so no JS logic is needed here.
+            // The responsive CSS in main.css handles the layout and scrolling.
+            document.body.classList.add('is-mobile-scroll');
+            section.style.height = 'auto'; // Ensure height is reset for mobile
+            track.style.transform = 'none'; // Ensure transform is reset
         } else {
             // Desktop Implementation
+            document.body.classList.remove('is-mobile-scroll');
             const scrollableWidth = track.scrollWidth - window.innerWidth;
             section.style.height = `${track.scrollWidth}px`;
 
@@ -291,6 +207,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     track.style.transform = `translateX(-${scrollableWidth * Math.min(progress, 1)}px)`;
                 } else if (scrollFromTop <= stickyTop) {
                     track.style.transform = 'translateX(0)';
+                } else {
+                    track.style.transform = `translateX(-${scrollableWidth}px)`;
                 }
             });
         }
@@ -311,7 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
             timeEl.textContent = now.toLocaleTimeString('en-US', options);
         }
         updateTime();
-        setInterval(updateTime, 30000); // Update every 30 seconds
+        setInterval(updateTime, 30000);
     }
 
     function initMagneticLinks() {
@@ -331,58 +249,23 @@ document.addEventListener('DOMContentLoaded', () => {
     function initResizeHandler() {
         let resizeTimer;
         window.addEventListener('resize', () => {
-            document.body.classList.remove('loaded');
             clearTimeout(resizeTimer);
             resizeTimer = setTimeout(() => {
-                window.requestAnimationFrame(() => {
-                    initHorizontalScroll();
-                    document.body.classList.add('loaded');
-                });
+                // Re-initialize the scroll logic on resize
+                initHorizontalScroll();
             }, 250);
         });
     }
 
     // --- Initialize Everything ---
-    populateProjects();
-    initPageTransitions();
+    if (document.querySelector('.horizontal-scroll-track')) {
+        populateProjects();
+    }
+    initPageTransitions(); // Called globally as it applies to all pages
     initCustomCursor();
     initMobileMenu();
     initHorizontalScroll();
     initClock();
     initMagneticLinks();
     initResizeHandler();
-});
-// Add this to your initPageTransitions() function
-function initPageTransitions() {
-    window.addEventListener('load', () => {
-        // ... existing load handler code ...
-        
-        // Add this image loader
-        document.querySelectorAll('.project-image').forEach(img => {
-            if (img.complete) {
-                img.closest('.project-card').classList.add('loaded');
-            } else {
-                img.addEventListener('load', () => {
-                    img.closest('.project-card').classList.add('loaded');
-                });
-                img.addEventListener('error', () => {
-                    console.error('Image failed to load:', img.src);
-                });
-            }
-        });
-    });
-    // ... rest of your existing code ...
-}
-// Inside initCustomCursor function
-const cursorText = document.getElementById('cursor-text');
-
-document.querySelectorAll('.project-card').forEach(card => {
-    card.addEventListener('mouseenter', () => {
-        cursorOutline.classList.add('hover');
-        cursorText.textContent = 'View'; // Set text on hover
-    });
-    card.addEventListener('mouseleave', () => {
-        cursorOutline.classList.remove('hover');
-        cursorText.textContent = ''; // Clear text
-    });
 });
