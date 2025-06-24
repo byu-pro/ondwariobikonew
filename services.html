@@ -35,12 +35,13 @@
         </div>
 
         <main>
+            <!-- Capabilities Section -->
             <section class="container mx-auto px-6 py-32 md:py-40 text-center">
                 <p class="text-lg text-text-color mb-4 reveal-up">What I Do</p>
                 <h1 class="page-title-heading uppercase reveal-line"><span class="reveal-line-inner">Capabilities</span></h1>
             </section>
             
-            <section class="services-grid container mx-auto px-6 pb-20 md:pb-40">
+            <section class="services-grid container mx-auto px-6 pb-20 md:pb-32">
                 <div class="service-item reveal-up">
                     <div class="service-header">
                         <span class="service-number text-accent-color">01</span>
@@ -48,21 +49,21 @@
                     </div>
                     <p class="service-description">I craft memorable brand identities that tell a compelling story. From logo design and color theory to typography and voice, I build a cohesive visual system that resonates with your target audience and sets you apart from the competition.</p>
                 </div>
-                <div class="service-item reveal-up">
+                <div class="service-item reveal-up" style="transition-delay: 0.1s;">
                     <div class="service-header">
                         <span class="service-number text-accent-color">02</span>
                         <h2 class="service-title">Web Design & UX</h2>
                     </div>
                     <p class="service-description">I design and build beautiful, intuitive, and high-performing websites. My user-centric approach ensures a seamless experience across all devices, focusing on clear navigation, engaging interactions, and achieving your business goals.</p>
                 </div>
-                <div class="service-item reveal-up">
+                <div class="service-item reveal-up" style="transition-delay: 0.2s;">
                     <div class="service-header">
                         <span class="service-number text-accent-color">03</span>
                         <h2 class="service-title">Art Direction</h2>
                     </div>
                     <p class="service-description">I provide creative oversight for digital campaigns, photoshoots, and video production. I establish and maintain a consistent visual style and quality, ensuring every creative asset aligns perfectly with the brand's vision and strategy.</p>
                 </div>
-                 <div class="service-item reveal-up">
+                 <div class="service-item reveal-up" style="transition-delay: 0.3s;">
                     <div class="service-header">
                         <span class="service-number text-accent-color">04</span>
                         <h2 class="service-title">Packaging Design</h2>
@@ -70,6 +71,101 @@
                     <p class="service-description">I create tangible brand experiences through thoughtful packaging design. From concept to production, I focus on sustainable materials and innovative structural design to create a memorable unboxing moment that delights customers.</p>
                 </div>
             </section>
+            
+            <!-- NEW: Toolkit Section with Linear Bars -->
+            <section id="toolkit" class="py-20 md:py-32 bg-[#111111] border-y border-white/10">
+                <div class="container mx-auto px-6">
+                    <div class="text-center mb-16 md:mb-24">
+                        <p class="text-lg text-text-color mb-4 reveal-up">My Go-To Tools</p>
+                        <h2 class="section-heading uppercase reveal-line"><span class="reveal-line-inner">My Toolkit</span></h2>
+                    </div>
+                    <!-- The new grid container for skill categories -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16">
+                        
+                        <!-- Category: Design -->
+                        <div class="toolkit-category reveal-up">
+                            <h3 class="toolkit-title">Design</h3>
+                            <ul class="toolkit-list">
+                                <li class="skill-item" data-percent="95">
+                                    <div class="skill-info"><span class="skill-name">Figma</span><span class="skill-percent">0%</span></div>
+                                    <div class="progress-bar"><div class="progress-bar-inner"></div></div>
+                                </li>
+                                <li class="skill-item" data-percent="90">
+                                    <div class="skill-info"><span class="skill-name">Adobe XD</span><span class="skill-percent">0%</span></div>
+                                    <div class="progress-bar"><div class="progress-bar-inner"></div></div>
+                                </li>
+                                <li class="skill-item" data-percent="85">
+                                    <div class="skill-info"><span class="skill-name">Adobe Photoshop</span><span class="skill-percent">0%</span></div>
+                                    <div class="progress-bar"><div class="progress-bar-inner"></div></div>
+                                </li>
+                                <li class="skill-item" data-percent="80">
+                                    <div class="skill-info"><span class="skill-name">Adobe Illustrator</span><span class="skill-percent">0%</span></div>
+                                    <div class="progress-bar"><div class="progress-bar-inner"></div></div>
+                                </li>
+                                <li class="skill-item" data-percent="75">
+                                    <div class="skill-info"><span class="skill-name">Canva</span><span class="skill-percent">0%</span></div>
+                                    <div class="progress-bar"><div class="progress-bar-inner"></div></div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Category: Development -->
+                        <div class="toolkit-category reveal-up" style="transition-delay: 0.1s;">
+                            <h3 class="toolkit-title">Development</h3>
+                            <ul class="toolkit-list">
+                                <li class="skill-item" data-percent="95">
+                                    <div class="skill-info"><span class="skill-name">HTML5</span><span class="skill-percent">0%</span></div>
+                                    <div class="progress-bar"><div class="progress-bar-inner"></div></div>
+                                </li>
+                                <li class="skill-item" data-percent="95">
+                                    <div class="skill-info"><span class="skill-name">CSS3 & Sass</span><span class="skill-percent">0%</span></div>
+                                    <div class="progress-bar"><div class="progress-bar-inner"></div></div>
+                                </li>
+                                <li class="skill-item" data-percent="85">
+                                    <div class="skill-info"><span class="skill-name">JavaScript (ES6+)</span><span class="skill-percent">0%</span></div>
+                                    <div class="progress-bar"><div class="progress-bar-inner"></div></div>
+                                </li>
+                                <li class="skill-item" data-percent="90">
+                                    <div class="skill-info"><span class="skill-name">Webflow</span><span class="skill-percent">0%</span></div>
+                                    <div class="progress-bar"><div class="progress-bar-inner"></div></div>
+                                </li>
+                                <li class="skill-item" data-percent="80">
+                                    <div class="skill-info"><span class="skill-name">React</span><span class="skill-percent">0%</span></div>
+                                    <div class="progress-bar"><div class="progress-bar-inner"></div></div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Category: 3D & Motion -->
+                        <div class="toolkit-category reveal-up" style="transition-delay: 0.2s;">
+                            <h3 class="toolkit-title">3D & Motion</h3>
+                            <ul class="toolkit-list">
+                                <li class="skill-item" data-percent="70">
+                                    <div class="skill-info"><span class="skill-name">Blender</span><span class="skill-percent">0%</span></div>
+                                    <div class="progress-bar"><div class="progress-bar-inner"></div></div>
+                                </li>
+                                <li class="skill-item" data-percent="80">
+                                    <div class="skill-info"><span class="skill-name">Adobe After Effects</span><span class="skill-percent">0%</span></div>
+                                    <div class="progress-bar"><div class="progress-bar-inner"></div></div>
+                                </li>
+                                <li class="skill-item" data-percent="85">
+                                    <div class="skill-info"><span class="skill-name">Spline</span><span class="skill-percent">0%</span></div>
+                                    <div class="progress-bar"><div class="progress-bar-inner"></div></div>
+                                </li>
+                                <li class="skill-item" data-percent="75">
+                                    <div class="skill-info"><span class="skill-name">Lottie</span><span class="skill-percent">0%</span></div>
+                                    <div class="progress-bar"><div class="progress-bar-inner"></div></div>
+                                </li>
+                                <li class="skill-item" data-percent="90">
+                                    <div class="skill-info"><span class="skill-name">GSAP</span><span class="skill-percent">0%</span></div>
+                                    <div class="progress-bar"><div class="progress-bar-inner"></div></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
         </main>
         
         <footer id="contact" class="bg-[#111111] text-white pt-24 pb-8 md:pt-40 md:pb-12">
