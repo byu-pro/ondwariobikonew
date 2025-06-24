@@ -14,6 +14,7 @@ body {
     font-family: 'Satoshi', sans-serif;
     overscroll-behavior-y: none; /* Prevents vertical pull-to-refresh */
     -webkit-font-smoothing: antialiased;
+    overflow-x: clip; /* Final Safeguard */
 }
 
 /* Typography */
@@ -25,8 +26,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* FLUID TYPOGRAPHY CLASSES */
-.hero-heading { font-size: clamp(3.5rem, 15vw, 12rem); }
-.page-title-heading { font-size: clamp(3rem, 12vw, 9rem); }
+.hero-heading { 
+    font-size: clamp(3.5rem, 15vw, 12rem); 
+    /* --- NEW: Add transition for interactive tilt effect --- */
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+}
+.page-title-heading { 
+    font-size: clamp(3rem, 12vw, 9rem); 
+}
 .section-heading { font-size: clamp(2.5rem, 8vw, 7rem); }
 .contact-heading { font-size: clamp(2.8rem, 12vw, 9rem); }
 
@@ -81,7 +89,12 @@ h1, h2, h3, h4, h5, h6 {
 body.loaded .content-wrapper { opacity: 1; }
 
 /* AMBIENT BG & SCROLL INDICATOR */
-.hero-section-container { position: relative; overflow: hidden; }
+.hero-section-container { 
+    position: relative; 
+    overflow: hidden; 
+    /* --- NEW: Add perspective for 3D effect --- */
+    perspective: 1000px;
+}
 .hero-section-container::before {
     content: ''; position: absolute; width: 200%; height: 200%;
     top: -50%; left: -50%; z-index: 0;
@@ -107,6 +120,15 @@ body.loaded .content-wrapper { opacity: 1; }
 .reveal-line { display: block; overflow: hidden; }
 .reveal-line-inner { display: block; transform: translateY(110%); transition: transform 1.2s cubic-bezier(0.65, 0, 0.35, 1); }
 .is-visible .reveal-line-inner { transform: translateY(0); }
+
+/* --- MODIFIED: Add delays for staggered effect --- */
+.hero-heading .reveal-line:nth-child(2) .reveal-line-inner {
+    transition-delay: 0.15s;
+}
+.hero-section-container > p .reveal-line-inner {
+    transition-delay: 0.3s;
+}
+
 .reveal-image { opacity: 0; transform: scale(1.05); transition: opacity 1s cubic-bezier(0.65, 0, 0.35, 1), transform 1.2s cubic-bezier(0.65, 0, 0.35, 1); }
 .is-visible.reveal-image { opacity: 1; transform: scale(1); }
 .reveal-text, .reveal-up { opacity: 0; transform: translateY(30px); transition: opacity 1s cubic-bezier(0.65, 0, 0.35, 1), transform 1s cubic-bezier(0.65, 0, 0.35, 1); }
@@ -297,10 +319,7 @@ footer { padding: 10rem 0; background-color: #111; }
 /* ==========================================================================
    UPDATED SOCIAL MEDIA LINKS
    ========================================================================== */
-
-/* This replaces the old .social-link class for a more modern, icon-based approach */
 .social-link {
-    /* The old text-based link can be removed or display:none if no longer needed */
    display: none;
 }
 .social-icon-link {
@@ -311,7 +330,7 @@ footer { padding: 10rem 0; background-color: #111; }
 .social-icon-link svg {
     width: 24px;
     height: 24px;
-    fill: currentColor; /* Makes the SVG color inherit from the parent link */
+    fill: currentColor;
 }
 .social-icon-link:hover {
     color: var(--accent-color);
@@ -319,11 +338,10 @@ footer { padding: 10rem 0; background-color: #111; }
 }
 #mobile-menu .mobile-social-links {
     display: flex;
-    gap: 1.5rem; /* 24px */
-    margin-top: 2rem; /* MODIFIED: Reduced space to bring icons closer to nav links */
+    gap: 1.5rem;
+    margin-top: 2rem;
     opacity: 0;
     transform: translateY(20px);
-    /* The transition delay allows the main menu links to appear first */
     transition: opacity 0.6s ease 0.8s, transform 0.6s ease 0.8s;
 }
 #mobile-menu.open .mobile-social-links {
@@ -331,19 +349,20 @@ footer { padding: 10rem 0; background-color: #111; }
     transform: translateY(0);
 }
 #mobile-menu .social-icon-link svg {
-    /* Slightly larger icons in the mobile menu for better touch interaction */
     width: 28px;
     height: 28px;
 }
-
-/* General Responsive Adjustments */
-@media (max-width: 768px) {
-    .clients-section { padding: 5rem 0; }
-    .logo-item { height: 60px; width: 120px; margin: 0 20px; }
+header .navbar-logo {
+    height: 48px;
+    width: auto;
+    transition: transform 0.3s ease;
 }
+header .navbar-logo:hover {
+    transform: scale(1.05);
+}
+
 /* ==========================================================================
    NON-INTRUSIVE RESPONSIVE ADDITIONS
-   - Add this to the end of main.css -
    ========================================================================== */
 
 /* --- 1. Touch-Device Enhancements --- */
@@ -356,7 +375,12 @@ a, button {
     -webkit-tap-highlight-color: rgba(0, 255, 255, 0.1);
 }
 
-/* --- 2. Extra-Small Device Adjustments (e.g., iPhone SE) --- */
+/* --- 2. General & Extra-Small Device Adjustments --- */
+@media (max-width: 767px) {
+    .clients-section { padding: 5rem 0; }
+    .logo-item { height: 60px; width: 120px; margin: 0 20px; }
+    .masonry-grid { grid-template-columns: 1fr; gap: 1rem; }
+}
 @media (max-width: 479px) {
     .content-wrapper .container {
         padding-left: 1rem;
@@ -364,6 +388,9 @@ a, button {
     }
     footer .text-text-color {
         font-size: 0.9rem;
+    }
+    .page-title-heading {
+        font-size: clamp(2.8rem, 12vw, 5rem);
     }
 }
 
@@ -409,7 +436,6 @@ a, button {
     #mobile-menu nav {
         gap: 1rem;
     }
-    /* Adjust social links for landscape mobile */
     #mobile-menu .mobile-social-links {
         margin-top: 1.5rem;
         gap: 1.25rem;
@@ -417,29 +443,5 @@ a, button {
     #mobile-menu .social-icon-link svg {
         width: 24px;
         height: 24px;
-    }
-}
-
-/* --- 6. Final Safeguard --- */
-body {
-    overflow-x: clip;
-}
-/* --- UPDATED: Style for the logo in the navigation bar --- */
-header .navbar-logo {
-    height: 48px;
-    width: auto;
-    transition: transform 0.3s ease;
-}
-header .navbar-logo:hover {
-    transform: scale(1.05);
-}
-/* ==========================================================================
-   MOBILE-SPECIFIC TEXT ADJUSTMENT
-   ========================================================================== */
-
-/* --- 7. Page Title Fix for Small Devices --- */
-@media (max-width: 479px) {
-    .page-title-heading {
-        font-size: clamp(2.8rem, 12vw, 5rem);
     }
 }

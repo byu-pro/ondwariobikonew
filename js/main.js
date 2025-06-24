@@ -68,6 +68,40 @@ document.addEventListener('DOMContentLoaded', () => {
         }, { threshold: 0.1, rootMargin: '0px 0px -20px 0px' });
         document.querySelectorAll('.reveal-up, .reveal-image, .reveal-line, .reveal-text, .toolkit-category').forEach(el => observer.observe(el));
     }
+    
+    /**
+     * NEW: Adds an interactive 3D tilt effect to the hero heading.
+     */
+    function initHeroTilt() {
+        const heroSection = document.querySelector('.hero-section-container');
+        const heroHeading = document.querySelector('.hero-heading');
+        if (!heroSection || !heroHeading) return;
+
+        // Don't run tilt effect on touch devices
+        if (window.matchMedia("(pointer: coarse)").matches) return;
+
+        const TILT_AMOUNT = 5; // Max tilt in degrees. Adjust for more/less effect.
+
+        heroSection.addEventListener('mousemove', (e) => {
+            const { clientX, clientY } = e;
+            const { offsetWidth, offsetHeight } = heroSection;
+
+            // Calculate mouse position from center of section (-0.5 to 0.5)
+            const x = (clientX / offsetWidth) - 0.5;
+            const y = (clientY / offsetHeight) - 0.5;
+
+            // Apply transform based on mouse position
+            const rotateY = x * TILT_AMOUNT;
+            const rotateX = -y * TILT_AMOUNT;
+            
+            heroHeading.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+
+        // Reset transform when mouse leaves the section
+        heroSection.addEventListener('mouseleave', () => {
+            heroHeading.style.transform = 'rotateX(0deg) rotateY(0deg)';
+        });
+    }
 
     /**
      * Sets up the custom cursor movement and interaction states.
@@ -224,6 +258,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- INITIALIZE ALL FUNCTIONS ---
     initPageTransitions();
+    initHeroTilt(); // <-- Initialize the new hero tilt effect
     initCustomCursor();
     initMobileMenu();
     initClock();
