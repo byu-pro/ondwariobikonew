@@ -13,38 +13,43 @@ document.addEventListener('DOMContentLoaded', () => {
     /**
      * Handles the preloader and smooth page load transitions.
      */
-    function initPageTransitions() {
-        window.addEventListener('load', () => {
-            document.body.classList.add('loaded');
-            if (preloader) {
-                preloader.classList.add('loaded');
-            }
-            setTimeout(initRevealAnimations, 500);
-            setTimeout(initSkillMeters, 500);
-        });
+   function initPageTransitions() {
+    window.addEventListener('load', () => {
+        document.body.classList.add('loaded');
+        if (preloader) {
+            preloader.classList.add('loaded');
+        }
+        setTimeout(initRevealAnimations, 500);
+        setTimeout(initSkillMeters, 500);
+    });
 
-        document.querySelectorAll('.page-link').forEach(link => {
-            if (link.dataset.listenerAttached) return;
-            link.dataset.listenerAttached = 'true';
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const destination = this.href;
-                const mobileMenu = document.getElementById('mobile-menu');
-                if (mobileMenu && mobileMenu.classList.contains('open')) {
-                    mobileMenu.classList.remove('open');
-                    document.body.style.overflow = '';
-                    document.querySelectorAll('#menu-toggle span').forEach(span => span.style.transform = '');
-                }
-                document.body.classList.remove('loaded');
-                if (preloader) {
-                    const preloaderText = preloader.querySelector('.preloader-text-inner');
-                    if(preloaderText) preloaderText.style.transform = 'translateY(120%)';
-                    preloader.classList.remove('loaded');
-                }
-                setTimeout(() => { window.location.href = destination; }, 900);
-            });
+    document.querySelectorAll('.page-link').forEach(link => {
+        if (link.dataset.listenerAttached) return;
+        link.dataset.listenerAttached = 'true';
+        link.addEventListener('click', function(e) {
+            // Skip transition for work link to ensure it works
+            if (this.href.includes('work.html')) {
+                return; // Let the default link behavior happen
+            }
+            
+            e.preventDefault();
+            const destination = this.href;
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenu && mobileMenu.classList.contains('open')) {
+                mobileMenu.classList.remove('open');
+                document.body.style.overflow = '';
+                document.querySelectorAll('#menu-toggle span').forEach(span => span.style.transform = '');
+            }
+            document.body.classList.remove('loaded');
+            if (preloader) {
+                const preloaderText = preloader.querySelector('.preloader-text-inner');
+                if(preloaderText) preloaderText.style.transform = 'translateY(120%)';
+                preloader.classList.remove('loaded');
+            }
+            setTimeout(() => { window.location.href = destination; }, 900);
         });
-    }
+    });
+}
 
     /**
      * Initializes the Intersection Observer for reveal-on-scroll animations.
