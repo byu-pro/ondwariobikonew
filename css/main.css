@@ -94,14 +94,6 @@ body.loaded .content-wrapper { opacity: 1; }
     /* --- NEW: Add perspective for 3D effect --- */
     perspective: 1000px;
 }
-.hero-section-container::before {
-    content: ''; position: absolute; width: 200%; height: 200%;
-    top: -50%; left: -50%; z-index: 0;
-    background: radial-gradient(circle, rgba(0, 255, 255, 0.05) 0%, rgba(0, 255, 255, 0) 30%),
-                radial-gradient(circle at 100% 100%, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0) 40%);
-    animation: subtle-gradient-move 45s linear infinite;
-}
-@keyframes subtle-gradient-move { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 .scroll-indicator {
     position: absolute; bottom: 2rem; left: 50%;
     transform: translateX(-50%); z-index: 20;
@@ -1000,4 +992,178 @@ a, button {
 /* When you hover over the main container, the image inside will scale up. */
 #about .tilt-container:hover .reveal-image {
     transform: scale(1.08); /* A slightly larger scale for a more noticeable zoom */
+}
+
+
+/* ==========================================================================
+   NEW: WebGL Canvas Styling
+   ========================================================================== */
+#webgl-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0.5; /* Adjust for desired subtlety */
+}
+
+/* ==========================================================================
+   NEW: Core Expertise Section Styles
+   ========================================================================== */
+.service-card {
+    background-color: transparent;
+    padding: 2rem 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    transition: transform 0.4s ease, background-color 0.4s ease, border-color 0.4s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-8px);
+    background-color: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.service-card .font-clash {
+    font-family: 'Clash Display', sans-serif;
+}
+
+
+/* ==========================================================================
+   NEW: Project Quick View Modal Styles
+   ========================================================================== */
+.project-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0s 0.5s;
+}
+.project-modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s ease;
+}
+.project-modal-content {
+    background-color: #111;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    width: 100%;
+    max-width: 1100px;
+    max-height: 90vh;
+    position: relative;
+    overflow: hidden;
+}
+#modal-close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    background: rgba(0,0,0,0.3);
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 10;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+#modal-close-btn:hover {
+    transform: scale(1.1);
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+}
+.modal-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    height: 100%;
+    max-height: 90vh;
+}
+.modal-image-wrapper {
+    overflow: hidden;
+    background-color: #000;
+}
+.modal-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.modal-info {
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow-y: auto;
+}
+.modal-title-heading {
+    font-family: 'Clash Display', sans-serif;
+    font-size: clamp(2rem, 5vw, 4rem);
+    text-transform: uppercase;
+    line-height: 1;
+    margin-bottom: 2rem;
+}
+.modal-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+.detail-heading {
+    font-family: 'Satoshi', sans-serif;
+    font-weight: 700;
+    color: var(--accent-color);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+.detail-text {
+    color: var(--text-color);
+    line-height: 1.6;
+}
+.modal-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+    margin-top: auto; /* Pushes the button to the bottom */
+}
+.modal-cta:hover {
+    color: var(--accent-color);
+}
+.modal-cta svg {
+    transition: transform 0.3s ease;
+}
+.modal-cta:hover svg {
+    transform: translate(5px, -5px);
+}
+@media (max-width: 900px) {
+    .modal-grid { 
+        grid-template-columns: 1fr; 
+        max-height: 85vh;
+        overflow-y: auto;
+    }
+    .modal-image-wrapper { height: 300px; }
+    .modal-info { padding: 2rem; }
+}
+
+/* ==========================================================================
+   NEW: Mute Button Icon Styling
+   ========================================================================== */
+#mute-btn .hidden {
+    display: none;
 }
