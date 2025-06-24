@@ -697,3 +697,14 @@ a, button {
     font-family: 'Satoshi', sans-serif;
     color: var(--text-color);
 }
+/* ==========================================================================
+   CUSTOM: Footer Email Link Hover Effect
+   ========================================================================== */
+#contact .magnetic-link span {
+    color: var(--primary-color); /* Sets the default text color to white */
+    transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#contact .magnetic-link:hover span {
+    color: var(--accent-color); /* Changes text color to the accent color on hover */
+}
