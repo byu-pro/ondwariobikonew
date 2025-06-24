@@ -12,7 +12,6 @@ body {
     background-color: var(--bg-color);
     color: var(--primary-color);
     font-family: 'Satoshi', sans-serif;
-    overscroll-behavior-y: none; /* Prevents vertical pull-to-refresh */
     -webkit-font-smoothing: antialiased;
     overflow-x: clip; /* Final Safeguard */
 }
