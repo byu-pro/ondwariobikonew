@@ -976,3 +976,28 @@ a, button {
 .project-card:hover .project-category {
   color: var(--accent-color);
 }
+/* In your main.css file */
+
+/* ==========================================================================
+   About Me Image Hover Effect
+   ========================================================================== */
+
+/* The parent container now has the 'interactive-tilt' class, 
+   which applies the 3D tilt effect via JavaScript. */
+
+/* This enhances the image within the container on hover. */
+#about .interactive-tilt {
+    /* The container itself needs a transition for a smooth return to neutral. */
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#about .reveal-image {
+    /* The image already has a transition from its reveal class. 
+       This ensures the hover zoom is also smooth. */
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* When you hover over the main container, the image inside will scale up. */
+#about .tilt-container:hover .reveal-image {
+    transform: scale(1.08); /* A slightly larger scale for a more noticeable zoom */
+}
