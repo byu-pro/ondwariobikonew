@@ -931,3 +931,48 @@ a, button {
         padding-top: 0.5rem;
     }
 }
+/* ==========================================================================
+   Premium Project Card Hover Effect
+   ========================================================================== */
+
+/* The card already has a transition on its transform property */
+/* This rule will make the entire card gently scale up on hover */
+.project-card:hover {
+  transform: scale(1.03);
+}
+
+/* The project image also has a transform transition */
+/* We'll make it scale up even more than the card for a subtle parallax effect */
+/* A brightness filter is also added for a modern, classy highlight */
+.project-card:hover .project-image {
+  transform: scale(1.15);
+  filter: brightness(1.05);
+}
+
+/* Add a transition to the overlay for a smooth gradient change */
+.project-card .project-overlay {
+  transition: background 0.6s ease;
+}
+
+/* Make the overlay slightly darker on hover to make the text pop */
+.project-card:hover .project-overlay {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, transparent 70%);
+}
+
+/* The project info block will slide up gently from the bottom on hover */
+.project-card .project-info {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-card:hover .project-info {
+  transform: translateY(-1rem);
+}
+
+/* For a final touch, we'll make the category text change to the accent color */
+.project-card .project-category {
+    transition: color 0.4s ease;
+}
+
+.project-card:hover .project-category {
+  color: var(--accent-color);
+}
