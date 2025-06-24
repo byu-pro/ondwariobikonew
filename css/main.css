@@ -418,3 +418,15 @@ header .navbar-logo {
 header .navbar-logo:hover {
     transform: scale(1.05);
 }
+/* ==========================================================================
+   MOBILE-SPECIFIC TEXT ADJUSTMENT
+   ========================================================================== */
+
+/* --- 7. Page Title Fix for Small Devices --- */
+/* Reduces the font size of the ".page-title-heading" (e.g., "Capabilities") 
+   on very small screens to prevent horizontal overflow. */
+@media (max-width: 479px) {
+    .page-title-heading {
+        font-size: clamp(2.8rem, 12vw, 5rem);
+    }
+}
