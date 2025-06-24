@@ -173,3 +173,21 @@ document.addEventListener('DOMContentLoaded', () => {
     initClock();
     initMagneticLinks();
 });
+// Add this new function call in the main DOMContentLoaded listener
+initNextProjectHover();
+
+function initNextProjectHover() {
+    const link = document.querySelector('.next-project-link');
+    const preview = document.querySelector('.next-project-preview');
+    if (!link || !preview) return;
+
+    link.addEventListener('mousemove', (e) => {
+        preview.style.opacity = '1';
+        preview.style.transform = `translate(${e.clientX}px, ${e.clientY}px) scale(1)`;
+    });
+
+    link.addEventListener('mouseleave', () => {
+        preview.style.opacity = '0';
+        preview.style.transform = `translate(-50%, -50%) scale(0.8)`;
+    });
+}

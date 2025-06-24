@@ -373,3 +373,16 @@ function initPageTransitions() {
     });
     // ... rest of your existing code ...
 }
+// Inside initCustomCursor function
+const cursorText = document.getElementById('cursor-text');
+
+document.querySelectorAll('.project-card').forEach(card => {
+    card.addEventListener('mouseenter', () => {
+        cursorOutline.classList.add('hover');
+        cursorText.textContent = 'View'; // Set text on hover
+    });
+    card.addEventListener('mouseleave', () => {
+        cursorOutline.classList.remove('hover');
+        cursorText.textContent = ''; // Clear text
+    });
+});
