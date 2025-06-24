@@ -837,3 +837,97 @@ a, button {
         height: 55px;
     }
 }
+
+/* ==========================================================================
+   Project Process Section
+   ========================================================================== */
+.process-timeline {
+    position: relative;
+}
+
+.process-step {
+    display: flex;
+    position: relative;
+    gap: 1.5rem; /* 24px */
+}
+
+/* We remove the line from the last step */
+.process-step:not(:last-child) {
+    padding-bottom: 3rem; /* 48px */
+}
+
+.process-number-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.process-number {
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Clash Display', sans-serif;
+    font-size: 1.125rem; /* 18px */
+    color: var(--text-light);
+    background-color: var(--bg-color);
+    z-index: 2;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.process-step:hover .process-number {
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+    transform: scale(1.05);
+}
+
+.process-line {
+    width: 1px;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.2);
+    flex-grow: 1;
+}
+
+.process-content {
+    padding-top: 0.75rem; /* 12px */
+}
+
+.process-title {
+    font-family: 'Clash Display', sans-serif;
+    font-size: clamp(1.5rem, 4vw, 2rem); /* Responsive font size */
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.75rem;
+    transition: color 0.4s ease;
+}
+
+.process-step:hover .process-title {
+    color: var(--accent-color);
+}
+
+.process-description {
+    color: var(--text-color);
+    line-height: 1.6;
+    max-width: 60ch; /* Improves readability */
+}
+
+@media (max-width: 640px) {
+    .process-step {
+        gap: 1rem;
+    }
+
+    .process-number {
+        width: 44px;
+        height: 44px;
+        font-size: 1rem;
+    }
+
+    .process-content {
+        padding-top: 0.5rem;
+    }
+}
