@@ -182,7 +182,7 @@ body.loaded .content-wrapper { opacity: 1; }
 }
 .menu-link:hover { color: var(--accent-color); }
 
-/* Client Logos, Footer, Social Links */
+/* Client Logos, Footer */
 .clients-section { padding: 8rem 0; border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1); }
 .logos-container { overflow: hidden; position: relative; }
 .logos-container:before, .logos-container:after { content: ''; position: absolute; top: 0; width: 10vw; height: 100%; z-index: 2; }
@@ -195,10 +195,7 @@ body.loaded .content-wrapper { opacity: 1; }
 @keyframes infinite-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 footer { padding: 10rem 0; background-color: #111; }
 .magnetic-link { display: inline-block; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
-.social-link { position: relative; font-size: 1.1rem; text-transform: uppercase; color: var(--text-color); transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1); padding: 5px; }
-.social-link:before { content: ''; position: absolute; width: 100%; height: 1px; bottom: 0; left: 0; background-color: var(--accent-color); visibility: hidden; transform: scaleX(0); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-.social-link:hover { color: var(--primary-color); }
-.social-link:hover:before { visibility: visible; transform: scaleX(1); }
+
 
 /* PERFECTED MASONRY GRID */
 .masonry-grid { display: grid; gap: 1.5rem; width: 100%; }
@@ -297,6 +294,47 @@ footer { padding: 10rem 0; background-color: #111; }
     transition: width 1.8s cubic-bezier(0.65, 0, 0.35, 1);
 }
 
+/* ==========================================================================
+   UPDATED SOCIAL MEDIA LINKS
+   ========================================================================== */
+
+/* This replaces the old .social-link class for a more modern, icon-based approach */
+.social-link {
+    /* The old text-based link can be removed or display:none if no longer needed */
+   display: none;
+}
+.social-icon-link {
+    display: inline-block;
+    color: var(--text-color);
+    transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.social-icon-link svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor; /* Makes the SVG color inherit from the parent link */
+}
+.social-icon-link:hover {
+    color: var(--accent-color);
+    transform: translateY(-3px);
+}
+#mobile-menu .mobile-social-links {
+    display: flex;
+    gap: 1.5rem; /* 24px */
+    margin-top: 2rem; /* MODIFIED: Reduced space to bring icons closer to nav links */
+    opacity: 0;
+    transform: translateY(20px);
+    /* The transition delay allows the main menu links to appear first */
+    transition: opacity 0.6s ease 0.8s, transform 0.6s ease 0.8s;
+}
+#mobile-menu.open .mobile-social-links {
+    opacity: 1;
+    transform: translateY(0);
+}
+#mobile-menu .social-icon-link svg {
+    /* Slightly larger icons in the mobile menu for better touch interaction */
+    width: 28px;
+    height: 28px;
+}
 
 /* General Responsive Adjustments */
 @media (max-width: 768px) {
@@ -309,112 +347,89 @@ footer { padding: 10rem 0; background-color: #111; }
    ========================================================================== */
 
 /* --- 1. Touch-Device Enhancements --- */
-
-/* Hide the custom mouse cursor on devices that use touch as the primary input.
-   This doesn't affect standard desktops, even if they have a touchscreen. */
 @media (pointer: coarse) {
     #cursor-dot, #cursor-outline {
         display: none !important;
     }
 }
-
-/* Improve tap feedback on all interactive elements for touch devices */
 a, button {
-    -webkit-tap-highlight-color: rgba(0, 255, 255, 0.1); /* Subtle cyan flash on tap */
+    -webkit-tap-highlight-color: rgba(0, 255, 255, 0.1);
 }
-
 
 /* --- 2. Extra-Small Device Adjustments (e.g., iPhone SE) --- */
 @media (max-width: 479px) {
-    /* Reduce body padding slightly on the smallest screens for more content space */
     .content-wrapper .container {
         padding-left: 1rem;
         padding-right: 1rem;
     }
-
-    /* Slightly smaller footer text on very narrow screens */
     footer .text-text-color {
         font-size: 0.9rem;
     }
 }
 
-
 /* --- 3. Tablet-Specific Layout Adjustments --- */
 @media (min-width: 768px) and (max-width: 1023px) {
-    /* On tablets, make the "About Me" image and text stack for better readability
-       instead of being side-by-side where text lines can get too short. */
     #about .lg\:grid-cols-5 {
         display: flex;
         flex-direction: column;
         align-items: center;
         text-align: center;
     }
-
     #about .lg\:col-span-2 {
-        max-width: 400px; /* Constrain image size */
+        max-width: 400px;
         margin-bottom: 2rem;
     }
-    
-    /* Make the toolkit a 2-column grid on tablets instead of 3 */
     #toolkit .lg\:grid-cols-3 {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
-
 /* --- 4. Extra-Large Desktop Screens (WQHD, 4K) --- */
 @media (min-width: 1920px) {
-    /* On very large screens, constrain the maximum width of text-heavy containers
-       to prevent lines from becoming too long and hard to read. */
     .container {
-        max-width: 1440px; /* A common standard for large screen content width */
+        max-width: 1440px;
     }
-
-    /* Make horizontal scroll projects slightly smaller as a percentage of the viewport
-       so more of the next item is visible, encouraging interaction. */
     .horizontal-scroll-section .project-card {
         width: 50vw;
     }
 }
 
-
 /* --- 5. Mobile Landscape Orientation --- */
 @media (max-height: 500px) and (orientation: landscape) {
-    /* Reduce the size of the hero section title on short, wide screens */
     .hero-heading {
         font-size: clamp(2.5rem, 12vh, 4rem) !important;
     }
-    
-    /* Hide the "Scroll to Explore" indicator as it takes up valuable vertical space */
     .scroll-indicator {
         display: none;
     }
-
-    /* Adjust the mobile menu for a better landscape fit */
     #mobile-menu .menu-link {
-        font-size: clamp(2rem, 8vh, 3rem); /* Use viewport height for sizing */
+        font-size: clamp(2rem, 8vh, 3rem);
         margin: 0;
     }
     #mobile-menu nav {
-        gap: 1rem; /* Reduce space between menu items */
+        gap: 1rem;
+    }
+    /* Adjust social links for landscape mobile */
+    #mobile-menu .mobile-social-links {
+        margin-top: 1.5rem;
+        gap: 1.25rem;
+    }
+    #mobile-menu .social-icon-link svg {
+        width: 24px;
+        height: 24px;
     }
 }
 
 /* --- 6. Final Safeguard --- */
-/* This rule helps prevent rare cases of horizontal overflow caused by rounding
-   errors or rogue elements, without interfering with intentional scroll areas. */
 body {
     overflow-x: clip;
 }
 /* --- UPDATED: Style for the logo in the navigation bar --- */
-/* This targets the logo specifically within the header for precise control. */
 header .navbar-logo {
-    height: 48px; /* Sets the height to match the menu toggle button (h-12 = 3rem = 48px). */
-    width: auto;  /* Allows the width to scale proportionally. */
-    transition: transform 0.3s ease; /* Adds a smooth transition for hover effects. */
+    height: 48px;
+    width: auto;
+    transition: transform 0.3s ease;
 }
-
-/* Adds a subtle zoom effect when you hover over the logo. */
 header .navbar-logo:hover {
     transform: scale(1.05);
 }
@@ -423,8 +438,6 @@ header .navbar-logo:hover {
    ========================================================================== */
 
 /* --- 7. Page Title Fix for Small Devices --- */
-/* Reduces the font size of the ".page-title-heading" (e.g., "Capabilities") 
-   on very small screens to prevent horizontal overflow. */
 @media (max-width: 479px) {
     .page-title-heading {
         font-size: clamp(2.8rem, 12vw, 5rem);
