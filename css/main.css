@@ -444,3 +444,132 @@ a, button {
         height: 24px;
     }
 }
+/* ADD THESE STYLES TO THE END OF YOUR main.css FILE */
+
+/* ==========================================================================
+   Work Page - Filter & Grid Styles
+   ========================================================================== */
+
+/* --- Filter Controls --- */
+.filter-btn {
+    font-family: 'Satoshi', sans-serif;
+    font-size: 1rem; /* 16px */
+    font-weight: 500;
+    color: var(--text-color);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.5rem 0;
+    position: relative;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.filter-btn::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: var(--accent-color);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.filter-btn:hover {
+    color: var(--text-light);
+}
+
+.filter-btn.active {
+    color: var(--primary-color);
+}
+
+.filter-btn.active::after {
+    transform: scaleX(1);
+}
+
+/* --- Work Grid --- */
+.work-grid {
+    position: relative;
+}
+
+.work-item {
+    position: relative;
+    display: block;
+    aspect-ratio: 4 / 5;
+    border-radius: 1rem;
+    overflow: hidden;
+    color: white;
+    background-color: #1a1a1a;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    will-change: transform, opacity;
+}
+
+/* Class for filtering animation */
+.work-item.hide {
+    transform: scale(0.95);
+    opacity: 0;
+    pointer-events: none;
+    /* Make it "disappear" from the layout flow after animation */
+    transition: opacity 0.5s ease, transform 0.5s ease, width 0s 0.5s, height 0s 0.5s, margin 0s 0.5s, padding 0s 0.5s;
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+
+.work-item-image-wrapper {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 1rem;
+}
+
+.work-item-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.work-item:hover .work-item-image {
+    transform: scale(1.05);
+}
+
+.work-item-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 2.5rem;
+    z-index: 2;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.work-item:hover .work-item-info {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.work-item-title {
+    font-family: 'Clash Display', sans-serif;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.work-item-category {
+    font-family: 'Satoshi', sans-serif;
+    color: var(--text-color);
+}

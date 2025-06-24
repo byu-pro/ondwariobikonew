@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work | Ondwari Obiko</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="icon" type="image/png" href="images/ondwariobiko logotype and symbol-02.png">
+</head>
+<body class="overflow-x-hidden">
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-text">
+            <span class="preloader-text-inner">Loading...</span>
+        </div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div id="cursor-dot" class="cursor"></div>
+    <div id="cursor-outline" class="cursor">
+        <span id="cursor-text"></span>
+    </div>
+    
+    <div class="content-wrapper">
+        <!-- Header: Consistent with index.html -->
+        <header class="fixed top-0 left-0 w-full p-6 md:p-8 z-50 flex justify-between items-center mix-blend-difference">
+            <a href="index.html" class="page-link">
+                <img src="images/logo favicon-02.png" alt="Ondwari Obiko Logo" class="navbar-logo">
+            </a>
+            <button id="menu-toggle" aria-label="Open main menu" class="w-12 h-12 rounded-full border border-white/50 flex flex-col items-center justify-center space-y-1.5 z-50">
+                <span class="w-6 h-0.5 bg-white block transition-transform duration-300"></span>
+                <span class="w-6 h-0.5 bg-white block transition-transform duration-300"></span>
+            </button>
+        </header>
+
+        <!-- Mobile Menu: Consistent with index.html -->
+        <div id="mobile-menu">
+            <nav>
+                <a href="work.html" class="menu-link page-link">Work</a>
+                <a href="services.html" class="menu-link page-link">Services</a>
+                <!-- Links to sections on the homepage -->
+                <a href="index.html#about" class="menu-link page-link">About</a>
+                <a href="index.html#contact" class="menu-link page-link">Contact</a>
+                
+                <div class="mobile-social-links">
+                    <a href="#" class="social-icon-link" aria-label="LinkedIn Profile"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 0 1 2.063-2.065 2.064 2.064 0 0 1 2.063 2.065c0 1.14-.925 2.065-2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg></a>
+                    <a href="#" class="social-icon-link" aria-label="Behance Profile"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8.28,13.253H4.453V8.62H8.28a2.316,2.316,0,0,1,2.317,2.317h0A2.316,2.316,0,0,1,8.28,13.253Zm0-6.142H2.94V14.762H8.28a3.825,3.825,0,0,0,3.826-3.825V9.411A3.825,3.825,0,0,0,8.28,7.111ZM19.78,10.6a4.57,4.57,0,0,0-3.9-2.2,4.3,4.3,0,0,0-4.32,4.32,4.3,4.3,0,0,0,4.32,4.32,4.57,4.57,0,0,0,3.9-2.2H14.7v1.506H21.5V9.117H14.7v1.483h5.08Zm-5.08,3.58a2.8,2.8,0,0,1-2.8-2.8,2.8,2.8,0,0,1,2.8-2.8h0a2.8,2.8,0,0,1,2.8,2.8h0A2.8,2.8,0,0,1,14.7,14.183ZM16.2,6h-5.4V4.5H16.2Z"/></svg></a>
+                    <a href="#" class="social-icon-link" aria-label="GitHub Profile"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+                </div>
+            </nav>
+        </div>
+
+        <main>
+            <!-- Page Header -->
+            <section class="pt-48 pb-24 text-center container mx-auto px-6">
+                <h1 class="page-title-heading uppercase">
+                    <span class="reveal-line"><span class="reveal-line-inner">Selected Work</span></span>
+                </h1>
+                <p class="text-lg md:text-xl text-text-color mt-4 max-w-3xl mx-auto reveal-text">A collection of my favorite projects. I've had the privilege to work on brand identities, websites, and mobile applications for some amazing clients.</p>
+            </section>
+
+            <!-- Filter Controls -->
+            <section class="container mx-auto px-6 mb-16 reveal-up">
+                <div id="filter-controls" class="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 md:gap-x-8">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="branding">Branding & Identity</button>
+                    <button class="filter-btn" data-filter="web">Web Design & UX</button>
+                    <button class="filter-btn" data-filter="mobile">Mobile & App Design</button>
+                    <button class="filter-btn" data-filter="packaging">Packaging Design</button>
+                </div>
+            </section>
+
+            <!-- Work Grid -->
+            <section class="container mx-auto px-6 pb-20 md:pb-40">
+                <div id="work-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                    <a href="#" class="work-item page-link" data-category="branding">
+                        <div class="work-item-image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1639762681057-408e52192e55?auto=format&fit=crop&w=800&q=80" alt="Nairobi Coffee Co." class="work-item-image">
+                        </div>
+                        <div class="work-item-info">
+                            <h3 class="work-item-title">Nairobi Coffee Co.</h3>
+                            <p class="work-item-category">Branding & Identity</p>
+                        </div>
+                    </a>
+
+                    <a href="#" class="work-item page-link" data-category="web">
+                        <div class="work-item-image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&w=800&q=80" alt="Safari Explorer" class="work-item-image">
+                        </div>
+                        <div class="work-item-info">
+                            <h3 class="work-item-title">Safari Explorer</h3>
+                            <p class="work-item-category">Web Design & UX</p>
+                        </div>
+                    </a>
+                    
+                    <a href="#" class="work-item page-link" data-category="packaging">
+                        <div class="work-item-image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?auto=format&fit=crop&w=800&q=80" alt="Maisha Tea" class="work-item-image">
+                        </div>
+                        <div class="work-item-info">
+                            <h3 class="work-item-title">Maisha Tea</h3>
+                            <p class="work-item-category">Packaging Design</p>
+                        </div>
+                    </a>
+
+                    <a href="#" class="work-item page-link" data-category="mobile">
+                        <div class="work-item-image-wrapper">
+                             <img src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?auto=format&fit=crop&w=800&q=80" alt="PesaTrack" class="work-item-image">
+                        </div>
+                        <div class="work-item-info">
+                            <h3 class="work-item-title">PesaTrack</h3>
+                            <p class="work-item-category">Mobile & App Design</p>
+                        </div>
+                    </a>
+                    
+                    <a href="#" class="work-item page-link" data-category="web">
+                        <div class="work-item-image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1516116216624-53e697300947?auto=format&fit=crop&w=800&q=80" alt="KaziConnect Platform" class="work-item-image">
+                        </div>
+                        <div class="work-item-info">
+                            <h3 class="work-item-title">KaziConnect</h3>
+                            <p class="work-item-category">Web Design & UX</p>
+                        </div>
+                    </a>
+
+                    <a href="#" class="work-item page-link" data-category="branding">
+                        <div class="work-item-image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?auto=format&fit=crop&w=800&q=80" alt="Artisan Collective" class="work-item-image">
+                        </div>
+                        <div class="work-item-info">
+                            <h3 class="work-item-title">Artisan Collective</h3>
+                            <p class="work-item-category">Branding & Identity</p>
+                        </div>
+                    </a>
+
+                </div>
+            </section>
+        </main>
+        
+        <!-- Footer: Consistent with index.html -->
+        <footer id="contact" class="bg-[#111111] text-white pt-24 pb-8 md:pt-40 md:pb-12">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-24 md:mb-32">
+                    <p class="text-lg text-text-color mb-4 reveal-up">Got an idea?</p>
+                    <h2 class="contact-heading uppercase mb-6"><span class="reveal-line"><span class="reveal-line-inner">Let's work together</span></span></h2>
+                    <a href="mailto:ondwariobiko@gmail.com" class="magnetic-link inline-block mt-4">
+                        <span class="text-xl md:text-2xl lg:text-3xl text-accent-color uppercase relative after:content-[''] after:absolute after:left-0 after:bottom-[-4px] after:w-full after:h-[2px] after:bg-accent-color after:scale-x-100 after:origin-right after:transition-transform after:duration-500 hover:after:scale-x-0 hover:after:origin-left">
+                            ondwariobiko@gmail.com
+                        </span>
+                    </a>
+                </div>
+                <div class="flex flex-col md:flex-row justify-between items-center text-center md:text-left border-t border-white/10 pt-8">
+                    <div class="text-text-color mb-6 md:mb-0">
+                        <p>&copy; 2025 Ondwari Obiko. All Rights Reserved.</p>
+                        <div class="flex items-center justify-center md:justify-start space-x-2">
+                            <p>Nairobi, Kenya</p>
+                            <p class="text-accent-color">&bull;</p>
+                            <p>EAT <span id="current-time"></span></p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-5">
+                         <a href="#" class="social-icon-link" aria-label="LinkedIn Profile"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 0 1 2.063-2.065 2.064 2.064 0 0 1 2.063 2.065c0 1.14-.925 2.065-2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg></a>
+                         <a href="#" class="social-icon-link" aria-label="Behance Profile"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8.28,13.253H4.453V8.62H8.28a2.316,2.316,0,0,1,2.317,2.317h0A2.316,2.316,0,0,1,8.28,13.253Zm0-6.142H2.94V14.762H8.28a3.825,3.825,0,0,0,3.826-3.825V9.411A3.825,3.825,0,0,0,8.28,7.111ZM19.78,10.6a4.57,4.57,0,0,0-3.9-2.2,4.3,4.3,0,0,0-4.32,4.32,4.3,4.3,0,0,0,4.32,4.32,4.57,4.57,0,0,0,3.9-2.2H14.7v1.506H21.5V9.117H14.7v1.483h5.08Zm-5.08,3.58a2.8,2.8,0,0,1-2.8-2.8,2.8,2.8,0,0,1,2.8-2.8h0a2.8,2.8,0,0,1,2.8,2.8h0A2.8,2.8,0,0,1,14.7,14.183ZM16.2,6h-5.4V4.5H16.2Z"/></svg></a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="js/main.js" defer></script>
+    <script src="js/work.js" defer></script>
+</body>
+</html>
