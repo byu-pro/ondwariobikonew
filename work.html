@@ -7,10 +7,17 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://api.fontshare.com/v2/css?f[]=clash-display@700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
-    <link rel="icon" type="image/png" href="images/logo%20favicon-02.png">
+    <link rel="icon" type="image/png" href="images/logo favicon-02.png">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Flip.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.158.0/build/three.module.js"
+        }
+    }
+    </script>
 </head>
 <body class="overflow-x-hidden">
     <div id="preloader">
@@ -169,8 +176,7 @@
         </footer>
     </div>
     
-    <script src="js/app.js" type="module" defer></script>
-    <script src="js/work.js" type="module" defer></script>
+    <script src="js/main.js" type="module" defer></script>
 
     <div id="hire-me-fab" class="hire-me-container">
         <button id="fab-main-btn" class="fab-main" aria-label="Contact Me">
