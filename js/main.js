@@ -27,8 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (link.dataset.listenerAttached) return;
         link.dataset.listenerAttached = 'true';
         link.addEventListener('click', function(e) {
-            // Skip transition for work link to ensure it works
-            if (this.href.includes('work.html')) {
+            // MODIFIED: Added an exception for services.html to fix navigation bug
+            if (this.href.includes('work.html') || this.href.includes('services.html')) {
                 return; // Let the default link behavior happen
             }
             
