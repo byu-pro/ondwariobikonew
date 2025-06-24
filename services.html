@@ -7,6 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://api.fontshare.com/v2/css?f[]=clash-display@700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="icon" type="image/png" href="images/logo favicon-02.png">
 </head>
 <body class="text-white">
     <div id="preloader"><h2 class="preloader-text"><div class="preloader-text-inner">Services</div></h2></div>
@@ -18,7 +19,9 @@
     
     <div class="content-wrapper">
         <header class="fixed top-0 left-0 w-full p-6 md:p-8 z-50 flex justify-between items-center mix-blend-difference">
-            <a href="index.html" class="page-link text-2xl font-bold uppercase text-white">OO</a>
+            <a href="index.html" class="page-link">
+                <img src="images/logo favicon-02.png" alt="Ondwari Obiko Logo" class="navbar-logo">
+            </a>
             <button id="menu-toggle" class="w-12 h-12 rounded-full border border-white/50 flex flex-col items-center justify-center space-y-1.5 z-50">
                 <span class="w-6 h-0.5 bg-white block transition-transform duration-300"></span>
                 <span class="w-6 h-0.5 bg-white block transition-transform duration-300"></span>
@@ -35,7 +38,6 @@
         </div>
 
         <main>
-            <!-- Capabilities Section -->
             <section class="container mx-auto px-6 py-32 md:py-40 text-center">
                 <p class="text-lg text-text-color mb-4 reveal-up">What I Do</p>
                 <h1 class="page-title-heading uppercase reveal-line"><span class="reveal-line-inner">Capabilities</span></h1>
@@ -72,17 +74,14 @@
                 </div>
             </section>
             
-            <!-- NEW: Toolkit Section with Linear Bars -->
             <section id="toolkit" class="py-20 md:py-32 bg-[#111111] border-y border-white/10">
                 <div class="container mx-auto px-6">
                     <div class="text-center mb-16 md:mb-24">
                         <p class="text-lg text-text-color mb-4 reveal-up">My Go-To Tools</p>
                         <h2 class="section-heading uppercase reveal-line"><span class="reveal-line-inner">My Toolkit</span></h2>
                     </div>
-                    <!-- The new grid container for skill categories -->
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16">
                         
-                        <!-- Category: Design -->
                         <div class="toolkit-category reveal-up">
                             <h3 class="toolkit-title">Design</h3>
                             <ul class="toolkit-list">
@@ -109,7 +108,6 @@
                             </ul>
                         </div>
 
-                        <!-- Category: Development -->
                         <div class="toolkit-category reveal-up" style="transition-delay: 0.1s;">
                             <h3 class="toolkit-title">Development</h3>
                             <ul class="toolkit-list">
@@ -136,7 +134,6 @@
                             </ul>
                         </div>
 
-                        <!-- Category: 3D & Motion -->
                         <div class="toolkit-category reveal-up" style="transition-delay: 0.2s;">
                             <h3 class="toolkit-title">3D & Motion</h3>
                             <ul class="toolkit-list">
