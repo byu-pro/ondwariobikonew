@@ -13,43 +13,43 @@ document.addEventListener('DOMContentLoaded', () => {
     /**
      * Handles the preloader and smooth page load transitions.
      */
-   function initPageTransitions() {
-    window.addEventListener('load', () => {
-        document.body.classList.add('loaded');
-        if (preloader) {
-            preloader.classList.add('loaded');
-        }
-        setTimeout(initRevealAnimations, 500);
-        setTimeout(initSkillMeters, 500);
-    });
-
-    document.querySelectorAll('.page-link').forEach(link => {
-        if (link.dataset.listenerAttached) return;
-        link.dataset.listenerAttached = 'true';
-        link.addEventListener('click', function(e) {
-            // MODIFIED: Added an exception for services.html to fix navigation bug
-            if (this.href.includes('work.html') || this.href.includes('services.html')) {
-                return; // Let the default link behavior happen
-            }
-            
-            e.preventDefault();
-            const destination = this.href;
-            const mobileMenu = document.getElementById('mobile-menu');
-            if (mobileMenu && mobileMenu.classList.contains('open')) {
-                mobileMenu.classList.remove('open');
-                document.body.style.overflow = '';
-                document.querySelectorAll('#menu-toggle span').forEach(span => span.style.transform = '');
-            }
-            document.body.classList.remove('loaded');
+    function initPageTransitions() {
+        window.addEventListener('load', () => {
+            document.body.classList.add('loaded');
             if (preloader) {
-                const preloaderText = preloader.querySelector('.preloader-text-inner');
-                if(preloaderText) preloaderText.style.transform = 'translateY(120%)';
-                preloader.classList.remove('loaded');
+                preloader.classList.add('loaded');
             }
-            setTimeout(() => { window.location.href = destination; }, 900);
+            setTimeout(initRevealAnimations, 500);
+            setTimeout(initSkillMeters, 500);
         });
-    });
-}
+
+        document.querySelectorAll('.page-link').forEach(link => {
+            if (link.dataset.listenerAttached) return;
+            link.dataset.listenerAttached = 'true';
+            link.addEventListener('click', function(e) {
+                // MODIFIED: Added an exception for services.html to fix navigation bug
+                if (this.href.includes('work.html') || this.href.includes('services.html')) {
+                    return; // Let the default link behavior happen
+                }
+                
+                e.preventDefault();
+                const destination = this.href;
+                const mobileMenu = document.getElementById('mobile-menu');
+                if (mobileMenu && mobileMenu.classList.contains('open')) {
+                    mobileMenu.classList.remove('open');
+                    document.body.style.overflow = '';
+                    document.querySelectorAll('#menu-toggle span').forEach(span => span.style.transform = '');
+                }
+                document.body.classList.remove('loaded');
+                if (preloader) {
+                    const preloaderText = preloader.querySelector('.preloader-text-inner');
+                    if(preloaderText) preloaderText.style.transform = 'translateY(120%)';
+                    preloader.classList.remove('loaded');
+                }
+                setTimeout(() => { window.location.href = destination; }, 900);
+            });
+        });
+    }
 
     /**
      * Initializes the Intersection Observer for reveal-on-scroll animations.
@@ -150,12 +150,32 @@ document.addEventListener('DOMContentLoaded', () => {
         const mobileMenu = document.getElementById('mobile-menu');
         if (!menuToggle || !mobileMenu) return;
         const menuSpans = menuToggle.querySelectorAll('span');
+        
         menuToggle.addEventListener('click', (e) => {
             e.stopPropagation();
             const isOpen = mobileMenu.classList.toggle('open');
             document.body.style.overflow = isOpen ? 'hidden' : '';
             menuSpans[0].style.transform = isOpen ? 'translateY(5px) rotate(45deg)' : '';
             menuSpans[1].style.transform = isOpen ? 'translateY(-5px) rotate(-45deg)' : '';
+        });
+
+        // Handle menu link clicks
+        document.querySelectorAll('#mobile-menu .menu-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                // Close the menu
+                mobileMenu.classList.remove('open');
+                document.body.style.overflow = '';
+                menuSpans.forEach(span => span.style.transform = '');
+                
+                // Only prevent default if it's a hash link (same page navigation)
+                if (link.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
+                    const target = document.querySelector(link.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
         });
     }
 
@@ -263,7 +283,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- INITIALIZE ALL FUNCTIONS ---
     initPageTransitions();
-    initHeroTilt(); // <-- Initialize the new hero tilt effect
+    initHeroTilt();
     initCustomCursor();
     initMobileMenu();
     initClock();

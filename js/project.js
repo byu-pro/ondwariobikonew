@@ -103,31 +103,26 @@ document.addEventListener('DOMContentLoaded', () => {
         menuToggle.addEventListener('click', () => {
             const isOpen = mobileMenu.classList.toggle('open');
             document.body.style.overflow = isOpen ? 'hidden' : '';
-            menuSpans.forEach(span => {
-                span.classList.toggle('bg-white', !isOpen && document.body.classList.contains('text-white'));
-                span.classList.toggle('bg-black', !isOpen && document.body.classList.contains('text-black'));
-            });
             menuSpans[0].style.transform = isOpen ? 'translateY(5px) rotate(45deg)' : '';
             menuSpans[1].style.transform = isOpen ? 'translateY(-5px) rotate(-45deg)' : '';
         });
 
-        // This allows menu links to close the menu and navigate
-        document.querySelectorAll('.menu-link').forEach(link => {
+        // Handle menu link clicks
+        document.querySelectorAll('#mobile-menu .menu-link').forEach(link => {
             link.addEventListener('click', (e) => {
-                e.preventDefault();
+                // Close the menu
                 mobileMenu.classList.remove('open');
                 document.body.style.overflow = '';
                 menuSpans.forEach(span => span.style.transform = '');
                 
-                const destination = link.href;
-                // Use the page transition logic
-                document.body.classList.remove('loaded');
-                if(preloader) {
-                    preloader.classList.remove('loaded');
+                // Only prevent default if it's a hash link (same page navigation)
+                if (link.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
+                    const target = document.querySelector(link.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
                 }
-                setTimeout(() => {
-                   window.location.href = destination;
-                }, 900);
             });
         });
     }
@@ -191,6 +186,5 @@ document.addEventListener('DOMContentLoaded', () => {
     initMobileMenu();
     initClock();
     initMagneticLinks();
-    // Moved this function call inside the listener
     initNextProjectHover();
 });
