@@ -29,7 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // before we initialize animations that might depend on them (like GSAP).
         window.addEventListener('load', () => {
             initRevealAnimations();
-            // The initSkillMeters() call was here but it is not defined in this file. Assuming it's not needed for the homepage.
             initHorizontalScroll(); // Moved here to run after all elements are loaded
         });
 
@@ -73,12 +72,46 @@ document.addEventListener('DOMContentLoaded', () => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('is-visible');
+                    
                     if (entry.target.classList.contains('toolkit-category')) {
                         const items = entry.target.querySelectorAll('.skill-item');
                         items.forEach((item, index) => {
                             item.style.transitionDelay = `${index * 100}ms`;
                             item.classList.add('is-visible');
                         });
+
+                        // =================================================================
+                        // NEW: TOOLKIT ANIMATION LOGIC ADDED HERE
+                        // =================================================================
+                        const skillItems = entry.target.querySelectorAll('.skill-item');
+                        skillItems.forEach(item => {
+                            const targetPercent = item.dataset.percent;
+                            const progressBarInner = item.querySelector('.progress-bar-inner');
+                            const skillPercentText = item.querySelector('.skill-percent');
+                            const counter = { val: 0 };
+
+                            // Animate the progress bar width using GSAP
+                            gsap.to(progressBarInner, {
+                                width: targetPercent + '%',
+                                duration: 1.8,
+                                ease: 'cubic.out',
+                                delay: 0.3 // Start slightly after the item appears
+                            });
+
+                            // Animate the percentage text count-up using GSAP
+                            gsap.to(counter, {
+                                val: targetPercent,
+                                duration: 1.8,
+                                ease: 'cubic.out',
+                                delay: 0.3,
+                                onUpdate: () => {
+                                    skillPercentText.textContent = Math.round(counter.val) + '%';
+                                }
+                            });
+                        });
+                        // =================================================================
+                        // END OF NEWLY ADDED LOGIC
+                        // =================================================================
                     }
                     observer.unobserve(entry.target);
                 }
