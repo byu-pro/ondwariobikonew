@@ -1188,31 +1188,98 @@ a, button {
 }
 
 /* ==========================================================================
-   NEW: Instagram Feed Section Styles
+   NEW: Instagram Carousel Section Styles
    ========================================================================== */
-.instagram-embed-container {
-    /* Basic styling for the container that will hold the Instagram widget */
-    width: 100%;
-    max-width: 800px; /* Adjust as needed */
-    margin-left: auto;
-    margin-right: auto;
-    aspect-ratio: 16 / 9; /* Or adjust to fit your feed's aspect ratio */
-    display: flex; /* For the placeholder content */
-    align-items: center; /* For the placeholder content */
-    justify-content: center; /* For the placeholder content */
-    overflow: hidden; /* Ensure no overflow from the embed */
+#instagram-carousel-section {
+    position: relative;
 }
 
-/* Responsive adjustments for the Instagram feed container */
+.instagram-carousel-wrapper {
+    overflow: hidden; /* Hides parts of the track outside the visible area */
+    position: relative;
+    padding: 2rem 0; /* Add vertical padding for spacing */
+}
+
+.instagram-carousel-track {
+    display: flex;
+    white-space: nowrap; /* Keeps all items on one line */
+    /* This will be animated by GSAP, so no transition here */
+    will-change: transform; /* Optimize for animation */
+}
+
+.instagram-post-card {
+    flex-shrink: 0; /* Prevents items from shrinking */
+    width: 280px; /* Fixed width for each post card */
+    height: 280px; /* Fixed height for each post card */
+    margin: 0 1rem; /* Spacing between cards */
+    border-radius: 0.75rem; /* Rounded corners */
+    overflow: hidden;
+    position: relative;
+    display: block;
+    background-color: #1a1a1a; /* Placeholder background */
+    transition: transform 0.3s ease; /* For magnetic effect */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+}
+
+.instagram-post-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures image covers the card */
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.instagram-post-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 70%);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 1rem;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.instagram-post-card:hover .instagram-post-overlay {
+    opacity: 1;
+}
+
+.instagram-post-card:hover .instagram-post-image {
+    transform: scale(1.05); /* Slight zoom on hover */
+}
+
+.instagram-post-caption {
+    color: white;
+    font-size: 0.9rem;
+    text-align: center;
+    line-height: 1.4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Limit caption to 3 lines */
+    -webkit-box-orient: vertical;
+}
+
+/* Responsive adjustments */
 @media (max-width: 768px) {
-    .instagram-embed-container {
-        padding: 1rem; /* Adjust padding for smaller screens */
+    .instagram-post-card {
+        width: 220px;
+        height: 220px;
+        margin: 0 0.75rem;
+    }
+    .instagram-carousel-wrapper {
+        padding: 1rem 0;
     }
 }
+
 @media (max-width: 480px) {
-    .instagram-embed-container {
-        padding: 0.5rem;
-        aspect-ratio: 1 / 1; /* More square on very small screens if preferred */
-        height: 350px; /* Or a fixed height */
+    .instagram-post-card {
+        width: 180px;
+        height: 180px;
+        margin: 0 0.5rem;
+    }
+    .instagram-post-caption {
+        font-size: 0.8rem;
     }
 }

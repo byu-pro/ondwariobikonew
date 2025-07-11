@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.addEventListener('mouseleave', () => { cursorDot.classList.add('cursor-hidden'); cursorOutline.classList.add('cursor-hidden'); });
         document.body.addEventListener('mouseenter', () => { cursorDot.classList.remove('cursor-hidden'); cursorOutline.classList.remove('cursor-hidden'); });
 
-        const interactiveElements = 'a, button, .project-card, .logo-item, .filter-btn, .nav-arrow, .social-icon-link, .fab-main, .fab-option';
+        const interactiveElements = 'a, button, .project-card, .logo-item, .filter-btn, .nav-arrow, .social-icon-link, .fab-main, .fab-option, .instagram-post-card'; /* ADDED .instagram-post-card */
         document.querySelectorAll(interactiveElements).forEach(el => {
             el.addEventListener('mouseenter', () => {
                 cursorOutline.classList.add('hover');
@@ -424,6 +424,46 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
     }
 
+    /**
+     * NEW: Initializes the self-moving Instagram carousel.
+     */
+    function initInstagramCarousel() {
+        const carouselTrack = document.querySelector('#instagram-carousel-section .instagram-carousel-track');
+        if (!carouselTrack || !window.gsap) {
+            return;
+        }
+
+        // Duplicate items to create a seamless loop
+        const items = Array.from(carouselTrack.children);
+        if (items.length === 0) return;
+
+        // Clear any existing clones to prevent duplicates on resize/re-init
+        carouselTrack.querySelectorAll('.carousel-clone').forEach(clone => clone.remove());
+
+        items.forEach(item => {
+            const clone = item.cloneNode(true);
+            clone.classList.add('carousel-clone'); // Add a class to identify clones
+            carouselTrack.appendChild(clone);
+        });
+
+        // Calculate the total width of the original items
+        let totalWidth = 0;
+        items.forEach(item => {
+            totalWidth += item.offsetWidth + parseFloat(getComputedStyle(item).marginRight) + parseFloat(getComputedStyle(item).marginLeft);
+        });
+
+        // Set up the GSAP animation
+        gsap.to(carouselTrack, {
+            x: -totalWidth, // Move left by the total width of original items
+            ease: "none",
+            duration: items.length * 4, // Adjust duration based on number of items
+            repeat: -1, // Infinite loop
+            modifiers: {
+                x: gsap.utils.unitize(x => parseFloat(x) % totalWidth) // Loop back when it goes too far
+            }
+        });
+    }
+
 
     // --- FINAL INITIALIZATION ---
     // This block calls all the functions to set up the page.
@@ -440,6 +480,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // NEW functions are called here
     initHeroWebGL();
     initProjectModal();
+    initInstagramCarousel(); // Call the new Instagram carousel function
     
     // Kept from original file structure, checks if this element exists on the page before running
     if (document.querySelector('.next-project-link')) {
@@ -447,5 +488,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     // Add a resize listener to re-run horizontal scroll logic for robustness
-    window.addEventListener('resize', initHorizontalScroll);
+    window.addEventListener('resize', () => {
+        initHorizontalScroll();
+        initInstagramCarousel(); // Re-initialize carousel on resize
+    });
 });
