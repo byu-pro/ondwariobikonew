@@ -1388,3 +1388,9 @@ a, button {
         padding: 0 1.5rem;
     }
 }
+#mobile-menu nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem; /* Or even 0.25rem for very close spacing */
+}
