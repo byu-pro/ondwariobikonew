@@ -1013,7 +1013,7 @@ a, button {
    ========================================================================== */
 .service-card {
     background-color: transparent;
-    padding: 2rem 1.5rem;
+    padding: 2.5rem 2rem; /* Adjusted padding as discussed earlier */
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 1rem;
     transition: transform 0.4s ease, background-color 0.4s ease, border-color 0.4s ease;
@@ -1027,6 +1027,23 @@ a, button {
 
 .service-card .font-clash {
     font-family: 'Clash Display', sans-serif;
+}
+
+/* Ensure headings in service cards don't overflow */
+.service-card h3 {
+    word-wrap: break-word; /* Allows long words to break and wrap */
+    overflow-wrap: break-word; /* Modern equivalent */
+    white-space: normal; /* Ensures text wraps normally, not kept on single line */
+}
+
+/* Adjust font size for h3 within service cards on larger screens if needed */
+/* This specifically targets the desktop breakpoint (md) as per your HTML */
+@media (min-width: 768px) {
+    .service-card h3 {
+        /* You can reduce the font size slightly if it's still overflowing */
+        /* For example, if Tailwind's text-2xl is too big, you can override it */
+        /* font-size: 1.75rem; */ /* Example: a bit smaller than 2rem (text-2xl) */
+    }
 }
 
 
