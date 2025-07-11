@@ -1161,8 +1161,6 @@ a, button {
     .modal-info { padding: 2rem; }
 }
 
-/* In css/main.css */
-
 /* ==========================================================================
    ENHANCED WORK GRID STYLES
    ========================================================================== */
@@ -1187,4 +1185,34 @@ a, button {
     margin: 0;
     padding: 0;
     overflow: hidden;
+}
+
+/* ==========================================================================
+   NEW: Instagram Feed Section Styles
+   ========================================================================== */
+.instagram-embed-container {
+    /* Basic styling for the container that will hold the Instagram widget */
+    width: 100%;
+    max-width: 800px; /* Adjust as needed */
+    margin-left: auto;
+    margin-right: auto;
+    aspect-ratio: 16 / 9; /* Or adjust to fit your feed's aspect ratio */
+    display: flex; /* For the placeholder content */
+    align-items: center; /* For the placeholder content */
+    justify-content: center; /* For the placeholder content */
+    overflow: hidden; /* Ensure no overflow from the embed */
+}
+
+/* Responsive adjustments for the Instagram feed container */
+@media (max-width: 768px) {
+    .instagram-embed-container {
+        padding: 1rem; /* Adjust padding for smaller screens */
+    }
+}
+@media (max-width: 480px) {
+    .instagram-embed-container {
+        padding: 0.5rem;
+        aspect-ratio: 1 / 1; /* More square on very small screens if preferred */
+        height: 350px; /* Or a fixed height */
+    }
 }
