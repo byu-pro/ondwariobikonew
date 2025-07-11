@@ -32,13 +32,14 @@ document.addEventListener('DOMContentLoaded', () => {
             initHorizontalScroll(); // Moved here to run after all elements are loaded
         });
 
-        document.querySelectorAll('.page-link').forEach(link => {
-            if (link.dataset.listenerAttached) return;
-            link.dataset.listenerAttached = 'true';
-            link.addEventListener('click', function(e) {
+        // Only apply to the logo/home link specifically
+        const homeLink = document.querySelector('a[href="index.html"].page-link');
+        if (homeLink && !homeLink.dataset.listenerAttached) {
+            homeLink.dataset.listenerAttached = 'true';
+            homeLink.addEventListener('click', function(e) {
                 const destination = this.href;
                 
-                if (link.hostname !== window.location.hostname || !destination.includes(window.location.hostname)) {
+                if (this.hostname !== window.location.hostname || !destination.includes(window.location.hostname)) {
                     return;
                 }
                 
@@ -61,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 setTimeout(() => { window.location.href = destination; }, 900);
             });
-        });
+        }
     }
 
     /**
