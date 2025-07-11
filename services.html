@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Services | Ondwari Obiko</title>
+    <title>Services | Graphic & Web Designer</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://api.fontshare.com/v2/css?f[]=clash-display@700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
@@ -11,7 +11,8 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
-    <!-- Importmap removed for Safari compatibility. Import Three.js directly in your JS files using CDN URL. -->
+    
+    </script>
 </head>
 <body class="overflow-x-hidden">
     <div id="cursor-dot" class="cursor"></div>
@@ -19,17 +20,17 @@
         <span id="cursor-text"></span>
     </div>
 
-
     <div class="content-wrapper">
         <header class="fixed top-0 left-0 w-full p-6 md:p-8 z-50 flex justify-between items-center mix-blend-difference">
             <a href="index.html" class="page-link">
                 <img src="images/logo favicon-02.png" alt="Ondwari Obiko Logo" class="navbar-logo">
             </a>
-            <button id="menu-toggle" class="w-12 h-12 rounded-full border border-white/50 flex flex-col items-center justify-center space-y-1.5 z-50" aria-label="Open menu">
-                <span class="sr-only">Open menu</span>
-                <span class="w-6 h-0.5 bg-white block transition-transform duration-300"></span>
-                <span class="w-6 h-0.5 bg-white block transition-transform duration-300"></span>
-            </button>
+            <div class="flex items-center space-x-4">
+                <button id="menu-toggle" aria-label="Open main menu" class="w-12 h-12 rounded-full border border-white/50 flex flex-col items-center justify-center space-y-1.5 z-50">
+                    <span class="w-6 h-0.5 bg-white block transition-transform duration-300"></span>
+                    <span class="w-6 h-0.5 bg-white block transition-transform duration-300"></span>
+                </button>
+            </div>
         </header>
 
         <div id="mobile-menu">
@@ -56,8 +57,7 @@
                     </div>
                     <p class="service-description">I craft memorable brand identities that tell a compelling story. From logo design and color theory to typography and voice, I build a cohesive visual system that resonates with your target audience and sets you apart from the competition.</p>
                 </div>
-                <div class="service-item reveal-up delay-1">
-                    <div class="service-header">
+                <div class="service-item reveal-up" style="transition-delay: 0.1s;"> <div class="service-header">
                         <span class="service-number text-accent-color">02</span>
                         <h2 class="service-title">Web Design & UX</h2>
                     </div>
@@ -266,9 +266,9 @@
                 </div>
             </footer>
     </div>
-    <script src="js/app.js" type="module" defer></script>
     <script src="js/main.js" type="module" defer></script>
-<div id="hire-me-fab" class="hire-me-container">
+
+    <div id="hire-me-fab" class="hire-me-container">
         <button id="fab-main-btn" class="fab-main" aria-label="Contact Me">
             <span class="fab-text">Hire Me</span>
             <span class="fab-icon">
@@ -284,5 +284,5 @@
             </a>
         </div>
     </div>
-    </body>
+</body>
 </html>
