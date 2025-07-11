@@ -6,7 +6,7 @@
  */
 
 // ADDED: Import Three.js to enable WebGL functionality
-import * as THREE from 'three';
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.module.js';
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -266,8 +266,6 @@ document.addEventListener('DOMContentLoaded', () => {
             prevButton.disabled = newIndex === 0;
             nextButton.disabled = newIndex === slides.length - 1;
         };
-        nextButton.addEventListener('click', () => { if (currentIndex < slides.length - 1) goToSlide(currentIndex + 1); });
-        prevButton.addEventListener('click', () => { if (currentIndex > 0) goToSlide(currentIndex - 1); });
         updateNav(0, 0);
     }
 
