@@ -2,12 +2,15 @@
  * app.js - Core Application Script
  * Handles all shared, global functionality across the site,
  * such as the preloader, custom cursor, and mobile menu.
+ *
+ * NOTE: initPageTransitions has been removed from this file.
+ * It is now solely managed by main.js to avoid conflicts and ensure
+ * consistent behavior across all pages.
  */
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- Global Initializations ---
     // These functions are called on every page.
-    initPageTransitions();
     initCustomCursor();
     initMobileMenu();
     initClock();
@@ -16,37 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initGlobalTiltEffect();
 
     // --- Function Definitions ---
-
-    function initPageTransitions() {
-        const preloader = document.getElementById('preloader');
-        window.addEventListener('load', () => {
-            document.body.classList.add('loaded');
-            if (preloader) {
-                preloader.classList.add('loaded');
-            }
-        });
-
-        document.querySelectorAll('.page-link').forEach(link => {
-            if (link.dataset.listenerAttached) return;
-            link.dataset.listenerAttached = 'true';
-
-            link.addEventListener('click', function(e) {
-                const destination = this.href;
-                if (!destination || link.hostname !== window.location.hostname || destination.includes('#')) {
-                    return;
-                }
-                e.preventDefault();
-                
-                const mobileMenu = document.getElementById('mobile-menu');
-                if (mobileMenu && mobileMenu.classList.contains('open')) {
-                    mobileMenu.classList.remove('open');
-                }
-
-                document.body.classList.remove('loaded');
-                setTimeout(() => { window.location.href = destination; }, 900);
-            });
-        });
-    }
 
     function initCustomCursor() {
         const cursorDot = document.getElementById('cursor-dot');
@@ -64,9 +36,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         window.addEventListener("mousemove", e => { mouseX = e.clientX; mouseY = e.clientY; });
 
-        document.querySelectorAll('a, button, .filter-btn, .nav-arrow, .work-item').forEach(el => {
+        document.querySelectorAll('a, button, .filter-btn, .nav-arrow, .work-item, .project-card, .logo-item, .social-icon-link, .fab-main, .fab-option, .instagram-post-card').forEach(el => {
             el.addEventListener('mouseenter', () => cursorOutline.classList.add('hover'));
             el.addEventListener('mouseleave', () => cursorOutline.classList.remove('hover'));
+        });
+
+        // Text hover for cursor
+        document.querySelectorAll('p, h1, h2, h3, h4, h5, h6').forEach(el => {
+            el.addEventListener('mouseenter', () => cursorOutline.classList.add('text-hover'));
+            el.addEventListener('mouseleave', () => cursorOutline.classList.remove('text-hover'));
         });
     }
 
@@ -75,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const mobileMenu = document.getElementById('mobile-menu');
         if (!menuToggle || !mobileMenu) return;
         const menuSpans = menuToggle.querySelectorAll('span');
-        
+
         menuToggle.addEventListener('click', (e) => {
             e.stopPropagation();
             const isOpen = mobileMenu.classList.toggle('open');
@@ -84,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
             menuSpans[1].style.transform = isOpen ? 'translateY(-5px) rotate(-45deg)' : '';
         });
     }
-    
+
     function initClock() {
         const timeEl = document.getElementById('current-time');
         if (!timeEl) return;

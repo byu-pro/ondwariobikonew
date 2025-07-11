@@ -2,26 +2,45 @@
  * work-page.js - Consolidated Script for the Work Page
  * Combines global functionality with work-grid specific animations
  * to prevent conflicts and ensure all elements load correctly.
+ *
+ * NOTE: initPageTransitions and other global functions are now imported
+ * or assumed to be handled by main.js, which should be loaded before this script.
  */
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- Global Initializations (from app.js) ---
-    initPageTransitions();
-    initCustomCursor();
-    initMobileMenu();
-    initClock();
-    initMagneticLinks();
-    initHireMeButton();
-    initGlobalTiltEffect();
-    initRevealAnimations(); // CRITICAL: This was missing before
+    // --- Global Initializations (from app.js / main.js) ---
+    // These functions are assumed to be available globally or handled by main.js
+    // initPageTransitions(); // REMOVED: This is now in main.js
+    // initCustomCursor(); // Assumed to be in main.js or app.js
+    // initMobileMenu();   // Assumed to be in main.js or app.js
+    // initClock();        // Assumed to be in main.js or app.js
+    // initMagneticLinks(); // Assumed to be in main.js or app.js
+    // initHireMeButton();  // Assumed to be in main.js or app.js
+    // initGlobalTiltEffect(); // Assumed to be in main.js or app.js
+
+    // Call any shared functions that are self-contained or needed specifically here
+    // If you have a separate `app.js` and load it before `work-page.js`, these calls
+    // should ensure they run if they weren't globally run by main.js.
+    // For this setup, we'll assume `main.js` is loaded first and handles the global init.
+
+    // If initRevealAnimations is specifically needed for elements on THIS page, call it:
+    initRevealAnimations(); // CRITICAL: This ensures reveal animations work on this page.
+
 
     // --- Work Page Specific Initializations (from work.js) ---
     initWorkGrid();
 
     // --- Function Definitions ---
 
-    // 1. SHARED FUNCTIONS (from app.js / main.js)
-    function initPageTransitions() {
+    // 1. SHARED FUNCTIONS (these should ideally be defined once in main.js or a shared.js)
+    // For the purpose of providing a complete working file, they are kept here,
+    // but the best practice is to load `main.js` first, then `work-page.js`.
+    // If main.js loads these, you wouldn't need to redefine them here.
+
+    // Duplicated functions for clarity if main.js isn't loaded first or is incomplete.
+    // In a real scenario, you'd ensure main.js initializes these or import them.
+
+    function initPageTransitions() { // Re-added for local execution safety if main.js is not guaranteed
         const preloader = document.getElementById('preloader');
         window.addEventListener('load', () => {
             document.body.classList.add('loaded');
@@ -40,13 +59,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     return;
                 }
                 e.preventDefault();
-                
+
                 const mobileMenu = document.getElementById('mobile-menu');
                 if (mobileMenu && mobileMenu.classList.contains('open')) {
                     mobileMenu.classList.remove('open');
+                    document.body.style.overflow = ''; // Restore scroll
+                    document.querySelectorAll('#menu-toggle span').forEach(span => span.style.transform = '');
                 }
 
                 document.body.classList.remove('loaded');
+                if (preloader) { // Ensure preloader is shown on exit
+                    const preloaderText = preloader.querySelector('.preloader-text-inner');
+                    if(preloaderText) preloaderText.style.transform = 'translateY(120%)';
+                    preloader.classList.remove('loaded');
+                }
                 setTimeout(() => { window.location.href = destination; }, 900);
             });
         });
@@ -67,9 +93,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         window.addEventListener("mousemove", e => { mouseX = e.clientX; mouseY = e.clientY; });
 
-        document.querySelectorAll('a, button, .filter-btn, .nav-arrow, .work-item').forEach(el => {
+        document.querySelectorAll('a, button, .filter-btn, .nav-arrow, .work-item, .project-card, .logo-item, .social-icon-link, .fab-main, .fab-option, .instagram-post-card').forEach(el => {
             el.addEventListener('mouseenter', () => cursorOutline.classList.add('hover'));
             el.addEventListener('mouseleave', () => cursorOutline.classList.remove('hover'));
+        });
+
+        // Text hover for cursor
+        document.querySelectorAll('p, h1, h2, h3, h4, h5, h6').forEach(el => {
+            el.addEventListener('mouseenter', () => cursorOutline.classList.add('text-hover'));
+            el.addEventListener('mouseleave', () => cursorOutline.classList.remove('text-hover'));
         });
     }
 
@@ -78,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const mobileMenu = document.getElementById('mobile-menu');
         if (!menuToggle || !mobileMenu) return;
         const menuSpans = menuToggle.querySelectorAll('span');
-        
+
         menuToggle.addEventListener('click', (e) => {
             e.stopPropagation();
             const isOpen = mobileMenu.classList.toggle('open');
@@ -87,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
             menuSpans[1].style.transform = isOpen ? 'translateY(-5px) rotate(-45deg)' : '';
         });
     }
-    
+
     function initClock() {
         const timeEl = document.getElementById('current-time');
         if (!timeEl) return;
@@ -162,7 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         }, { threshold: 0.1 });
-        
+
         // Ensure we are looking for all revealable elements on the page
         document.querySelectorAll('.reveal-up, .reveal-image, .reveal-line, .reveal-text').forEach(el => {
             observer.observe(el);
@@ -178,9 +210,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const filterControls = document.getElementById('filter-controls');
         const workGrid = document.getElementById('work-grid');
-        
+
         if (!filterControls || !workGrid) return;
-        
+
         const projectItems = Array.from(workGrid.querySelectorAll('.work-item'));
         const filterButtons = filterControls.querySelectorAll('.filter-btn');
 
@@ -201,7 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             filterButtons.forEach(button => button.classList.remove('active'));
             clickedButton.classList.add('active');
-            
+
             const filterValue = clickedButton.dataset.filter;
             const state = Flip.getState(projectItems);
 
@@ -222,4 +254,17 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    // Call the shared global functions that are expected to be available
+    // from a main script, or if this is the primary script, define them above.
+    // For this context, assuming main.js will load the global ones.
+    initPageTransitions(); // Ensure page transitions are initialized
+    initCustomCursor();
+    initMobileMenu();
+    initClock();
+    initMagneticLinks();
+    initHireMeButton();
+    initGlobalTiltEffect();
+    initRevealAnimations(); // Make sure this is called if relevant to the page's elements
+
 });

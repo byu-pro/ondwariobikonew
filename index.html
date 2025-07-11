@@ -24,7 +24,7 @@
     <div id="cursor-outline" class="cursor">
         <span id="cursor-text"></span>
     </div>
-    
+
     <div class="content-wrapper">
         <header class="fixed top-0 left-0 w-full p-6 md:p-8 z-50 flex justify-between items-center mix-blend-difference">
             <a href="index.html" class="page-link">
@@ -40,10 +40,10 @@
 
         <div id="mobile-menu">
             <nav>
-                <a href="services.html" class="menu-link">Services</a>
-                <a href="work.html" class="menu-link">Work</a>
-                <a href="about.html" class="menu-link">About</a>
-                <a href="contact.html" class="menu-link">Contact</a>
+                <a href="services.html" class="menu-link page-link">Services</a>
+                <a href="work.html" class="menu-link page-link">Work</a>
+                <a href="about.html" class="menu-link page-link">About</a>
+                <a href="contact.html" class="menu-link page-link">Contact</a>
                 <a href="faq.html" class="menu-link page-link">FAQ</a>
             </nav>
         </div>
@@ -58,7 +58,7 @@
                 </h1>
                 <p class="text-zinc-400 mt-4 max-w-2xl z-20 reveal-line"><span class="reveal-line-inner" style="transition-delay: 0.2s;">Based in Nairobi, Kenya, crafting beautiful brands and functional, user-centered websites.</span></p>
             </section>
-            
+
             <section class="py-20 md:py-32 container mx-auto px-6">
                 <div class="text-center mb-16 md:mb-20">
                     <h2 class="section-heading uppercase reveal-line"><span class="reveal-line-inner">Core Expertise</span></h2>
@@ -129,8 +129,7 @@
                     </div>
                 </div>
             </section>
-            
-            <!-- Updated About Me Section -->
+
             <section id="about" class="py-20 md:py-40 container mx-auto px-6">
                 <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
                     <div class="lg:col-span-2 tilt-container">
@@ -146,7 +145,7 @@
                             I'm Ondwari Obiko, a graphic and web designer who combines aesthetic vision with technical skill. Based in Nairobi, Kenya, I specialize in crafting cohesive brand identities and translating them into beautiful, responsive, and high-performing websites. My work is driven by a passion for clean design and intuitive user experiences.
                         </p>
                         <div class="mt-8 reveal-up" style="transition-delay: 0.3s;">
-                            <a href="about.html" class="magnetic-link inline-flex items-center gap-2 text-accent-color hover:text-accent-color transition-colors duration-300">
+                            <a href="about.html" class="magnetic-link inline-flex items-center gap-2 text-accent-color hover:text-accent-color transition-colors duration-300 page-link">
                                 Learn More
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                             </a>
@@ -306,7 +305,11 @@
                 </div>
             </footer>
     </div>
+    <script src="js/app.js" type="module" defer></script>
     <script src="js/main.js" type="module" defer></script>
+    <script src="js/work-page.js" type="module" defer></script>
+    <script src="js/project.js" type="module" defer></script>
+
 <div id="hire-me-fab" class="hire-me-container">
         <button id="fab-main-btn" class="fab-main" aria-label="Contact Me">
             <span class="fab-text">Hire Me</span>

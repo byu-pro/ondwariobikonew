@@ -1,6 +1,8 @@
 /**
  * main.js - Unified Premium Portfolio Script
  * Handles all core animations and interactions site-wide.
+ *
+ * NOTE: This file now solely manages initPageTransitions for the entire site.
  */
 
 // ADDED: Import Three.js to enable WebGL functionality
@@ -15,9 +17,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const cursorText = document.getElementById('cursor-text');
 
     /**
-     * Handles the preloader and smooth page load transitions.
+     * Handles the preloader and smooth page load transitions for ALL page-link elements.
      */
     function initPageTransitions() {
+        // On page load, reveal the content
         window.addEventListener('load', () => {
             document.body.classList.add('loaded');
             if (preloader) {
@@ -25,44 +28,49 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // This is a separate listener on window load to ensure all other scripts have loaded
-        // before we initialize animations that might depend on them (like GSAP).
-        window.addEventListener('load', () => {
-            initRevealAnimations();
-            initHorizontalScroll(); // Moved here to run after all elements are loaded
-        });
+        // Attach event listener to ALL elements with 'page-link' class
+        document.querySelectorAll('.page-link').forEach(link => {
+            // Check if listener is already attached to prevent multiple bindings on hot reloads/SPA
+            if (link.dataset.listenerAttached) return;
+            link.dataset.listenerAttached = 'true';
 
-        // Only apply to the logo/home link specifically
-        const homeLink = document.querySelector('a[href="index.html"].page-link');
-        if (homeLink && !homeLink.dataset.listenerAttached) {
-            homeLink.dataset.listenerAttached = 'true';
-            homeLink.addEventListener('click', function(e) {
+            link.addEventListener('click', function(e) {
                 const destination = this.href;
-                
-                if (this.hostname !== window.location.hostname || !destination.includes(window.location.hostname)) {
+
+                // Only apply transition to internal links
+                if (!destination || link.hostname !== window.location.hostname || destination.includes('#')) {
+                    // For hash links, allow default behavior or handle smooth scroll if desired
+                    // For external links, let them open normally
                     return;
                 }
-                
-                e.preventDefault();
+
+                e.preventDefault(); // Prevent default link behavior for smooth transition
 
                 const mobileMenu = document.getElementById('mobile-menu');
+                const menuToggleSpans = document.querySelectorAll('#menu-toggle span');
+
+                // Close mobile menu if open
                 if (mobileMenu && mobileMenu.classList.contains('open')) {
                     mobileMenu.classList.remove('open');
-                    document.body.style.overflow = '';
-                    document.querySelectorAll('#menu-toggle span').forEach(span => span.style.transform = '');
+                    document.body.style.overflow = ''; // Restore scroll
+                    if (menuToggleSpans.length > 0) {
+                        menuToggleSpans[0].style.transform = '';
+                        menuToggleSpans[1].style.transform = '';
+                    }
                 }
-                
+
+                // Start page exit animation
                 document.body.classList.remove('loaded');
-                
                 if (preloader) {
                     const preloaderText = preloader.querySelector('.preloader-text-inner');
-                    if(preloaderText) preloaderText.style.transform = 'translateY(120%)';
-                    preloader.classList.remove('loaded');
+                    if (preloaderText) preloaderText.style.transform = 'translateY(120%)'; // Animate text out
+                    preloader.classList.remove('loaded'); // Make preloader visible
                 }
-                
-                setTimeout(() => { window.location.href = destination; }, 900);
+
+                // Navigate to new page after animation
+                setTimeout(() => { window.location.href = destination; }, 900); // Match CSS transition duration
             });
-        }
+        });
     }
 
     /**
@@ -73,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('is-visible');
-                    
+
                     if (entry.target.classList.contains('toolkit-category')) {
                         const items = entry.target.querySelectorAll('.skill-item');
                         items.forEach((item, index) => {
@@ -120,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, { threshold: 0.1, rootMargin: '0px 0px -20px 0px' });
         document.querySelectorAll('.reveal-up, .reveal-image, .reveal-line, .reveal-text, .toolkit-category').forEach(el => observer.observe(el));
     }
-    
+
     /**
      * Applies an interactive 3D tilt effect to designated elements sitewide.
      */
@@ -138,10 +146,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 const y = ((clientY - top) / height) - 0.5;
                 const rotateY = x * TILT_AMOUNT;
                 const rotateX = -y * TILT_AMOUNT;
-                elementToTilt.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                gsap.to(elementToTilt, { rotateX: rotateX, rotateY: rotateY, duration: 0.8, ease: "power3.out" });
             });
             container.addEventListener('mouseleave', () => {
-                elementToTilt.style.transform = 'rotateX(0deg) rotateY(0deg)';
+                gsap.to(elementToTilt, { rotateX: 0, rotateY: 0, duration: 1, ease: "elastic.out(1, 0.5)" });
             });
         });
     }
@@ -150,7 +158,8 @@ document.addEventListener('DOMContentLoaded', () => {
      * MODIFIED: Sets up the custom cursor, now with custom data-driven text.
      */
     function initCustomCursor() {
-        if (!cursorDot || !cursorOutline) return;
+        if (!cursorDot || !cursorOutline || window.matchMedia("(pointer: coarse)").matches) return; // Added check for coarse pointer
+
         let mouseX = 0, mouseY = 0, outlineX = 0, outlineY = 0;
         window.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; });
         const animateCursor = () => {
@@ -163,45 +172,33 @@ document.addEventListener('DOMContentLoaded', () => {
             requestAnimationFrame(animateCursor);
         };
         requestAnimationFrame(animateCursor);
+
+        // Hide cursor when leaving body
         document.body.addEventListener('mouseleave', () => { cursorDot.classList.add('cursor-hidden'); cursorOutline.classList.add('cursor-hidden'); });
         document.body.addEventListener('mouseenter', () => { cursorDot.classList.remove('cursor-hidden'); cursorOutline.classList.remove('cursor-hidden'); });
 
-        const interactiveElements = 'a, button, .project-card, .logo-item, .filter-btn, .nav-arrow, .social-icon-link, .fab-main, .fab-option, .instagram-post-card'; /* ADDED .instagram-post-card */
+        const interactiveElements = 'a, button, .project-card, .logo-item, .filter-btn, .nav-arrow, .social-icon-link, .fab-main, .fab-option, .instagram-post-card';
         document.querySelectorAll(interactiveElements).forEach(el => {
             el.addEventListener('mouseenter', () => {
                 cursorOutline.classList.add('hover');
                 const customText = el.getAttribute('data-cursor-text');
                 if (cursorText) {
                     cursorText.textContent = customText || 'Click';
+                    cursorText.style.opacity = 1; // Ensure text is visible on hover
                 }
             });
             el.addEventListener('mouseleave', () => {
                 cursorOutline.classList.remove('hover');
-                if (cursorText) cursorText.textContent = '';
+                if (cursorText) {
+                    cursorText.textContent = '';
+                    cursorText.style.opacity = 0; // Hide text when not hovered
+                }
             });
         });
 
         document.querySelectorAll('p, h1, h2, h3, h4, h5, h6').forEach(el => {
             el.addEventListener('mouseenter', () => cursorOutline.classList.add('text-hover'));
             el.addEventListener('mouseleave', () => cursorOutline.classList.remove('text-hover'));
-        });
-    }
-    
-    /**
-     * MODIFIED: Mobile menu now plays sound on toggle.
-     */
-    function initMobileMenu() {
-        const menuToggle = document.getElementById('menu-toggle');
-        const mobileMenu = document.getElementById('mobile-menu');
-        if (!menuToggle || !mobileMenu) return;
-        const menuSpans = menuToggle.querySelectorAll('span');
-        
-        menuToggle.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const isOpen = mobileMenu.classList.toggle('open');
-            document.body.style.overflow = isOpen ? 'hidden' : '';
-            menuSpans[0].style.transform = isOpen ? 'translateY(5px) rotate(45deg)' : '';
-            menuSpans[1].style.transform = isOpen ? 'translateY(-5px) rotate(-45deg)' : '';
         });
     }
 
@@ -213,7 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!section || !window.gsap || window.innerWidth < 1024) {
             if (section) {
                 // Ensure no inline height is left on mobile
-                section.style.height = ''; 
+                section.style.height = '';
             }
             return;
         }
@@ -236,9 +233,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // We no longer need to manually set the section's height.
-        section.style.height = ''; 
+        section.style.height = '';
     }
-    
+
     function initTestimonialSlider() {
         const slider = document.getElementById('testimonial-slider');
         if (!slider) return;
@@ -286,22 +283,23 @@ document.addEventListener('DOMContentLoaded', () => {
         setInterval(updateTime, 1000);
         updateTime();
     }
-    
+
     function initMagneticLinks() {
         document.querySelectorAll('.magnetic-link').forEach(link => {
+            if (window.matchMedia("(pointer: coarse)").matches) return; // Added check for coarse pointer
             link.addEventListener('mousemove', (e) => {
                 const { clientX, clientY } = e;
                 const { left, top, width, height } = link.getBoundingClientRect();
                 const x = (clientX - (left + width / 2)) * 0.2;
                 const y = (clientY - (top + height / 2)) * 0.2;
-                link.style.transform = `translate(${x}px, ${y}px)`;
+                gsap.to(link, { x: x, y: y, duration: 0.6, ease: "power2.out" }); // Use GSAP for smooth animation
             });
             link.addEventListener('mouseleave', () => {
-                link.style.transform = 'translate(0, 0)';
+                gsap.to(link, { x: 0, y: 0, duration: 0.6, ease: "elastic.out(1, 0.5)" }); // Use GSAP for smooth return
             });
         });
     }
-    
+
     function initHireMeButton() {
         const fabContainer = document.getElementById('hire-me-fab');
         const mainFab = document.getElementById('fab-main-btn');
@@ -364,7 +362,7 @@ document.addEventListener('DOMContentLoaded', () => {
         scene.add(mesh);
         camera.position.z = 2;
         const clock = new THREE.Clock();
-        
+
         function animate() {
             material.uniforms.uTime.value = clock.getElapsedTime();
             renderer.render(scene, camera);
@@ -404,7 +402,7 @@ document.addEventListener('DOMContentLoaded', () => {
         projectCards.forEach(card => {
             card.addEventListener('click', (e) => {
                 e.preventDefault();
-                
+
                 modalTitle.textContent = card.dataset.title;
                 modalImg.src = card.dataset.img;
                 modalGoal.textContent = card.dataset.goal;
@@ -465,29 +463,30 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-
     // --- FINAL INITIALIZATION ---
     // This block calls all the functions to set up the page.
 
     initPageTransitions();
     initGlobalTiltEffect();
     initCustomCursor();
-    initMobileMenu();
+    // initMobileMenu(); // REMOVED: Now solely in app.js
     initClock();
     initMagneticLinks();
-    initTestimonialSlider(); 
+    initTestimonialSlider();
     initHireMeButton();
-    
+    initRevealAnimations(); // Ensure reveal animations are initialized here
+    initHorizontalScroll(); // ADDED: Call horizontal scroll init here
+
     // NEW functions are called here
     initHeroWebGL();
     initProjectModal();
     initInstagramCarousel(); // Call the new Instagram carousel function
-    
+
     // Kept from original file structure, checks if this element exists on the page before running
     if (document.querySelector('.next-project-link')) {
         // initNextProjectHover is not defined in this file. If you need it, ensure its function definition is present.
     }
-    
+
     // Add a resize listener to re-run horizontal scroll logic for robustness
     window.addEventListener('resize', () => {
         initHorizontalScroll();
