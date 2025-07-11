@@ -296,12 +296,9 @@
                     </div>
                 </div>
             </footer>
-        </main>
     </div>
-
     <script src="js/main.js" type="module" defer></script>
-
-    <div id="hire-me-fab" class="hire-me-container">
+<div id="hire-me-fab" class="hire-me-container">
         <button id="fab-main-btn" class="fab-main" aria-label="Contact Me">
             <span class="fab-text">Hire Me</span>
             <span class="fab-icon">
@@ -317,40 +314,5 @@
             </a>
         </div>
     </div>
-    <script>
-        window.addEventListener('load', () => {
-            document.querySelectorAll('.project-card').forEach(card => {
-                card.classList.add('loaded');
-            });
-        });
-    </script>
-    
-    <div id="project-modal" class="project-modal-overlay">
-        <div class="project-modal-content reveal-up">
-            <button id="modal-close-btn" aria-label="Close project details">&times;</button>
-            <div class="modal-grid">
-                <div class="modal-image-wrapper">
-                    <img id="modal-img" src="" alt="Project Image" class="modal-image">
-                </div>
-                <div class="modal-info">
-                    <h2 id="modal-title" class="modal-title-heading"></h2>
-                    <div class="modal-details">
-                        <div>
-                            <h3 class="detail-heading">Project Goal</h3>
-                            <p id="modal-goal" class="detail-text"></p>
-                        </div>
-                        <div>
-                            <h3 class="detail-heading">Impact</h3>
-                            <p id="modal-impact" class="detail-text"></p>
-                        </div>
-                    </div>
-                    <a href="#" id="modal-casestudy-link" class="modal-cta page-link">
-                        <span>View Full Case Study</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</body>
+    </body>
 </html>
