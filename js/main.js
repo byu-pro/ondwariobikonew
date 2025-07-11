@@ -4,7 +4,17 @@
  */
 
 // Import Three.js for WebGL functionality
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.module.js';
+// Only import if a canvas element with id 'webgl-canvas' exists
+let THREE;
+if (document.getElementById('webgl-canvas')) {
+    import('https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.module.js')
+        .then(module => {
+            THREE = module;
+            initHeroWebGL(); // Initialize WebGL only when THREE is loaded and on the relevant page
+        })
+        .catch(error => console.error("Failed to load Three.js:", error));
+}
+
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -13,6 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const cursorDot = document.getElementById('cursor-dot');
     const cursorOutline = document.getElementById('cursor-outline');
     const cursorText = document.getElementById('cursor-text');
+    const menuToggle = document.getElementById('menu-toggle'); // Get menu toggle button
+    const mobileMenu = document.getElementById('mobile-menu');   // Get mobile menu container
 
     /**
      * Fixed: Page transitions now work while preserving all animations
@@ -85,10 +97,57 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+
     /**
-     * PRESERVED: All your original animation functions below
-     * (Only initPageTransitions was modified)
+     * NEW: Mobile Menu Toggle Functionality
      */
+    function initMobileMenu() {
+        if (!menuToggle || !mobileMenu) return; // Exit if elements not found
+
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+            if (mobileMenu.classList.contains('open')) {
+                document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
+                // Animate menu icon to 'X'
+                gsap.to(menuToggle.children[0], { rotate: 45, y: 7, duration: 0.3 });
+                gsap.to(menuToggle.children[1], { rotate: -45, y: -7, duration: 0.3 });
+                 // Animate menu links and social links
+                gsap.fromTo('.menu-link', { y: 20, opacity: 0 }, {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.6,
+                    ease: 'power3.out',
+                    stagger: 0.1,
+                    delay: 0.5 // Delay after menu opens
+                });
+                gsap.fromTo('#mobile-menu .mobile-social-links', { y: 20, opacity: 0 }, {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.6,
+                    ease: 'power3.out',
+                    delay: 0.8 // Delay after links animate
+                });
+
+            } else {
+                document.body.style.overflow = ''; // Restore scrolling
+                // Animate menu icon back to 'hamburger'
+                gsap.to(menuToggle.children[0], { rotate: 0, y: 0, duration: 0.3 });
+                gsap.to(menuToggle.children[1], { rotate: 0, y: 0, duration: 0.3 });
+                // Animate menu links and social links out
+                gsap.to('.menu-link, #mobile-menu .mobile-social-links', {
+                    y: -20, // Move up slightly as they fade out
+                    opacity: 0,
+                    duration: 0.3, // Shorter duration for closing
+                    ease: 'power2.in',
+                    stagger: 0.05,
+                    onComplete: () => {
+                        // Reset properties after animation if needed, e.g., display: none
+                    }
+                });
+            }
+        });
+    }
+
 
     function initRevealAnimations() {
         const observer = new IntersectionObserver((entries, observer) => {
@@ -313,7 +372,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function initHeroWebGL() {
         const canvas = document.getElementById('webgl-canvas');
-        if (!canvas || window.matchMedia("(pointer: coarse)").matches) return;
+        // Ensure THREE is loaded before trying to use it
+        if (!canvas || !THREE || window.matchMedia("(pointer: coarse)").matches) return;
 
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -430,32 +490,38 @@ document.addEventListener('DOMContentLoaded', () => {
         const items = Array.from(carouselTrack.children);
         if (items.length === 0) return;
 
+        // Clear existing clones to prevent duplicates on re-init
         carouselTrack.querySelectorAll('.carousel-clone').forEach(clone => clone.remove());
 
+        // Clone items to create a seamless loop
         items.forEach(item => {
             const clone = item.cloneNode(true);
             clone.classList.add('carousel-clone');
             carouselTrack.appendChild(clone);
         });
 
+        // Recalculate total width after cloning
         let totalWidth = 0;
+        // Calculate width based on original items only, as clones will be identical
         items.forEach(item => {
             totalWidth += item.offsetWidth + parseFloat(getComputedStyle(item).marginRight) + parseFloat(getComputedStyle(item).marginLeft);
         });
 
+        // Set up the GSAP animation for infinite horizontal scrolling
         gsap.to(carouselTrack, {
-            x: -totalWidth,
+            x: -totalWidth, // Move left by the total width of original items
             ease: "none",
-            duration: items.length * 4,
-            repeat: -1,
+            duration: items.length * 4, // Adjust speed based on number of items
+            repeat: -1, // Infinite loop
             modifiers: {
-                x: gsap.utils.unitize(x => parseFloat(x) % totalWidth)
+                x: gsap.utils.unitize(x => parseFloat(x) % totalWidth) // Ensures seamless looping
             }
         });
     }
 
     // --- Initialize Everything ---
     initPageTransitions();
+    initMobileMenu(); // Call the new mobile menu initialization
     initGlobalTiltEffect();
     initCustomCursor();
     initClock();
@@ -464,7 +530,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initHireMeButton();
     initRevealAnimations();
     initHorizontalScroll();
-    initHeroWebGL();
+    // initHeroWebGL is now conditionally called after THREE is loaded
     initProjectModal();
     initInstagramCarousel();
 
