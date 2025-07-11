@@ -13,7 +13,7 @@ body {
     color: var(--primary-color);
     font-family: 'Satoshi', sans-serif;
     -webkit-font-smoothing: antialiased;
-    overflow-x: clip; /* Final Safeguard */
+    overflow-x: hidden; /* Final Safeguard - Safari compatible */
 }
 
 /* Typography */
@@ -157,7 +157,7 @@ body.loaded .content-wrapper { opacity: 1; }
         overflow-x: auto !important; overflow-y: hidden !important;
         scroll-snap-type: x mandatory; scroll-behavior: smooth;
         transform: none !important; padding: 0 5vw !important; gap: 4vw;
-        -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain;
+        /* overscroll-behavior-x: contain; */ /* Removed for Safari iOS compatibility */
     }
     .project-card {
         width: 80vw !important; min-width: 80vw !important; height: 65vh !important;
@@ -1037,8 +1037,8 @@ a, button {
     position: fixed;
     inset: 0;
     background-color: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
     z-index: 10000;
     display: flex;
     align-items: center;
@@ -1258,6 +1258,7 @@ a, button {
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 3; /* Limit caption to 3 lines */
+    line-clamp: 3; /* Standard property for compatibility */
     -webkit-box-orient: vertical;
 }
 

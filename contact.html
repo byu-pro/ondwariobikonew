@@ -11,12 +11,9 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
-    <script type="importmap">
-    {
-        "imports": {
-            "three": "https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.module.js"
-        }
-    }
+    <script type="module">
+        import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.module.js';
+        window.THREE = THREE;
     </script>
 </head>
 <body class="overflow-x-hidden">
@@ -52,7 +49,7 @@
             <section class="container mx-auto px-6 py-32 md:py-40 text-center tilt-container">
                 <p class="text-lg text-text-color mb-4 reveal-up">Reach Out</p>
                 <h1 class="page-title-heading uppercase reveal-line interactive-tilt"><span class="reveal-line-inner">Get In Touch</span></h1>
-                <p class="text-lg md:text-xl text-text-color mt-4 max-w-3xl mx-auto reveal-text" style="transition-delay: 0.1s;">Let's create something extraordinary together. Whether you have a project in mind, a question, or just want to say hello, I'd love to hear from you.</p>
+                <p class="text-lg md:text-xl text-text-color mt-4 max-w-3xl mx-auto reveal-text delay-01">Let's create something extraordinary together. Whether you have a project in mind, a question, or just want to say hello, I'd love to hear from you.</p>
             </section>
             
             <section class="py-20 md:py-32 container mx-auto px-6">
@@ -62,19 +59,19 @@
                             <label for="name" class="block text-text-light text-lg font-bold mb-2">Name</label>
                             <input type="text" id="name" name="name" class="w-full px-5 py-3 bg-white/5 border border-white/10 rounded-lg text-primary-color focus:outline-none focus:border-accent-color transition-colors duration-300" placeholder="Your Name" required>
                         </div>
-                        <div class="reveal-up" style="transition-delay: 0.1s;">
+                        <div class="reveal-up delay-01">
                             <label for="email" class="block text-text-light text-lg font-bold mb-2">Email</label>
                             <input type="email" id="email" name="email" class="w-full px-5 py-3 bg-white/5 border border-white/10 rounded-lg text-primary-color focus:outline-none focus:border-accent-color transition-colors duration-300" placeholder="your.email@example.com" required>
                         </div>
-                        <div class="reveal-up" style="transition-delay: 0.2s;">
+                        <div class="reveal-up delay-02">
                             <label for="subject" class="block text-text-light text-lg font-bold mb-2">Subject</label>
                             <input type="text" id="subject" name="subject" class="w-full px-5 py-3 bg-white/5 border border-white/10 rounded-lg text-primary-color focus:outline-none focus:border-accent-color transition-colors duration-300" placeholder="Project Inquiry, Collaboration, etc." required>
                         </div>
-                        <div class="reveal-up" style="transition-delay: 0.3s;">
+                        <div class="reveal-up delay-03">
                             <label for="message" class="block text-text-light text-lg font-bold mb-2">Message</label>
                             <textarea id="message" name="message" rows="6" class="w-full px-5 py-3 bg-white/5 border border-white/10 rounded-lg text-primary-color focus:outline-none focus:border-accent-color transition-colors duration-300" placeholder="Tell me about your project or inquiry..." required></textarea>
                         </div>
-                        <div class="text-center reveal-up" style="transition-delay: 0.4s;">
+                        <div class="text-center reveal-up transition-delay-04">
                             <button type="submit" class="magnetic-link inline-block bg-accent-color text-bg-color px-8 py-4 rounded-full font-bold text-lg uppercase shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out">
                                 <span class="flex items-center gap-2">
                                     Send Message
@@ -98,7 +95,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
                             </a>
                         </div>
-                        <div class="service-card reveal-up" style="transition-delay: 0.1s;">
+                        <div class="service-card reveal-up transition-delay-01">
                             <h3 class="text-2xl font-bold mb-4 font-clash">Call / WhatsApp</h3>
                             <p class="text-text-color leading-relaxed mb-4">For urgent matters or a quick chat, reach me on WhatsApp.</p>
                             <a href="https://wa.me/25470255575" target="_blank" rel="noopener noreferrer" class="magnetic-link inline-flex items-center gap-2 text-accent-color hover:text-white transition-colors duration-300">
@@ -107,7 +104,7 @@
                             </a>
                         </div>
                     </div>
-                     <div class="mt-12 text-center reveal-up" style="transition-delay: 0.2s;">
+                     <div class="mt-12 text-center reveal-up transition-delay-02">
                         <p class="text-text-color text-lg mb-4">You can also find me on social media:</p>
                         <div class="flex items-center justify-center space-x-5">
                             <a href="#" class="social-icon-link" aria-label="LinkedIn Profile">

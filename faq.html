@@ -11,12 +11,9 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
-    <script type="importmap">
-    {
-        "imports": {
-            "three": "https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.module.js"
-        }
-    }
+    <script type="module">
+        import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.module.js';
+        window.THREE = THREE;
     </script>
 </head>
 <body class="overflow-x-hidden">
@@ -52,7 +49,7 @@
             <section class="container mx-auto px-6 py-32 md:py-40 text-center tilt-container">
                 <p class="text-lg text-text-color mb-4 reveal-up">Need Answers?</p>
                 <h1 class="page-title-heading uppercase reveal-line interactive-tilt"><span class="reveal-line-inner">Frequently Asked Questions</span></h1>
-                <p class="text-lg md:text-xl text-text-color mt-4 max-w-3xl mx-auto reveal-text" style="transition-delay: 0.1s;">Find quick answers to common questions about my services, process, and more.</p>
+                <p class="text-lg md:text-xl text-text-color mt-4 max-w-3xl mx-auto reveal-text transition-delay-01">Find quick answers to common questions about my services, process, and more.</p>
             </section>
             
             <section class="py-20 md:py-32 container mx-auto px-6">
@@ -67,7 +64,7 @@
                         </div>
                     </div>
 
-                    <div class="faq-item reveal-up" style="transition-delay: 0.1s;">
+                    <div class="faq-item reveal-up transition-delay-01">
                         <button class="faq-question">
                             <h3 class="faq-title">What is your design process like?</h3>
                             <span class="faq-icon"></span>
@@ -77,7 +74,7 @@
                         </div>
                     </div>
 
-                    <div class="faq-item reveal-up" style="transition-delay: 0.2s;">
+                    <div class="faq-item reveal-up transition-delay-02">
                         <button class="faq-question">
                             <h3 class="faq-title">How long does a typical project take?</h3>
                             <span class="faq-icon"></span>
@@ -87,7 +84,7 @@
                         </div>
                     </div>
 
-                    <div class="faq-item reveal-up" style="transition-delay: 0.3s;">
+                    <div class="faq-item reveal-up transition-delay-03">
                         <button class="faq-question">
                             <h3 class="faq-title">What are your payment terms?</h3>
                             <span class="faq-icon"></span>
@@ -97,7 +94,7 @@
                         </div>
                     </div>
 
-                    <div class="faq-item reveal-up" style="transition-delay: 0.4s;">
+                    <div class="faq-item reveal-up transition-delay-04">
                         <button class="faq-question">
                             <h3 class="faq-title">Do you offer ongoing support after project completion?</h3>
                             <span class="faq-icon"></span>
@@ -107,7 +104,7 @@
                         </div>
                     </div>
 
-                    <div class="faq-item reveal-up" style="transition-delay: 0.5s;">
+                    <div class="faq-item reveal-up transition-delay-05">
                         <button class="faq-question">
                             <h3 class="faq-title">What kind of clients do you work with?</h3>
                             <span class="faq-icon"></span>
@@ -122,8 +119,8 @@
             <section class="py-20 md:py-32 bg-[#111111] border-y border-white/10 text-center">
                 <div class="container mx-auto px-6">
                     <h2 class="section-heading uppercase reveal-line interactive-tilt"><span class="reveal-line-inner">Still Have Questions?</span></h2>
-                    <p class="text-lg md:text-xl text-text-color mt-4 max-w-3xl mx-auto reveal-text" style="transition-delay: 0.1s;">If you couldn't find the answer you were looking for, don't hesitate to reach out. I'm here to help!</p>
-                    <div class="mt-8 reveal-up" style="transition-delay: 0.2s;">
+                    <p class="text-lg md:text-xl text-text-color mt-4 max-w-3xl mx-auto reveal-text transition-delay-01">If you couldn't find the answer you were looking for, don't hesitate to reach out. I'm here to help!</p>
+                    <div class="mt-8 reveal-up transition-delay-02">
                         <a href="contact.html" class="magnetic-link inline-block bg-accent-color text-bg-color px-8 py-4 rounded-full font-bold text-lg uppercase shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out">
                             <span class="flex items-center gap-2">
                                 Contact Me Directly
