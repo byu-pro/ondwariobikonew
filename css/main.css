@@ -1493,13 +1493,31 @@ a, button {
 }
 /* Custom styles for button hover effects on services page */
 .services-grid a.magnetic-link.bg-accent-color:hover {
-    background-color: var(#00FFFF) !important; /* Forces background to accent color */
+    background-color: var(--accent-color) !important; /* Forces background to accent color */
     color: var(--bg-color) !important; /* Ensures text remains readable on accent background */
-    border-color: var(#00FFFF) !important; /* Match border to accent color */
+    border-color: var(--accent-color) !important; /* Match border to accent color */
 }
 
 .services-grid a.magnetic-link.border:hover {
-    background-color: var(#00FFFF) !important; /* Forces background to accent color */
+    background-color: var(--accent-color) !important; /* Forces background to accent color */
     color: var(--bg-color) !important; /* Ensures text remains readable on accent background */
-    border-color: var(#00FFFF) !important; /* Match border to accent color */
+    border-color: var(--accent-color) !important; /* Match border to accent color */
+}
+/* Services page specific button styles */
+.services-grid .magnetic-link:hover {
+    background-color: var(--accent-color) !important;
+    color: var(--bg-color) !important;
+    border-color: var(--accent-color) !important;
+    box-shadow: 0 6px 25px rgba(0, 255, 255, 0.5);
+}
+
+.services-grid .magnetic-link.bg-accent-color:hover {
+    background-color: var(--accent-color) !important;
+    color: var(--bg-color) !important;
+}
+
+.services-grid .magnetic-link.border:hover {
+    background-color: var(--accent-color) !important;
+    color: var(--bg-color) !important;
+    border-color: var(--accent-color) !important;
 }
