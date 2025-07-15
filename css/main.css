@@ -471,6 +471,8 @@ header .navbar-logo {
     height: 48px;
     width: auto;
     transition: transform 0.3s ease;
+    /* ADD THIS LINE TO PUSH LOGO DOWN */
+    padding-top: 5px; /* Adjust this value as needed (e.g., 5px, 10px, 15px) */
 }
 header .navbar-logo:hover {
     transform: scale(1.05);
