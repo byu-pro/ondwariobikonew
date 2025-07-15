@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work | Graphic & Web Designer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="icon" type="image/png" href="images/logo favicon-02.png">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Flip.min.js" defer></script>
+
+</head>
+<body class="overflow-x-hidden">
+    <div id="cursor-dot" class="cursor"></div>
+    <div id="cursor-outline" class="cursor">
+        <span id="cursor-text"></span>
+    </div>
+
+    <div class="content-wrapper">
+        <header class="fixed top-0 left-0 w-full p-6 md:p-8 z-50 flex justify-between items-center mix-blend-difference">
+            <a href="index.html" class="page-link">
+                <img src="images/logo favicon-02.png" alt="Ondwari Obiko Logo" class="navbar-logo">
+            </a>
+            <div class="flex items-center space-x-4">
+                <button id="menu-toggle" aria-label="Open main menu" class="w-12 h-12 rounded-full border border-white/50 flex flex-col items-center justify-center space-y-1.5 z-50">
+                    <span class="w-6 h-0.5 bg-white block transition-transform duration-300"></span>
+                    <span class="w-6 h-0.5 bg-white block transition-transform duration-300"></span>
+                </button>
+            </div>
+        </header>
+
+        <div id="mobile-menu">
+            <nav>
+                <a href="services.html" class="menu-link page-link">Services</a>
+                <a href="work.html" class="menu-link page-link">Work</a>
+                <a href="about.html" class="menu-link page-link">About</a>
+                <a href="contact.html" class="menu-link page-link">Contact</a>
+                <a href="faq.html" class="menu-link page-link">FAQ</a>
+            </nav>
+        </div>
+
+        <main>
+            <section class="container mx-auto px-6 py-32 md:py-40 text-center tilt-container">
+                <p class="text-lg text-text-color mb-4 reveal-up">My Creative Journey</p>
+                <h1 class="page-title-heading uppercase reveal-line interactive-tilt"><span class="reveal-line-inner">Featured Work</span></h1>
+            </section>
+
+            <section class="container mx-auto px-6 pb-20 md:pb-32">
+                <div id="filter-controls" class="flex flex-wrap justify-center gap-4 mb-12 md:mb-16 reveal-up">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="branding">Branding</button>
+                    <button class="filter-btn" data-filter="web-design">Web Design</button>
+                    <button class="filter-btn" data-filter="mobile-app">Mobile App</button>
+                    <button class="filter-btn" data-filter="packaging">Packaging</button>
+                    <button class="filter-btn" data-filter="motion">Motion Graphics</button>
+                </div>
+
+                <div id="work-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <a href="#" class="work-item reveal-grid-item" data-category="branding" data-title="Nairobi Coffee Co." data-img="images/project-alpha.webp" data-goal="To craft a premium, authentic brand identity that captures the rich heritage of Kenyan coffee." data-impact="Successful launch with 40% increase in social media engagement." data-casestudy-url="project-alpha.html">
+                        <div class="work-item-image-wrapper">
+                            <img src="images/project-alpha.webp" alt="Nairobi Coffee Co. Branding" class="work-item-image" loading="lazy">
+                        </div>
+                        <div class="work-item-hover-overlay"></div>
+                        <div class="work-item-info">
+                            <h3 class="work-item-title">Nairobi Coffee Co.</h3>
+                            <p class="work-item-category">Branding & Identity</p>
+                        </div>
+                        <span class="view-project-label">View Project</span>
+                    </a>
+
+                    <a href="#" class="work-item reveal-grid-item" data-category="web-design" data-title="Safari Explorer" data-img="images/project-beta.webp" data-goal="To design a visually immersive and user-friendly booking website for a luxury safari tour operator." data-impact="25% increase in online bookings within the first 3 months." data-casestudy-url="project-beta.html">
+                        <div class="work-item-image-wrapper">
+                            <img src="images/project-beta.webp" alt="Safari Explorer Web Design" class="work-item-image" loading="lazy">
+                        </div>
+                        <div class="work-item-hover-overlay"></div>
+                        <div class="work-item-info">
+                            <h3 class="work-item-title">Safari Explorer</h3>
+                            <p class="work-item-category">Web Design & UX</p>
+                        </div>
+                        <span class="view-project-label">View Project</span>
+                    </a>
+
+                    <a href="#" class="work-item reveal-grid-item" data-category="mobile-app" data-title="PesaTrack" data-img="images/gamma.webp" data-goal="Develop a clean and intuitive mobile app interface to simplify personal finance tracking for young professionals." data-impact="Featured on TechCrunch Kenya as a 'Top Finance App'." data-casestudy-url="project-gamma.html">
+                        <div class="work-item-image-wrapper">
+                            <img src="images/gamma.webp" alt="PesaTrack Mobile App" class="work-item-image" loading="lazy">
+                        </div>
+                        <div class="work-item-hover-overlay"></div>
+                        <div class="work-item-info">
+                            <h3 class="work-item-title">PesaTrack</h3>
+                            <p class="work-item-category">Mobile Application</p>
+                        </div>
+                        <span class="view-project-label">View Project</span>
+                    </a>
+
+                    <a href="#" class="work-item reveal-grid-item" data-category="packaging" data-title="Maisha Tea" data-img="images/project-delta.webp" data-goal="To create elegant and modern packaging that stands out on retail shelves and reflects the product's premium quality." data-impact="Secured placement in 50+ high-end retail stores nationwide." data-casestudy-url="project-delta.html">
+                        <div class="work-item-image-wrapper">
+                            <img src="images/project-delta.webp" alt="Maisha Tea Packaging" class="work-item-image" loading="lazy">
+                        </div>
+                        <div class="work-item-hover-overlay"></div>
+                        <div class="work-item-info">
+                            <h3 class="work-item-title">Maisha Tea</h3>
+                            <p class="work-item-category">Packaging Design</p>
+                        </div>
+                        <span class="view-project-label">View Project</span>
+                    </a>
+
+                    <a href="#" class="work-item reveal-grid-item" data-category="branding" data-title="Urban Echo Apparel" data-img="images/project-epsilon.webp" data-goal="To design a bold and contemporary brand identity for a sustainable urban apparel line." data-impact="Successful brand launch led to 30% increase in pre-orders." data-casestudy-url="project-epsilon.html">
+                        <div class="work-item-image-wrapper">
+                            <img src="images/project-epsilon.webp" alt="Urban Echo Apparel Branding" class="work-item-image" loading="lazy">
+                        </div>
+                        <div class="work-item-hover-overlay"></div>
+                        <div class="work-item-info">
+                            <h3 class="work-item-title">Urban Echo Apparel</h3>
+                            <p class="work-item-category">Branding & Apparel</p>
+                        </div>
+                        <span class="view-project-label">View Project</span>
+                    </a>
+
+                    <a href="#" class="work-item reveal-grid-item" data-category="web-design" data-title="EcoHarvest Ventures" data-img="images/project-zeta.webp" data-goal="Develop an informative and engaging website for an agricultural tech startup." data-impact="Increased investor inquiries by 50% post-launch." data-casestudy-url="project-zeta.html">
+                        <div class="work-item-image-wrapper">
+                            <img src="images/project-zeta.webp" alt="EcoHarvest Ventures Web Design" class="work-item-image" loading="lazy">
+                        </div>
+                        <div class="work-item-hover-overlay"></div>
+                        <div class="work-item-info">
+                            <h3 class="work-item-title">EcoHarvest Ventures</h3>
+                            <p class="work-item-category">Web Design & Development</p>
+                        </div>
+                        <span class="view-project-label">View Project</span>
+                    </a>
+
+                    <a href="#" class="work-item reveal-grid-item" data-category="motion" data-title="Kinetic Explainer" data-img="images/project-eta.webp" data-goal="Create an animated explainer video to clearly convey a complex service to potential clients." data-impact="Improved conversion rates on landing pages by 15%." data-casestudy-url="project-eta.html">
+                        <div class="work-item-image-wrapper">
+                            <img src="images/project-eta.webp" alt="Kinetic Explainer Video" class="work-item-image" loading="lazy">
+                        </div>
+                        <div class="work-item-hover-overlay"></div>
+                        <div class="work-item-info">
+                            <h3 class="work-item-title">Kinetic Explainer</h3>
+                            <p class="work-item-category">Motion Graphics</p>
+                        </div>
+                        <span class="view-project-label">View Project</span>
+                    </a>
+
+                    <a href="#" class="work-item reveal-grid-item" data-category="packaging" data-title="Artisan Bites" data-img="images/project-theta.webp" data-goal="Design rustic yet modern packaging for a line of artisanal snacks." data-impact="Awarded 'Best New Packaging' at the local food fair." data-casestudy-url="project-theta.html">
+                        <div class="work-item-image-wrapper">
+                            <img src="images/project-theta.webp" alt="Artisan Bites Packaging" class="work-item-image" loading="lazy">
+                        </div>
+                        <div class="work-item-hover-overlay"></div>
+                        <div class="work-item-info">
+                            <h3 class="work-item-title">Artisan Bites</h3>
+                            <p class="work-item-category">Packaging Design</p>
+                        </div>
+                        <span class="view-project-label">View Project</span>
+                    </a>
+
+                     <a href="#" class="work-item reveal-grid-item" data-category="web-design" data-title="Wellness Hub" data-img="images/project-iota.webp" data-goal="Build a comprehensive and calming web platform for a holistic wellness center." data-impact="Increased online class sign-ups by 35%." data-casestudy-url="project-iota.html">
+                        <div class="work-item-image-wrapper">
+                            <img src="images/project-iota.webp" alt="Wellness Hub Web Design" class="work-item-image" loading="lazy">
+                        </div>
+                        <div class="work-item-hover-overlay"></div>
+                        <div class="work-item-info">
+                            <h3 class="work-item-title">Wellness Hub</h3>
+                            <p class="work-item-category">Web Design & Content</p>
+                        </div>
+                        <span class="view-project-label">View Project</span>
+                    </a>
+                </div>
+            </section>
+
+            <section class="py-20 md:py-32 container mx-auto px-6 text-center">
+                <div class="max-w-3xl mx-auto">
+                    <p class="text-lg text-text-color mb-4 reveal-up">Ready to Start a Project?</p>
+                    <h2 class="section-heading uppercase mb-6 reveal-line interactive-tilt"><span class="reveal-line-inner">Let's Create Something Great</span></h2>
+                    <p class="text-lg md:text-xl text-text-color leading-relaxed mb-10 reveal-text">
+                        Whether you have a clear vision or need help shaping your ideas, I'm here to bring your digital presence to life.
+                    </p>
+                    <div class="flex flex-col sm:flex-row justify-center gap-6 reveal-up">
+                        <a href="mailto:ondwariobiko@gmail.com?subject=Project Inquiry" class="magnetic-link inline-flex items-center justify-center px-8 py-4 bg-accent-color text-bg-color font-bold uppercase tracking-wide rounded-full transition-all duration-300 hover:bg-white hover:text-accent-color shadow-lg hover:shadow-xl">
+                            Get a Quote
+                        </a>
+                        <a href="contact.html" class="magnetic-link inline-flex items-center justify-center px-8 py-4 border border-white/30 text-white font-bold uppercase tracking-wide rounded-full transition-all duration-300 hover:bg-white hover:text-bg-color hover:border-white shadow-lg hover:shadow-xl">
+                            Contact Me
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <footer id="contact" class="bg-[#111111] text-white pt-24 pb-8 md:pt-40 md:pb-28">
+                <div class="container mx-auto px-6">
+                    <div class="text-center tilt-container mb-24 md:mb-32">
+                        <p class="text-lg text-text-color mb-4 reveal-up">Got an idea?</p>
+                        <h2 class="contact-heading uppercase mb-6 interactive-tilt">
+                            <span class="reveal-line"><span class="reveal-line-inner">Let's work together</span></span>
+                        </h2>
+                        <a href="mailto:ondwariobiko@gmail.com" class="magnetic-link inline-block mt-4">
+                            <span class="text-xl md:text-2xl lg:text-3xl text-accent-color uppercase relative after:content-[''] after:absolute after:left-0 after:bottom-[-4px] after:w-full after:h-[2px] after:bg-accent-color after:scale-x-100 after:origin-right after:transition-transform after:duration-500 hover:after:scale-x-0 hover:after:origin-left">
+                                ondwariobiko@gmail.com
+                            </span>
+                        </a>
+                    </div>
+
+                    <div class="flex flex-col md:flex-row justify-between items-center text-center md:text-left border-t border-white/10 pt-8">
+                        <div class="text-text-color mb-6 md:mb-0">
+                            <p>&copy; 2025 Ondwari Obiko. All Rights Reserved.</p>
+                            <div class="flex items-center justify-center md:justify-start space-x-2">
+                                <p>Nairobi, Kenya</p>
+                                <p class="text-accent-color">&bull;</p>
+                                <p>EAT <span id="current-time"></span></p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-5">
+                            <a href="#" class="social-icon-link" aria-label="LinkedIn Profile">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 0 1 2.063 2.065c0 1.14-.925 2.065-2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"></path></svg>
+                            </a>
+                            <a href="#" class="social-icon-link" aria-label="Behance Profile">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8.28,13.253H4.453V8.62H8.28a2.316,2.316,0,0,1,2.317,2.317h0A2.316,2.316,0,0,1,8.28,13.253Zm0-6.142H2.94V14.762H8.28a3.825,3.825,0,0,0,3.826-3.825V9.411A3.825,3.825,0,0,0,8.28,7.111ZM19.78,10.6a4.57,4.57,0,0,0-3.9-2.2,4.3,4.3,0,0,0-4.32,4.32,4.3,4.3,0,0,0,4.32,4.32,4.57,4.57,0,0,0,3.9-2.2H14.7v1.506H21.5V9.117H14.7v1.483h5.08Zm-5.08,3.58a2.8,2.8,0,0,1-2.8-2.8,2.8,2.8,0,0,1,2.8-2.8h0a2.8,2.8,0,0,1,2.8,2.8h0A2.8,2.8,0,0,1,14.7,14.183ZM16.2,6h-5.4V4.5H16.2Z"></path></svg>
+                            </a>
+                            <a href="#" class="social-icon-link" aria-label="GitHub Profile">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path></svg>
+                            </a>
+                            <a href="#" class="social-icon-link" aria-label="Upwork Profile">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M16.618 9.344c-2.328 0-4.086 1.93-4.467 4.316h3.243c.394-1.254 1.205-2.02 2.131-2.02.99 0 1.58.627 1.58 1.518 0 .956-.525 1.48-1.516 1.48-.99 0-1.802-.756-2.228-2.18h-3.242c.439 3.122 2.768 5.232 5.406 5.232 3.235 0 5.372-2.292 5.372-5.176.001-3.003-2.23-5.17-5.275-5.17zM9.545 13.62h3.243c.38 2.45 2.213 4.37 4.836 4.37 3.234 0 5.37-2.292 5.37-5.17S21.228 7.65 17.994 7.65c-2.45 0-4.323 1.488-5.19 3.865h-2.18V3.344H7.382v17.312h3.243V13.62h-1.08zM0 13.62h3.243v7.036H0z"></path></svg>
+                            </a>
+                            <a href="#" class="social-icon-link" aria-label="Instagram Profile">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.584-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.85s.012-3.584.07-4.85c.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.85-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.058-1.281.072-1.689.072-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.441-.645 1.441-1.44s-.646-1.44-1.441-1.44z"></path></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+    </div>
+
+    <div id="hire-me-fab" class="hire-me-container">
+        <button id="fab-main-btn" class="fab-main" aria-label="Contact Me">
+            <span class="fab-text">Hire Me</span>
+            <span class="fab-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            </span>
+        </button>
+        <div class="fab-options">
+            <a href="mailto:ondwariobiko@gmail.com" class="fab-option" aria-label="Email Me">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            </a>
+            <a href="https://wa.me/25470255575" target="_blank" rel="noopener noreferrer" class="fab-option" aria-label="WhatsApp Me">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.447-4.433-9.884-9.888-9.884-5.448 0-9.886 4.434-9.889 9.884-.001 2.225.651 4.315 1.731 6.086l.001.004l-1.03 3.758l3.805-1.001z"></path></svg>
+            </a>
+        </div>
+    </div>
+    <div id="project-modal" class="project-modal-overlay">
+        <div class="project-modal-content">
+            <button id="modal-close-btn" aria-label="Close Project Details">&times;</button>
+            <div class="modal-grid">
+                <div class="modal-image-wrapper">
+                    <img id="modal-img" src="" alt="Project Image" class="modal-image">
+                </div>
+                <div class="modal-info">
+                    <h2 id="modal-title" class="modal-title-heading"></h2>
+                    <div class="modal-details">
+                        <div>
+                            <p class="detail-heading">Project Goal</p>
+                            <p id="modal-goal" class="detail-text"></p>
+                        </div>
+                        <div>
+                            <p class="detail-heading">Impact/Results</p>
+                            <p id="modal-impact" class="detail-text"></p>
+                        </div>
+                    </div>
+                    <a id="modal-casestudy-link" href="#" class="modal-cta">
+                        View Full Case Study
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-up-right"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/main.js" type="module" defer></script>
+</body>
+</html>
