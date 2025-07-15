@@ -623,6 +623,7 @@ a, button {
     transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease; /* Added box-shadow transition */
     will-change: transform, opacity;
     box-shadow: 0 4px 15px rgba(0,0,0,0.2); /* Subtle initial shadow */
+    /* REMOVED: Initial opacity and transform from .reveal-grid-item */
 }
 
 /* NEW: Work Item Hover Effect */
@@ -1219,10 +1220,7 @@ a, button {
    ========================================================================== */
 
 /* This prepares the grid items for the GSAP entrance animation */
-.work-item.reveal-grid-item {
-    opacity: 0;
-    transform: translateY(30px);
-}
+/* .work-item.reveal-grid-item { This class is now removed from HTML } */
 
 /* The .hide class is no longer needed for filtering because GSAP now handles it,
   but it can be kept as a fallback or for other uses.

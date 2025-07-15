@@ -541,18 +541,22 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!filterControls || !workGrid) return;
 
         const projectItems = Array.from(workGrid.querySelectorAll('.work-item'));
-        const filterButtons = filterControls.querySelectorAll('.filter-btn');
 
         // Entrance Animation for the grid items
-        gsap.from(projectItems, { // Changed to gsap.from for initial animation
+        // This will now correctly animate items from their default (visible) state
+        // if they were not hidden by .reveal-grid-item previously.
+        // It sets their initial state to opacity:0, y:30 and animates to opacity:1, y:0.
+        gsap.from(projectItems, {
             duration: 0.8,
-            y: 30, // Start from slightly below
-            opacity: 0, // Start invisible
+            y: 30,
+            opacity: 0,
             stagger: 0.1,
             ease: 'power3.out',
-            delay: 0.5, // Delay slightly to let other animations start
+            delay: 0.5,
         });
 
+
+        const filterButtons = filterControls.querySelectorAll('.filter-btn');
 
         // Filtering Logic with GSAP Flip
         filterControls.addEventListener('click', (e) => {
