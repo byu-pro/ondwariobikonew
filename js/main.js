@@ -26,6 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const cursorText = document.getElementById('cursor-text');
     const menuToggle = document.getElementById('menu-toggle'); // Get menu toggle button
     const mobileMenu = document.getElementById('mobile-menu');   // Get mobile menu container
+    const header = document.querySelector('header'); // Get the header element
+
 
     /**
      * Fixed: Page transitions now work while preserving all animations
@@ -74,6 +76,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     document.querySelectorAll('#menu-toggle span').forEach(span => {
                         span.style.transform = '';
                     });
+                    // Remove 'menu-open' class from header when closing the menu from a link click
+                    if (header) {
+                        header.classList.remove('menu-open');
+                    }
                 }
 
                 // Start exit animation
@@ -129,6 +135,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     delay: 0.8 // Delay after links animate
                 });
 
+                // Add a class to the header immediately when menu is open
+                if (header) {
+                    header.classList.add('menu-open');
+                    header.classList.remove('scrolled'); // Ensure 'scrolled' class is removed
+                }
+
             } else {
                 document.body.style.overflow = ''; // Restore scrolling
                 // Animate menu icon back to 'hamburger'
@@ -145,6 +157,15 @@ document.addEventListener('DOMContentLoaded', () => {
                         // Reset properties after animation if needed, e.g., display: none
                     }
                 });
+
+                // Remove the 'menu-open' class from the header when menu is closed
+                if (header) {
+                    header.classList.remove('menu-open');
+                    // Re-apply 'scrolled' class if the user is currently scrolled down
+                    if (window.scrollY > 50) {
+                        header.classList.add('scrolled');
+                    }
+                }
             }
         });
     }
@@ -616,6 +637,26 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    /**
+     * Handles adding/removing 'scrolled' class from the header based on scroll position,
+     * but only if the mobile menu is not open.
+     */
+    function initHeaderScrollEffect() {
+        if (!header) return;
+
+        window.addEventListener('scroll', () => {
+            // Only apply 'scrolled' class if the mobile menu is NOT open
+            if (!mobileMenu.classList.contains('open')) {
+                if (window.scrollY > 50) { // Adjust scroll threshold as needed
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            }
+            // If the menu is open, the 'scrolled' class will be handled by initMobileMenu
+        });
+    }
+
 
     // --- Initialize Everything ---
     initPageTransitions();
@@ -633,6 +674,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initInstagramCarousel();
     initWorkGrid(); // Initialize work grid for pages that have it
     initNextProjectHover(); // Initialize next project hover for project detail pages
+    initHeaderScrollEffect(); // Initialize the header scroll effect
 
 
     window.addEventListener('resize', () => {
