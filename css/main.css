@@ -1411,3 +1411,83 @@ a, button {
     align-items: center;
     gap: 0.5rem; /* Or even 0.25rem for very close spacing */
 }
+
+/* Custom styles for stacked service items */
+.services-grid {
+    display: flex;
+    flex-direction: column; /* Stacks items vertically */
+    gap: 2rem; /* Adds space between stacked items */
+    max-width: 900px; /* Constrain width for better readability */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.service-item {
+    background-color: #1a1a1a;
+    padding: 3rem 2.5rem; /* Increased padding */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1.25rem; /* Slightly more rounded corners */
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Subtle initial shadow */
+}
+
+.service-item:hover {
+    transform: translateY(-10px); /* More pronounced lift effect */
+    background-color: rgba(0, 255, 255, 0.05); /* Lighter accent background on hover */
+    border-color: var(--accent-color); /* Accent color border on hover */
+    box-shadow: 0 12px 30px rgba(0, 255, 255, 0.25); /* Stronger accent shadow on hover */
+}
+
+.service-header {
+    margin-bottom: 2rem; /* More space below header */
+}
+
+.service-number {
+    font-size: 1.8rem; /* Larger number */
+    margin-right: 1.25rem; /* More space for number */
+}
+
+.service-title {
+    font-size: clamp(1.8rem, 4vw, 2.8rem); /* Larger and more responsive title */
+    line-height: 1.2; /* Better line height for titles */
+}
+
+.service-description {
+    font-size: 1.1rem; /* Slightly larger base text */
+    line-height: 1.7; /* Improved readability */
+    color: var(--text-color);
+}
+
+.service-description strong {
+    color: var(--primary-color); /* Highlight strong text */
+}
+
+.service-item ul {
+    margin-top: 1.5rem; /* Space above list */
+    margin-bottom: 1.5rem; /* Space below list */
+    font-size: 1rem;
+}
+
+.service-item ul li {
+    margin-bottom: 0.75rem; /* Space between list items */
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .services-grid {
+        gap: 1.5rem; /* Reduce gap on smaller screens */
+    }
+
+    .service-item {
+        padding: 2rem 1.5rem; /* Reduce padding on smaller screens */
+        border-radius: 1rem;
+    }
+
+    .service-title {
+        font-size: clamp(1.6rem, 6vw, 2.2rem); /* Adjust title size for mobile */
+    }
+
+    .service-description {
+        font-size: 0.95rem; /* Adjust description size for mobile */
+    }
+}
