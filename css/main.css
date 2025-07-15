@@ -1491,3 +1491,15 @@ a, button {
         font-size: 0.95rem; /* Adjust description size for mobile */
     }
 }
+/* Custom styles for button hover effects on services page */
+.services-grid a.magnetic-link.bg-accent-color:hover {
+    background-color: var(#00FFFF) !important; /* Forces background to accent color */
+    color: var(--bg-color) !important; /* Ensures text remains readable on accent background */
+    border-color: var(#00FFFF) !important; /* Match border to accent color */
+}
+
+.services-grid a.magnetic-link.border:hover {
+    background-color: var(#00FFFF) !important; /* Forces background to accent color */
+    color: var(--bg-color) !important; /* Ensures text remains readable on accent background */
+    border-color: var(#00FFFF) !important; /* Match border to accent color */
+}
