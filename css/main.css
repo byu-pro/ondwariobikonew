@@ -620,24 +620,16 @@ a, button {
     overflow: hidden;
     color: white;
     background-color: #1a1a1a;
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease; /* Added box-shadow transition */
     will-change: transform, opacity;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2); /* Subtle initial shadow */
 }
 
-/* Class for filtering animation */
-.work-item.hide {
-    transform: scale(0.95);
-    opacity: 0;
-    pointer-events: none;
-    /* Make it "disappear" from the layout flow after animation */
-    transition: opacity 0.5s ease, transform 0.5s ease, width 0s 0.5s, height 0s 0.5s, margin 0s 0.5s, padding 0s 0.5s;
-    width: 0;
-    height: 0;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
+/* NEW: Work Item Hover Effect */
+.work-item:hover {
+    transform: translateY(-8px); /* Lift effect */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4); /* More pronounced shadow */
 }
-
 
 .work-item-image-wrapper {
     position: absolute;
@@ -659,16 +651,28 @@ a, button {
     transform: scale(1.05);
 }
 
+/* NEW: Work Item Hover Overlay */
+.work-item-hover-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 70%);
+    opacity: 0; /* Hidden by default */
+    transition: opacity 0.5s ease;
+}
+
+.work-item:hover .work-item-hover-overlay {
+    opacity: 1; /* Visible on hover */
+}
+
 .work-item-info {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: 2.5rem;
+    padding: 2rem; /* Reduced padding for cleaner look */
     z-index: 2;
-    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
-    opacity: 0;
-    transform: translateY(20px);
+    opacity: 0; /* Hidden by default */
+    transform: translateY(20px); /* Starts slightly below */
     transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -688,7 +692,39 @@ a, button {
 .work-item-category {
     font-family: 'Satoshi', sans-serif;
     color: var(--text-color);
+    font-size: 0.95rem; /* Slightly smaller for subtlety */
+    transition: color 0.4s ease;
 }
+
+.work-item:hover .work-item-category {
+    color: var(--accent-color); /* Highlight category on hover */
+}
+
+/* NEW: "View Project" Label */
+.view-project-label {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+    padding: 0.3rem 0.8rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    pointer-events: none; /* Ensure it doesn't interfere with click */
+}
+
+.work-item:hover .view-project-label {
+    opacity: 1;
+    transform: scale(1);
+}
+
+
 /* ==========================================================================
    CUSTOM: Footer Email Link Hover Effect
    ========================================================================== */

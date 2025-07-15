@@ -236,7 +236,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.addEventListener('mouseleave', () => { cursorDot.classList.add('cursor-hidden'); cursorOutline.classList.add('cursor-hidden'); });
         document.body.addEventListener('mouseenter', () => { cursorDot.classList.remove('cursor-hidden'); cursorOutline.classList.remove('cursor-hidden'); });
 
-        const interactiveElements = 'a, button, .project-card, .logo-item, .filter-btn, .nav-arrow, .social-icon-link, .fab-main, .fab-option, .instagram-post-card';
+        const interactiveElements = 'a, button, .project-card, .logo-item, .filter-btn, .nav-arrow, .social-icon-link, .fab-main, .fab-option, .instagram-post-card, .work-item'; // Added .work-item
         document.querySelectorAll(interactiveElements).forEach(el => {
             el.addEventListener('mouseenter', () => {
                 cursorOutline.classList.add('hover');
@@ -439,7 +439,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function initProjectModal() {
         const modal = document.getElementById('project-modal');
         const closeBtn = document.getElementById('modal-close-btn');
-        const projectCards = document.querySelectorAll('.project-card');
+        const projectCards = document.querySelectorAll('.project-card, .work-item'); // Include work-item
 
         if (!modal || !closeBtn || projectCards.length === 0) return;
 
@@ -453,11 +453,15 @@ document.addEventListener('DOMContentLoaded', () => {
             card.addEventListener('click', (e) => {
                 e.preventDefault();
 
+                // Populate modal with data from the clicked card
                 modalTitle.textContent = card.dataset.title;
                 modalImg.src = card.dataset.img;
                 modalGoal.textContent = card.dataset.goal;
                 modalImpact.textContent = card.dataset.impact;
                 modalLink.href = card.dataset.casestudyUrl;
+                modalLink.textContent = card.dataset.casestudyUrl ? 'View Full Case Study' : 'Case Study Coming Soon';
+                modalLink.style.pointerEvents = card.dataset.casestudyUrl ? 'auto' : 'none';
+                modalLink.style.opacity = card.dataset.casestudyUrl ? '1' : '0.5';
 
                 gsap.to(modal, {
                     opacity: 1,
@@ -519,9 +523,77 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    /**
+     * Initializes the filtering and animation logic for the work grid.
+     * Moved from work-page.js to main.js for unified control.
+     */
+    function initWorkGrid() {
+        // Ensure GSAP and Flip plugin are loaded before proceeding
+        if (typeof gsap === 'undefined' || typeof Flip === 'undefined') {
+            console.warn('GSAP or Flip plugin is not loaded. Work grid animations may not function.');
+            return;
+        }
+
+        const filterControls = document.getElementById('filter-controls');
+        const workGrid = document.getElementById('work-grid');
+
+        if (!filterControls || !workGrid) return;
+
+        const projectItems = Array.from(workGrid.querySelectorAll('.work-item'));
+        const filterButtons = filterControls.querySelectorAll('.filter-btn');
+
+        // Entrance Animation for the grid items
+        gsap.from(projectItems, { // Changed to gsap.from for initial animation
+            duration: 0.8,
+            y: 30, // Start from slightly below
+            opacity: 0, // Start invisible
+            stagger: 0.1,
+            ease: 'power3.out',
+            delay: 0.5, // Delay slightly to let other animations start
+        });
+
+
+        // Filtering Logic with GSAP Flip
+        filterControls.addEventListener('click', (e) => {
+            const clickedButton = e.target.closest('.filter-btn');
+            if (!clickedButton || clickedButton.classList.contains('active')) return;
+
+            filterButtons.forEach(button => button.classList.remove('active'));
+            clickedButton.classList.add('active');
+
+            const filterValue = clickedButton.dataset.filter;
+            const state = Flip.getState(projectItems); // Capture state before changes
+
+            projectItems.forEach(item => {
+                const itemCategory = item.dataset.category;
+                const shouldShow = filterValue === 'all' || filterValue === itemCategory;
+
+                // Use display: 'none' or 'block' to remove/add from flow
+                // Flip will handle the animation for existing items.
+                // New items (from 'none' to 'block') will animate in via onEnter.
+                // Items going from 'block' to 'none' will animate out via onLeave.
+                if (shouldShow) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            Flip.from(state, {
+                duration: 0.7,
+                scale: true, // Animate scale during flip
+                ease: "power3.inOut",
+                stagger: 0.08, // Stagger animation for items
+                absolute: true, // Keep elements absolutely positioned during animation
+                onEnter: elements => gsap.fromTo(elements, { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.6, ease: "power3.out" }),
+                onLeave: elements => gsap.to(elements, { opacity: 0, scale: 0.8, duration: 0.6, ease: "power3.in" }),
+            });
+        });
+    }
+
     // --- Initialize Everything ---
     initPageTransitions();
-    initMobileMenu(); // Call the new mobile menu initialization
+    initMobileMenu();
     initGlobalTiltEffect();
     initCustomCursor();
     initClock();
@@ -533,6 +605,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // initHeroWebGL is now conditionally called after THREE is loaded
     initProjectModal();
     initInstagramCarousel();
+    initWorkGrid(); // Initialize work grid for pages that have it
 
     window.addEventListener('resize', () => {
         initHorizontalScroll();
