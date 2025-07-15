@@ -1,6 +1,7 @@
 /**
  * main.js - Unified Premium Portfolio Script
- * Handles all core animations and interactions site-wide.
+ * Handles all core animations and interactions site-wide,
+ * combining functionalities previously in app.js and project.js.
  */
 
 // Import Three.js for WebGL functionality
@@ -591,6 +592,27 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    /**
+     * Handles hover effect for the next project link.
+     * (Moved from project.js)
+     */
+    function initNextProjectHover() {
+        const link = document.querySelector('.next-project-link');
+        const preview = document.querySelector('.next-project-preview');
+        if (!link || !preview) return;
+
+        link.addEventListener('mousemove', (e) => {
+            preview.style.opacity = '1';
+            preview.style.transform = `translate(${e.clientX}px, ${e.clientY}px) scale(1)`;
+        });
+
+        link.addEventListener('mouseleave', () => {
+            preview.style.opacity = '0';
+            preview.style.transform = `translate(-50%, -50%) scale(0.8)`;
+        });
+    }
+
+
     // --- Initialize Everything ---
     initPageTransitions();
     initMobileMenu();
@@ -606,6 +628,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initProjectModal();
     initInstagramCarousel();
     initWorkGrid(); // Initialize work grid for pages that have it
+    initNextProjectHover(); // Initialize next project hover for project detail pages
+
 
     window.addEventListener('resize', () => {
         initHorizontalScroll();
